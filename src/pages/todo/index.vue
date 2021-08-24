@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-blue-500 h-[350px]">
-    This is Index Page
+  <div>
+    asd
   </div>
 </template>
 
@@ -9,3 +9,7 @@ import Vue from 'vue'
 
 export default Vue.extend({})
 </script>
+
+<style>
+
+</style>
