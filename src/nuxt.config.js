@@ -44,8 +44,22 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/firebase'
   ],
+  firebase: {
+    config: {
+      apiKey: 'AIzaSyBZQtxzuVT5HJJnTHlTuYivDJX8D_dPYlA',
+      authDomain: 'todolist-8c4a7.firebaseapp.com',
+      projectId: 'todolist-8c4a7',
+      storageBucket: 'todolist-8c4a7.appspot.com',
+      messagingSenderId: '1089309658315',
+      appId: '1:1089309658315:web:a3ced20446852d64e5df4e'
+    },
+    services: {
+      auth: true // Just as example. Can be any other service.
+    }
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
