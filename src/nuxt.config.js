@@ -1,3 +1,5 @@
+import * as FontAwesome from './build/fontawesome'
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -35,10 +37,13 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    // https://composition-api.nuxtjs.org/getting-started/setup
+    '@nuxtjs/composition-api/module',
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    ['@nuxtjs/fontawesome', { component: 'fontAwesome', suffix: true }]
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -58,6 +63,13 @@ export default {
     },
     services: {
       auth: true // Just as example. Can be any other service.
+    }
+  },
+  fontawesome: {
+    icons: {
+      solid: FontAwesome.solid,
+      regular: FontAwesome.regular,
+      brands: FontAwesome.brands
     }
   },
 
