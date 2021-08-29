@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-full h-auto flex-1 flex flex-col">
     TodoList
   </div>
 </template>
