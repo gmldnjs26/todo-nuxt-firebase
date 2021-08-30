@@ -1,5 +1,5 @@
 export type Todo = {
-  id: string,
+  id: string
   doDate: string
   context: string
   completion: boolean
