@@ -13,8 +13,6 @@
 <script lang="ts">
 import { defineComponent, ref } from '@nuxtjs/composition-api'
 import { Todo } from '@/types/todo'
-import {} from 'moment'
-import {} from 'date-fns'
 
 export default defineComponent({
   components: {
