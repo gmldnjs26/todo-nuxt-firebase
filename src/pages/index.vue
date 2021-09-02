@@ -6,7 +6,6 @@
     This is Index Page
     <font-awesome-icon class="fa-x text-blue-900" icon="star" />
     <TodoList :todo-list="testData" />
-    <MarkBox :is-checked="isChecked" label="testtext" @change="onChange" />
   </div>
 </template>
 
@@ -16,8 +15,7 @@ import { Todo } from '@/types/todo'
 
 export default defineComponent({
   components: {
-    TodoList: () => import('@/components/TodoList.vue'),
-    MarkBox: () => import('@/components/common/MarkBox.vue')
+    TodoList: () => import('@/components/TodoList.vue')
   },
   setup () {
     const isChecked = ref(false)
