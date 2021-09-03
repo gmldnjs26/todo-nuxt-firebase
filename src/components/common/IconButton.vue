@@ -1,5 +1,5 @@
 <template>
-  <button>
+  <button @click.prevent="onClick">
     <font-awesome-icon :icon="icon" :class="styles" />
   </button>
 </template>
@@ -20,15 +20,20 @@ export default defineComponent({
     }
   },
   emits: ['click'],
-  setup (props) {
+  setup (props, { emit }) {
     const styles = computed(() => {
       const classes = []
       classes.push(props.size)
       return classes.join(' ')
     })
 
+    const onClick = () => {
+      emit('click')
+    }
+
     return {
-      styles
+      styles,
+      onClick
     }
   }
 })
