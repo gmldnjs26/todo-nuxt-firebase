@@ -2,7 +2,11 @@
   <button @click.prevent="click">
     <font-awesome-icon :icon="icon" :class="styles" />
     <div>
+<<<<<<< HEAD
       Test1
+=======
+      test3
+>>>>>>> develop
     </div>
   </button>
 </template>
