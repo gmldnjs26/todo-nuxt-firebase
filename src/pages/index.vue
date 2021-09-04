@@ -1,11 +1,8 @@
 <template>
-  <div class="bg-white h-[350px]">
-    <font-awesome-layers class="fa-4x">
-      <font-awesome-icon icon="download" />
-    </font-awesome-layers>
-    This is Index Page
-    <font-awesome-icon class="fa-x text-blue-900" icon="star" />
-    <TodoList :todo-list="testData" />
+  <div class="bg-white w-full h-full">
+    <div class="w-[400px] mx-auto">
+      <TodoList :todo-list="testData" />
+    </div>
   </div>
 </template>
 
@@ -15,7 +12,7 @@ import { Todo } from '@/types/todo'
 
 export default defineComponent({
   components: {
-    TodoList: () => import('@/components/TodoList.vue')
+    TodoList: () => import('~/components/todo/TodoList.vue')
   },
   setup () {
     const isChecked = ref(false)

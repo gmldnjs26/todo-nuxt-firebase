@@ -1,5 +1,5 @@
 <template>
-  <button @click.prevent="onClick">
+  <button @click.prevent="click">
     <font-awesome-icon :icon="icon" :class="styles" />
   </button>
 </template>
@@ -27,13 +27,13 @@ export default defineComponent({
       return classes.join(' ')
     })
 
-    const onClick = () => {
+    const click = () => {
       emit('click')
     }
 
     return {
       styles,
-      onClick
+      click
     }
   }
 })
