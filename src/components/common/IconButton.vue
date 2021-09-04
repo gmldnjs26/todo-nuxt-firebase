@@ -1,6 +1,9 @@
 <template>
   <button @click.prevent="click">
     <font-awesome-icon :icon="icon" :class="styles" />
+    <div>
+      Test1
+    </div>
   </button>
 </template>
 

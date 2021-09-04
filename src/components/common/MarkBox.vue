@@ -16,6 +16,9 @@
     <span v-show="label" class="ml-3 leading-5" :class="isChecked ? 'line-through': ''">
       {{ label }}
     </span>
+    <div>
+      test2
+    </div>
   </label>
 </template>
 
