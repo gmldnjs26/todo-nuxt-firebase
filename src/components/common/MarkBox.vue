@@ -1,5 +1,5 @@
 <template>
-  <label class="flex relative" :class="isDisabled ? 'opacity-50' : ''">
+  <label class="flex relative cursor-pointer" :class="isDisabled ? 'opacity-50' : 'hover:opacity-60'">
     <input
       type="checkbox"
       class="w-[15px] h-[15px] opacity-0"

@@ -6,7 +6,7 @@
         :is-checked="t.completion"
         @change="onChange(i)"
       />
-      <IconButton icon="star" @click="toggleTodoEditModal" />
+      <IconButton icon="ellipsis-h" @click="toggleTodoEditModal" />
     </div>
     <TodoEditModal v-show="isShowTodoEditModal" />
   </div>
