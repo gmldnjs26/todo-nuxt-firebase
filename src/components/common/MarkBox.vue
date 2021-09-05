@@ -17,7 +17,7 @@
       {{ label }}
     </span>
     <div>
-      test4
+      test23
     </div>
   </label>
 </template>

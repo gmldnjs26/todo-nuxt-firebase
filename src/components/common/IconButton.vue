@@ -2,7 +2,7 @@
   <button @click.prevent="click">
     <font-awesome-icon :icon="icon" :class="styles" />
     <div>
-      test3
+      test11
     </div>
   </button>
 </template>
