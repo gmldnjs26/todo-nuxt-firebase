@@ -24,6 +24,4 @@ yarn dev
 
 ## Authors
 
-Contributors names and contact info
-
-ex. [@Heewongwak](https://heewon26.tistory.com/)
+ [@Heewongwak](https://heewon26.tistory.com/)
