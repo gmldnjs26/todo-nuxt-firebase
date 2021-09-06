@@ -11,16 +11,16 @@ export default defineComponent({
   props: {
     icon: {
       type: String,
-      required: true
+      required: true,
     },
     size: {
       type: String,
       required: false,
-      default: 'text-xl'
-    }
+      default: 'text-xl',
+    },
   },
   emits: ['click'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const styles = computed(() => {
       const classes = []
       classes.push(props.size)
@@ -33,12 +33,10 @@ export default defineComponent({
 
     return {
       styles,
-      click
+      click,
     }
-  }
+  },
 })
 </script>
 
-<style>
-
-</style>
+<style></style>

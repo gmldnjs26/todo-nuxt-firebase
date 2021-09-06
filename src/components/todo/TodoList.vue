@@ -1,14 +1,12 @@
 <template>
   <div class="w-full h-auto flex-1 flex flex-col space-y-2">
     <div v-for="(t, i) in editTodoList" :key="i" class="flex justify-between">
-      <MarkBox
-        :label="t.context"
-        :is-checked="t.completion"
-        @change="onChange(i)"
-      />
+      <MarkBox :label="t.context" :is-checked="t.completion" @change="onChange(i)" />
       <IconButton icon="ellipsis-h" @click="toggleTodoEditModal" />
     </div>
-    <TodoEditModal v-show="isShowTodoEditModal" />
+    <transition>
+      <TodoEditModal v-show="isShowTodoEditModal" @toggleTodoEditModal="toggleTodoEditModal" />
+    </transition>
   </div>
 </template>
 
@@ -19,7 +17,7 @@ import {
   ref,
   toRefs,
   reactive,
-  onBeforeMount
+  onBeforeMount,
 } from '@nuxtjs/composition-api'
 import { Todo } from '@/types/todo'
 
@@ -27,18 +25,18 @@ export default defineComponent({
   components: {
     MarkBox: () => import('@/components/common/MarkBox.vue'),
     IconButton: () => import('@/components/common/IconButton.vue'),
-    TodoEditModal: () => import('@/components/todo/TodoEditModal.vue')
+    TodoEditModal: () => import('@/components/todo/TodoEditModal.vue'),
   },
   props: {
     todoList: {
       type: Array as PropType<Todo[]>,
       required: false,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
-  setup (props) {
+  setup(props) {
     const state = reactive({
-      editTodoList: [] as Todo[]
+      editTodoList: [] as Todo[],
     })
 
     const isShowTodoEditModal = ref(false)
@@ -58,9 +56,9 @@ export default defineComponent({
       ...toRefs(state),
       onChange,
       isShowTodoEditModal,
-      toggleTodoEditModal
+      toggleTodoEditModal,
     }
-  }
+  },
 })
 </script>
 

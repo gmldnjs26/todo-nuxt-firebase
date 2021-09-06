@@ -13,7 +13,7 @@ const solid = [
   'faEllipsisH'
 ]
 
-const regular = ['faStar']
+const regular = ['faStar', 'faEdit']
 
 const brands = ['faTwitter']
 
