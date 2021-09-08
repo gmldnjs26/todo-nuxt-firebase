@@ -6,3 +6,9 @@ export type Todo = {
   createdAt: string
   userId: string
 }
+
+export type TodoEditEventInfo = {
+  icon: string
+  event: string
+  title: string
+}
