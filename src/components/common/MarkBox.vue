@@ -6,14 +6,14 @@
       :checked="isChecked"
       :disabled="isDisabled"
       @change="change"
-    >
-    <font-awesome-icon class="absolute inset-0 text-xl" :class="isChecked ? 'text-blue-500' : 'text-gray-300'" icon="star" />
-    <span
-      v-show="isChecked"
-      class="absolute left-2 top-1 w-3.5 h-3.5"
-      :class="checkStyles"
     />
-    <span v-show="label" class="ml-3 leading-5" :class="isChecked ? 'line-through': ''">
+    <font-awesome-icon
+      class="absolute inset-0 text-xl"
+      :class="isChecked ? 'text-blue-500' : 'text-gray-300'"
+      icon="star"
+    />
+    <span v-show="isChecked" class="absolute left-2 top-1 w-3.5 h-3.5" :class="checkStyles" />
+    <span v-show="label" class="ml-3 leading-5" :class="isChecked ? 'line-through' : ''">
       {{ label }}
     </span>
   </label>
@@ -26,25 +26,25 @@ export default defineComponent({
     isChecked: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
     isDisabled: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
     inlineText: {
       type: String,
       required: false,
-      default: ''
+      default: '',
     },
     label: {
       type: String,
       required: false,
-      default: ''
-    }
+      default: '',
+    },
   },
-  setup (_, { emit }) {
+  setup(_, { emit }) {
     const checkStyles = computed(() => {
       const classes = []
       classes.push('after:block')
@@ -57,13 +57,13 @@ export default defineComponent({
       return classes.join(' ')
     })
 
-    const change = ({ target }: { target: HTMLInputElement}) => {
+    const change = ({ target }: { target: HTMLInputElement }) => {
       emit('change', target.checked)
     }
     return {
       checkStyles,
-      change
+      change,
     }
-  }
+  },
 })
 </script>

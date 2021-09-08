@@ -1,5 +1,5 @@
 <template>
-  <button @click.prevent="click">
+  <button class="flex items-center justify-center" @click.prevent="click">
     <font-awesome-icon :icon="icon" :class="styles" />
   </button>
 </template>
