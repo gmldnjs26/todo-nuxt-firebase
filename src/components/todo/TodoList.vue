@@ -4,21 +4,14 @@
       <MarkBox :label="t.context" :is-checked="t.completion" @change="onChange(i)" />
       <IconButton icon="ellipsis-h" @click="toggleTodoEditModal" />
     </div>
-    <transition>
+    <transition name="fade">
       <TodoEditModal v-show="isShowTodoEditModal" @toggleTodoEditModal="toggleTodoEditModal" />
     </transition>
   </div>
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  PropType,
-  ref,
-  toRefs,
-  reactive,
-  onBeforeMount,
-} from '@nuxtjs/composition-api'
+import { defineComponent, PropType, ref, toRefs, reactive, onBeforeMount } from '@nuxtjs/composition-api'
 import { Todo } from '@/types/todo'
 
 export default defineComponent({
@@ -62,4 +55,12 @@ export default defineComponent({
 })
 </script>
 
-<style></style>
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+</style>

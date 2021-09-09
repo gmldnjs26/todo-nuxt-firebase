@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="fixed inset-0 w-full h-full bg-black opacity-50 z-10" @click="$emit('toggleTodoEditModal')" />
-    <div class="absolute w-[350px] h-[250px] m-auto flex flex-col bg-white z-20 rounded-md p-3">
+    <div class="absolute w-[350px] h-[250px] m-auto flex flex-col bg-white z-20 rounded-md p-3.5">
       <div class="h-20 text-2xl flex items-center justify-center">
         title
       </div>
