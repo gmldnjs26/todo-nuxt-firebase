@@ -10,7 +10,8 @@ const solid = [
   'faUpload',
   'faUser',
   'faStar',
-  'faEllipsisH'
+  'faEllipsisH',
+  'faTimes',
 ]
 
 const regular = ['faStar', 'faEdit']
