@@ -11,8 +11,10 @@ interface AccountState {
 
 @Module({
   name: 'account',
-  stateFactory: true, // ?
-  namespaced: true, // ?
+  // If you need to support module reuse or to use modules with NuxtJS,
+  // you can have a state factory function generated instead of a static state object instance by using stateFactory
+  stateFactory: true,
+  namespaced: true, // can do it -> getters['account/accountInfo']
 })
 class Account extends VuexModule implements AccountState {
   email: string = ''
