@@ -26,8 +26,9 @@ yarn dev
 
  [@Heewongwak](https://heewon26.tistory.com/)
  
- | Alfed로 만든 테이블  |   |   |   |
-|---|---|---|---|
-| 놀랍다  |   |   |   |
-|   |   |   |   |
+ | Alfred  | Alfred4 |
+|---|---|
+|   |   |
+|   |   |
+
 
