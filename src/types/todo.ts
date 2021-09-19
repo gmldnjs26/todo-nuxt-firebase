@@ -12,3 +12,7 @@ export type TodoEditEventInfo = {
   event: string
   title: string
 }
+
+export type EditTodo = Todo & {
+  onEdit: boolean
+}
