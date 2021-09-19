@@ -9,6 +9,11 @@ import { defineComponent, computed } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   props: {
+    color: {
+      type: String,
+      required: false,
+      default: 'black',
+    },
     icon: {
       type: String,
       required: true,
@@ -24,6 +29,7 @@ export default defineComponent({
     const styles = computed(() => {
       const classes = []
       classes.push(props.size)
+      classes.push('text-' + props.color)
       return classes.join(' ')
     })
 
