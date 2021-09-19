@@ -1,18 +1,24 @@
 <template>
   <div class="w-full h-auto flex-1 flex flex-col space-y-2">
     <div v-for="(t, i) in editTodoList" :key="i" class="flex justify-between">
-      <MarkBox :label="t.context" :is-checked="t.completion" @change="onChange(i)" />
-      <IconButton icon="ellipsis-h" @click="toggleTodoEditModal" />
+      <MarkBox
+        :label="t.context"
+        :is-checked="t.completion"
+        :on-edit="t.onEdit"
+        @change="onChangeCompletion(i)"
+        @overEdit="onChangeContext"
+      />
+      <IconButton icon="ellipsis-h" color="primary" @click="toggleTodoEditModal(i)" />
     </div>
     <transition name="fade">
-      <TodoEditModal v-show="isShowTodoEditModal" @toggleTodoEditModal="toggleTodoEditModal" />
+      <TodoEditModal v-show="isShowTodoEditModal" @toggleTodoEditModal="toggleTodoEditModal" @edit="edit" />
     </transition>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType, ref, toRefs, reactive, onBeforeMount } from '@nuxtjs/composition-api'
-import { Todo } from '@/types/todo'
+import { Todo, EditTodo } from '@/types/todo'
 
 export default defineComponent({
   components: {
@@ -27,29 +33,44 @@ export default defineComponent({
       default: () => [],
     },
   },
-  setup(props) {
+  setup(props, context) {
     const state = reactive({
-      editTodoList: [] as Todo[],
+      editTodoList: [] as EditTodo[],
     })
 
+    const editingTodoIndex = ref()
+
     const isShowTodoEditModal = ref(false)
-    const toggleTodoEditModal = () => {
+    const toggleTodoEditModal = (index: Number) => {
+      editingTodoIndex.value = index
       isShowTodoEditModal.value = !isShowTodoEditModal.value
     }
 
     onBeforeMount(() => {
-      state.editTodoList = props.todoList
+      state.editTodoList = props.todoList.map((todo) => ({ ...todo, onEdit: false }))
     })
 
-    const onChange = (index: number) => {
+    const onChangeCompletion = (index: number) => {
       state.editTodoList[index].completion = !state.editTodoList[index].completion
+    }
+
+    const onChangeContext = (editContext: string) => {
+      state.editTodoList[editingTodoIndex.value].onEdit = false
+      state.editTodoList[editingTodoIndex.value].context = editContext
+    }
+
+    const edit = () => {
+      state.editTodoList[editingTodoIndex.value].onEdit = true
+      isShowTodoEditModal.value = false
     }
 
     return {
       ...toRefs(state),
-      onChange,
+      onChangeCompletion,
       isShowTodoEditModal,
       toggleTodoEditModal,
+      edit,
+      onChangeContext,
     }
   },
 })

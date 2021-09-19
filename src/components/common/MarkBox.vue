@@ -9,30 +9,26 @@
     />
     <font-awesome-icon
       class="absolute inset-0 text-xl"
-      :class="isChecked ? 'text-blue-500' : 'text-gray-300'"
+      :class="isChecked ? 'text-primary_dark' : 'text-primary'"
       icon="star"
     />
     <span v-show="isChecked" class="absolute left-2 top-1 w-3.5 h-3.5" :class="checkStyles" />
-    <span v-show="label" class="ml-3 leading-5" :class="isChecked ? 'line-through' : ''">
+    <span v-show="label && !onEdit" class="ml-3 leading-5" :class="isChecked ? 'line-through' : ''">
       {{ label }}
     </span>
+    <input
+      v-show="label && onEdit"
+      v-model="editContext"
+      class="ml-3 leading-5 border-2 border-primary_dark rounded-md"
+      @blur="$emit('overEdit', editContext)"
+    />
   </label>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from '@nuxtjs/composition-api'
+import { ref, defineComponent, computed } from '@nuxtjs/composition-api'
 export default defineComponent({
   props: {
-    isChecked: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    isDisabled: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
     inlineText: {
       type: String,
       required: false,
@@ -43,8 +39,26 @@ export default defineComponent({
       required: false,
       default: '',
     },
+    isChecked: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    isDisabled: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    onEdit: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
-  setup(_, { emit }) {
+  setup(props, { emit }) {
+    const editContext = ref('')
+    editContext.value = props.label
+
     const checkStyles = computed(() => {
       const classes = []
       classes.push('after:block')
@@ -63,6 +77,7 @@ export default defineComponent({
     return {
       checkStyles,
       change,
+      editContext,
     }
   },
 })
