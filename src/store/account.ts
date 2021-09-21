@@ -6,7 +6,7 @@ interface AccountState {
   password: string
   username: string
   todoList: Todo[]
-  createdAt: Date
+  createdAt: string
 }
 
 @Module({
@@ -17,11 +17,11 @@ interface AccountState {
   namespaced: true, // can do it -> getters['account/accountInfo']
 })
 class Account extends VuexModule implements AccountState {
-  email: string = ''
-  password: string = ''
-  username: string = ''
-  todoList: Todo[] = []
-  createdAt: Date = new Date('1970/1/1')
+  email = ''
+  password = ''
+  username = ''
+  todoList = []
+  createdAt = ''
 
   get accountInfo() {
     return ''

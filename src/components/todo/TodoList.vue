@@ -33,7 +33,7 @@ export default defineComponent({
       default: () => [],
     },
   },
-  setup(props, context) {
+  setup(props) {
     const state = reactive({
       editTodoList: [] as EditTodo[],
     })
