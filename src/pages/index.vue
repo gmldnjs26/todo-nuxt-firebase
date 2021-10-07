@@ -3,6 +3,9 @@
     <div class="w-[400px] mx-auto">
       <TodoList :todo-list="testData" />
     </div>
+    <transition name="fade">
+      <TodoEditModal v-show="isShowTodoEditModal" @toggleTodoEditModal="toggleTodoEditModal" @edit="edit" />
+    </transition>
   </div>
 </template>
 
@@ -12,9 +15,10 @@ import { Todo } from '@/types/todo'
 
 export default defineComponent({
   components: {
-    TodoList: () => import('~/components/todo/TodoList.vue')
+    TodoList: () => import('~/components/todo/TodoList.vue'),
+    TodoEditModal: () => import('@/components/todo/TodoEditModal.vue'),
   },
-  setup () {
+  setup() {
     const isChecked = ref(false)
 
     const testData: Todo[] = [
@@ -24,7 +28,7 @@ export default defineComponent({
         context: 'Test1',
         completion: false,
         createdAt: '20210830',
-        userId: 'gmldnjs'
+        userId: 'gmldnjs',
       },
       {
         id: '2',
@@ -32,7 +36,7 @@ export default defineComponent({
         context: 'Test2',
         completion: false,
         createdAt: '20210830',
-        userId: 'gmldnjs'
+        userId: 'gmldnjs',
       },
       {
         id: '3',
@@ -40,8 +44,8 @@ export default defineComponent({
         context: 'Test3',
         completion: false,
         createdAt: '20210830',
-        userId: 'gmldnjs'
-      }
+        userId: 'gmldnjs',
+      },
     ]
 
     const onChange = (checked: boolean) => {
@@ -51,9 +55,18 @@ export default defineComponent({
     return {
       onChange,
       isChecked,
-      testData
+      testData,
     }
-  }
+  },
 })
-
 </script>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+</style>
