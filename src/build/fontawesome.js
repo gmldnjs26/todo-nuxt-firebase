@@ -12,6 +12,7 @@ const solid = [
   'faStar',
   'faEllipsisH',
   'faTimes',
+  'faPlus',
 ]
 
 const regular = ['faStar', 'faEdit']

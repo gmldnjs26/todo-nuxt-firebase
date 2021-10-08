@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-auto flex-1 flex flex-col space-y-2">
-    <IconButton icon="ellipsis-h" color="primary" @click="toggleTodoEditModal(i)" />
+    <IconButton icon="plus" color="primary" @click="toggleTodoEditModal(i)" />
     <div v-for="(t, i) in editTodoList" :key="i" class="flex justify-between">
       <MarkBox
         :label="t.context"
