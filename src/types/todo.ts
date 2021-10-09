@@ -1,6 +1,14 @@
+export type Category = {
+  id: string
+  icon: string
+  color: string
+}
+
 export type Todo = {
+  categoryId: string
   id: string
   doDate: string
+  doTime: string
   context: string
   completion: boolean
   createdAt: string
