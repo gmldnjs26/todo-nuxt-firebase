@@ -9,7 +9,7 @@
         @change="onChangeCompletion(i)"
         @overEdit="onChangeContext"
       />
-      <IconButton icon="ellipsis-h" color="primary" @click="toggleTodoEditModal(i)" />
+      <FloatMenuBtn />
     </div>
   </div>
 </template>
@@ -22,6 +22,7 @@ export default defineComponent({
   components: {
     MarkBox: () => import('@/components/common/MarkBox.vue'),
     IconButton: () => import('@/components/common/IconButton.vue'),
+    FloatMenuBtn: () => import('@/components/todo/FloatMenuBtn.vue'),
   },
   props: {
     todoList: {
