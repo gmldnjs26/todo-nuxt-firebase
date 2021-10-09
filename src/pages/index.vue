@@ -23,24 +23,30 @@ export default defineComponent({
 
     const testData: Todo[] = [
       {
+        categoryId: '1',
         id: '1',
         doDate: '20210830',
+        doTime: '2012',
         context: 'Test1',
         completion: false,
         createdAt: '20210830',
         userId: 'gmldnjs',
       },
       {
+        categoryId: '1',
         id: '2',
         doDate: '20210830',
+        doTime: '2012',
         context: 'Test2',
         completion: false,
         createdAt: '20210830',
         userId: 'gmldnjs',
       },
       {
+        categoryId: '1',
         id: '3',
         doDate: '20210830',
+        doTime: '2012',
         context: 'Test3',
         completion: false,
         createdAt: '20210830',
