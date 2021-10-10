@@ -16,7 +16,7 @@ export type Todo = {
 }
 
 export type TodoEditEventInfo = {
-  icon: string
+  icon: string | Array<string>
   event: string
   title: string
 }

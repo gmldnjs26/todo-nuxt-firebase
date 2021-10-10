@@ -4,36 +4,21 @@ export const TODO_EDIT_EVENTS: TodoEditEventInfo[] = [
   {
     icon: 'edit',
     event: 'edit',
-    title: '編集',
+    title: '수정',
   },
   {
-    icon: 'edit',
-    event: 'edit',
-    title: '編集',
+    icon: 'trash-alt',
+    event: 'delete',
+    title: '삭제',
   },
   {
-    icon: 'edit',
-    event: 'edit',
-    title: '編集',
+    icon: ['far', 'bell'],
+    event: 'alram',
+    title: '시간설정',
   },
   {
-    icon: 'edit',
-    event: 'edit',
-    title: '編集',
-  },
-  {
-    icon: 'edit',
-    event: 'edit',
-    title: '編集',
-  },
-  {
-    icon: 'edit',
-    event: 'edit',
-    title: '編集',
-  },
-  {
-    icon: 'edit',
-    event: 'edit',
-    title: '編集',
+    icon: ['far', 'calendar-alt'],
+    event: 'changeDate',
+    title: '날짜변경',
   },
 ]
