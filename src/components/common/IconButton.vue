@@ -15,7 +15,7 @@ export default defineComponent({
       default: 'black',
     },
     icon: {
-      type: String,
+      type: [String, Array],
       required: true,
     },
     size: {
