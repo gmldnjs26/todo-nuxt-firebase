@@ -11,26 +11,22 @@ export default {
   head: {
     title: 'todo-app',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'en',
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
+  css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-  ],
+  plugins: [],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -43,14 +39,14 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
-    ['@nuxtjs/fontawesome', { component: 'fontAwesome', suffix: true }]
+    ['@nuxtjs/fontawesome', { component: 'fontAwesome', suffix: true }],
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/firebase'
+    '@nuxtjs/firebase',
   ],
   firebase: {
     config: {
@@ -59,24 +55,23 @@ export default {
       projectId: 'todolist-8c4a7',
       storageBucket: 'todolist-8c4a7.appspot.com',
       messagingSenderId: '1089309658315',
-      appId: '1:1089309658315:web:a3ced20446852d64e5df4e'
+      appId: '1:1089309658315:web:a3ced20446852d64e5df4e',
     },
     services: {
-      auth: true // Just as example. Can be any other service.
-    }
+      auth: true, // Just as example. Can be any other service.
+    },
   },
   fontawesome: {
     icons: {
       solid: FontAwesome.solid,
       regular: FontAwesome.regular,
-      brands: FontAwesome.brands
-    }
+      brands: FontAwesome.brands,
+    },
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-  }
+  build: {},
 }
