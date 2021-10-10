@@ -3,9 +3,6 @@
     <div class="w-[400px] mx-auto">
       <TodoList :todo-list="testData" />
     </div>
-    <transition name="fade">
-      <TodoEditModal v-show="isShowTodoEditModal" @toggleTodoEditModal="toggleTodoEditModal" @edit="edit" />
-    </transition>
   </div>
 </template>
 
@@ -16,7 +13,6 @@ import { Todo } from '@/types/todo'
 export default defineComponent({
   components: {
     TodoList: () => import('@/components/todo/TodoList.vue'),
-    TodoEditModal: () => import('@/components/todo/TodoEditModal.vue'),
   },
   setup() {
     const isChecked = ref(false)
