@@ -7,9 +7,9 @@
         :is-checked="t.completion"
         :on-edit="t.onEdit"
         @change="onChangeCompletion(i)"
-        @overEdit="onChangeContext"
+        @overEdit="(editContext) => onChangeContext(editContext, i)"
       />
-      <FloatMenuBtn />
+      <FloatMenuBtn @edit="edit(i)" @remove="remove(i)" @alram="setAlram(i)" @changeDate="changeDate(i)" />
     </div>
   </div>
 </template>
@@ -36,8 +36,6 @@ export default defineComponent({
       editTodoList: [] as EditTodo[],
     })
 
-    const editingTodoIndex = ref()
-
     onBeforeMount(() => {
       state.editTodoList = props.todoList.map((todo) => ({ ...todo, onEdit: false }))
     })
@@ -46,15 +44,33 @@ export default defineComponent({
       state.editTodoList[index].completion = !state.editTodoList[index].completion
     }
 
-    const onChangeContext = (editContext: string) => {
-      state.editTodoList[editingTodoIndex.value].onEdit = false
-      state.editTodoList[editingTodoIndex.value].context = editContext
+    const onChangeContext = (editContext: string, index: number) => {
+      state.editTodoList[index].onEdit = false
+      state.editTodoList[index].context = editContext
+    }
+
+    // event 정리
+    const edit = (index: number) => {
+      state.editTodoList[index].onEdit = true
+    }
+    const remove = (index: number) => {
+      console.log(index)
+    }
+    const setAlram = (index: number) => {
+      console.log(index)
+    }
+    const changeDate = (index: number) => {
+      console.log(index)
     }
 
     return {
       ...toRefs(state),
       onChangeCompletion,
       onChangeContext,
+      edit,
+      remove,
+      setAlram,
+      changeDate,
     }
   },
 })
