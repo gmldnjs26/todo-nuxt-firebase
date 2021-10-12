@@ -8,7 +8,7 @@ export const TODO_EDIT_EVENTS: TodoEditEventInfo[] = [
   },
   {
     icon: 'trash-alt',
-    event: 'delete',
+    event: 'remove',
     title: '삭제',
   },
   {
