@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
     <IconButton
-      v-show="isShowOpenBtn"
+      v-show="!isShowMenu"
       class="w-5 h-5 rounded-full p-1 hover:bg-gray-200"
       icon="ellipsis-h"
       size="text-sm"
@@ -17,13 +17,13 @@
           @click="toggleMenu"
         />
         <IconButton
-          v-for="(item, i) in TODO_EDIT_EVENTS"
-          :key="i"
+          v-for="item in TODO_EDIT_EVENTS"
+          :key="item.event"
           class="w-6 h-6 rounded-full p-1 hover:bg-gray-300"
           :icon="item.icon"
           color="primary_light"
           size="text-base"
-          @click="emit(item.event)"
+          @click="$emit(item.event), toggleMenu()"
         />
       </div>
     </div>
@@ -39,7 +39,6 @@ export default defineComponent({
   },
   setup() {
     const isShowMenu = ref(false)
-    const isShowOpenBtn = ref(true)
 
     const styles = computed(() => {
       if (isShowMenu.value) {
@@ -48,14 +47,11 @@ export default defineComponent({
     })
 
     const toggleMenu = () => {
-      debugger
       isShowMenu.value = !isShowMenu.value
-      isShowOpenBtn.value = !isShowOpenBtn.value
     }
 
     return {
       isShowMenu,
-      isShowOpenBtn,
       styles,
       TODO_EDIT_EVENTS,
       toggleMenu,
