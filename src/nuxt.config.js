@@ -26,7 +26,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [{ src: '~/plugins/firebase.ts', mode: 'client' }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -46,21 +46,24 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/firebase',
+    // '@nuxtjs/firebase',
   ],
-  firebase: {
-    config: {
-      apiKey: 'AIzaSyBZQtxzuVT5HJJnTHlTuYivDJX8D_dPYlA',
-      authDomain: 'todolist-8c4a7.firebaseapp.com',
-      projectId: 'todolist-8c4a7',
-      storageBucket: 'todolist-8c4a7.appspot.com',
-      messagingSenderId: '1089309658315',
-      appId: '1:1089309658315:web:a3ced20446852d64e5df4e',
-    },
-    services: {
-      auth: true, // Just as example. Can be any other service.
-    },
-  },
+  // firebase: {
+  //   config: {
+  //     apiKey: 'AIzaSyC-s98DtWSmAWU8L1l1pU0K6QJlVAu3hwU',
+  //     authDomain: 'todo-scheduler-55d15.firebaseapp.com',
+  //     projectId: 'todo-scheduler-55d15',
+  //     storageBucket: 'todo-scheduler-55d15.appspot.com',
+  //     messagingSenderId: '925297734363',
+  //     appId: '1:925297734363:web:8f9048342c92cdaeebd2fe',
+  //     measurementId: 'G-MKYBKXC8SN',
+  //   },
+  //   services: {
+  //     auth: true, // Just as example. Can be any other service.
+  //     firestore: true,
+  //     storage: true,
+  //   },
+  // },
   fontawesome: {
     icons: {
       solid: FontAwesome.solid,
