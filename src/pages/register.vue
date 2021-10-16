@@ -6,10 +6,10 @@
         <h1 class="text-xl mb-2 font-bold">Sign up to Here</h1>
       </div>
       <section class="flex flex-col w-full space-y-3">
-        <input type="text" placeholder="Email" />
-        <input type="text" placeholder="Username" />
-        <input type="password" placeholder="Password" />
-        <button class="w-full h-12 text-white bg-primary rounded-full hover:bg-dark">
+        <input v-model="email" type="text" placeholder="Email" />
+        <input v-model="username" type="text" placeholder="Username" />
+        <input v-model="password" type="password" placeholder="Password" />
+        <button class="w-full h-12 text-white bg-primary rounded-full hover:bg-dark" @click="onRegister">
           <span>Sign Up</span>
         </button>
         <div class="w-full text-center">
@@ -21,11 +21,31 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  setup() {
-    console.log('register')
+  setup(_, context) {
+    const email = ref('')
+    const password = ref('')
+    const username = ref('')
+
+    const onRegister = async (): Promise<any> => {
+      try {
+        const credential = await context.root.$auth.createUserWithEmailAndPassword(email.value, password.value)
+        console.log(credential)
+      } catch (err) {
+        if (err instanceof Error) {
+          alert(err.message)
+        }
+      }
+    }
+
+    return {
+      email,
+      password,
+      username,
+      onRegister,
+    }
   },
 })
 </script>
