@@ -16,12 +16,9 @@ const firebaseConfig = {
   measurementId: 'G-MKYBKXC8SN',
 }
 
-// 親の顔より見た初期化
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
 }
-
-// FCMに対応していない場合は$messagingはnullにしてエラーを防ぐ。
 
 declare module 'vue/types/vue' {
   interface Vue {
