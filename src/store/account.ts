@@ -23,10 +23,6 @@ class Account extends VuexModule implements AccountState {
   todoList = []
   createdAt = ''
 
-  get accountInfo() {
-    return ''
-  }
-
   @Mutation
   setAccountInfo(accountInfo: AccountState) {
     this.email = accountInfo.email

@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, toRefs, reactive, onBeforeMount } from '@nuxtjs/composition-api'
+import { defineComponent, PropType, toRefs, reactive, onBeforeMount } from '@nuxtjs/composition-api'
 import { Todo, EditTodo } from '@/types/todo'
 
 export default defineComponent({

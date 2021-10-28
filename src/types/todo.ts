@@ -1,18 +1,20 @@
 export type Category = {
   id: string
+  userId: string
   icon: string
   color: string
+  createdAt: string
 }
 
 export type Todo = {
-  categoryId: string
   id: string
+  userId: string
+  categoryId: string
   doDate: string
   doTime: string
   context: string
   completion: boolean
   createdAt: string
-  userId: string
 }
 
 export type TodoEditEventInfo = {
