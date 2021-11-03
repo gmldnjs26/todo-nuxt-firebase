@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, toRefs, reactive, onBeforeMount, watch } from '@nuxtjs/composition-api'
+import { defineComponent, PropType, toRefs, reactive, onBeforeMount, watch, toRef } from '@nuxtjs/composition-api'
 import { Todo, EditTodo } from '@/types/todo'
 
 export default defineComponent({
@@ -63,10 +63,14 @@ export default defineComponent({
       console.log(index)
     }
 
-    watch(state.editTodoList, (newVal: EditTodo[]) => {
-      console.log(newVal)
-      emit('updateTodoList', newVal)
-    })
+    watch(
+      () => state.editTodoList,
+      (cur: EditTodo[], prev: EditTodo[]) => {
+        console.log(cur, prev)
+        emit('updateTodoList', cur)
+      },
+      { deep: true },
+    )
 
     return {
       ...toRefs(state),
