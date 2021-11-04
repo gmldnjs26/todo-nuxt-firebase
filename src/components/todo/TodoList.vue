@@ -5,7 +5,7 @@
       <MarkBox
         :label="t.context"
         :is-checked="t.completion"
-        :on-edit="t.onEdit"
+        :on-edit="i === onEditTodoItemIndex"
         @change="onChangeCompletion(i)"
         @overEdit="(editContext) => onChangeContext(editContext, i)"
       />
@@ -15,8 +15,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, toRefs, reactive, onBeforeMount, watch, toRef } from '@nuxtjs/composition-api'
-import { Todo, EditTodo } from '@/types/todo'
+import { defineComponent, PropType, toRefs, ref } from '@nuxtjs/composition-api'
+import { Todo } from '@/types/todo'
 
 export default defineComponent({
   components: {
@@ -32,48 +32,34 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    const state = reactive({
-      editTodoList: [] as EditTodo[],
-    })
-
-    onBeforeMount(() => {
-      state.editTodoList = props.todoList.map((todo) => ({ ...todo, onEdit: false }))
-    })
+    const editTodoList = toRefs(props).todoList
+    const onEditTodoItemIndex = ref(-1)
 
     const onChangeCompletion = (index: number) => {
-      state.editTodoList[index].completion = !state.editTodoList[index].completion
+      emit('onChangeCompletion', index)
     }
 
     const onChangeContext = (editContext: string, index: number) => {
-      state.editTodoList[index].onEdit = false
-      state.editTodoList[index].context = editContext
+      onEditTodoItemIndex.value = -1
+      emit('onChangeContext', { editContext, index })
     }
 
     // event 정리
     const edit = (index: number) => {
-      state.editTodoList[index].onEdit = true
+      onEditTodoItemIndex.value = index
     }
     const remove = (index: number) => {
-      console.log(index)
+      emit('onRemove', index)
     }
     const setAlram = (index: number) => {
-      console.log(index)
+      emit('onSetAlarm', index)
     }
     const changeDate = (index: number) => {
-      console.log(index)
+      emit('onChangeDate', index)
     }
-
-    watch(
-      () => state.editTodoList,
-      (cur: EditTodo[], prev: EditTodo[]) => {
-        console.log(cur, prev)
-        emit('updateTodoList', cur)
-      },
-      { deep: true },
-    )
-
     return {
-      ...toRefs(state),
+      editTodoList,
+      onEditTodoItemIndex,
       onChangeCompletion,
       onChangeContext,
       edit,
