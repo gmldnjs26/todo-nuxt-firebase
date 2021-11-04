@@ -1,13 +1,20 @@
 <template>
   <div class="bg-white w-full h-full">
     <div class="w-[400px] mx-auto">
-      <TodoList :todo-list="testData" />
+      <TodoList
+        :todo-list="testData"
+        @onChangeCompletion="changeCompletion"
+        @onChangeContext="changeContext"
+        @onRemove="remove"
+        @onSetAlarm="setAlarm"
+        @onChangeDate="changeDate"
+      />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+import { defineComponent, reactive, onBeforeMount } from '@nuxtjs/composition-api'
 import { Todo } from '@/types/todo'
 
 export default defineComponent({
@@ -15,9 +22,7 @@ export default defineComponent({
     TodoList: () => import('@/components/todo/TodoList.vue'),
   },
   setup() {
-    const isChecked = ref(false)
-
-    const testData: Todo[] = [
+    const testData = reactive([
       {
         categoryId: '1',
         id: '1',
@@ -48,16 +53,31 @@ export default defineComponent({
         createdAt: '20210830',
         userId: 'gmldnjs',
       },
-    ]
+    ])
 
-    const onChange = (checked: boolean) => {
-      isChecked.value = checked
+    const changeCompletion = (index: number) => {
+      testData[index].completion = !testData[index].completion
+    }
+    const changeContext = ({ editContext, index }: { editContext: string; index: number }) => {
+      testData[index].context = editContext
+    }
+    const remove = () => {
+      console.log('test')
+    }
+    const setAlarm = () => {
+      console.log('test')
+    }
+    const changeDate = () => {
+      console.log('test')
     }
 
     return {
-      onChange,
-      isChecked,
       testData,
+      changeCompletion,
+      changeContext,
+      remove,
+      setAlarm,
+      changeDate,
     }
   },
 })
