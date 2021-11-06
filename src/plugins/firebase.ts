@@ -5,16 +5,9 @@ import 'firebase/storage'
 import 'firebase/messaging'
 import 'firebase/analytics'
 import { Plugin } from '@nuxt/types'
+import FirebaseConfigInfo from '@/config/firebaseConfig'
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyC-s98DtWSmAWU8L1l1pU0K6QJlVAu3hwU',
-  authDomain: 'todo-scheduler-55d15.firebaseapp.com',
-  projectId: 'todo-scheduler-55d15',
-  storageBucket: 'todo-scheduler-55d15.appspot.com',
-  messagingSenderId: '925297734363',
-  appId: '1:925297734363:web:8f9048342c92cdaeebd2fe',
-  measurementId: 'G-MKYBKXC8SN',
-}
+const firebaseConfig = FirebaseConfigInfo
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
