@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-auto flex-1 flex flex-col space-y-2">
-    <IconButton icon="plus" color="primary" @click="toggleTodoEditModal(i)" />
+    <IconButton icon="plus" color="primary" @click="addTodo" />
     <div v-for="(t, i) in editTodoList" :key="i" class="flex justify-between">
       <MarkBox
         :label="t.context"
@@ -57,6 +57,12 @@ export default defineComponent({
     const changeDate = (index: number) => {
       emit('onChangeDate', index)
     }
+
+    const addTodo = () => {
+      // FIXME: function을 내려서 비동기로 만들어준뒤 then으로 onEditTodoItemIndex을 수정하자
+      emit('addTodo')
+      onEditTodoItemIndex.value = props.todoList.length - 1
+    }
     return {
       editTodoList,
       onEditTodoItemIndex,
@@ -66,6 +72,7 @@ export default defineComponent({
       remove,
       setAlram,
       changeDate,
+      addTodo,
     }
   },
 })

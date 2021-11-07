@@ -8,13 +8,14 @@
         @onRemove="remove"
         @onSetAlarm="setAlarm"
         @onChangeDate="changeDate"
+        @addTodo="addTodo"
       />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, onBeforeMount } from '@nuxtjs/composition-api'
+import { defineComponent, reactive } from '@nuxtjs/composition-api'
 import { Todo } from '@/types/todo'
 
 export default defineComponent({
@@ -53,7 +54,7 @@ export default defineComponent({
         createdAt: '20210830',
         userId: 'gmldnjs',
       },
-    ])
+    ] as Todo[])
 
     const changeCompletion = (index: number) => {
       testData[index].completion = !testData[index].completion
@@ -70,7 +71,18 @@ export default defineComponent({
     const changeDate = () => {
       console.log('test')
     }
-
+    const addTodo = () => {
+      testData.push({
+        categoryId: '1',
+        id: (testData.length + 2).toString(),
+        doDate: '20210830',
+        doTime: '2012',
+        context: 'Test3',
+        completion: false,
+        createdAt: '20210830',
+        userId: 'gmldnjs',
+      })
+    }
     return {
       testData,
       changeCompletion,
@@ -78,6 +90,7 @@ export default defineComponent({
       remove,
       setAlarm,
       changeDate,
+      addTodo,
     }
   },
 })
