@@ -7,12 +7,7 @@
       :disabled="isDisabled"
       @change="change"
     />
-    <font-awesome-icon
-      class="absolute inset-0 text-xl"
-      :class="isChecked ? 'text-primary_dark' : 'text-primary'"
-      icon="star"
-    />
-    <span v-show="isChecked" class="absolute left-2 top-1 w-3.5 h-3.5" :class="checkStyles" />
+    <MarkIcon :is-checked="isChecked" />
     <span v-show="label && !onEdit" class="ml-3 leading-5" :class="isChecked ? 'line-through' : ''">
       {{ label }}
     </span>
@@ -26,8 +21,11 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, computed } from '@nuxtjs/composition-api'
+import { ref, defineComponent } from '@nuxtjs/composition-api'
 export default defineComponent({
+  components: {
+    MarkIcon: () => import('@/components/common/MarkIcon.vue'),
+  },
   props: {
     inlineText: {
       type: String,
@@ -59,23 +57,10 @@ export default defineComponent({
     const editContext = ref('')
     editContext.value = props.label
 
-    const checkStyles = computed(() => {
-      const classes = []
-      classes.push('after:block')
-      classes.push('after:transform -rotate-45')
-      classes.push('after:w-2.5')
-      classes.push('after:h-1.5')
-      classes.push('after:border-white')
-      classes.push('after:border-b-2')
-      classes.push('after:border-l-2')
-      return classes.join(' ')
-    })
-
     const change = ({ target }: { target: HTMLInputElement }) => {
       emit('change', target.checked)
     }
     return {
-      checkStyles,
       change,
       editContext,
     }
