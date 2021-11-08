@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, watch } from '@nuxtjs/composition-api'
+import { ref, defineComponent, watch, onMounted } from '@nuxtjs/composition-api'
 export default defineComponent({
   components: {
     MarkIcon: () => import('@/components/MarkIcon.vue'),
@@ -55,6 +55,11 @@ export default defineComponent({
     },
   },
   setup(props, { emit, refs }) {
+    onMounted(() => {
+      if (props.onEdit) {
+        if (refs.editInput instanceof HTMLInputElement) refs.editInput.focus()
+      }
+    })
     const editContext = ref('')
 
     editContext.value = props.label
