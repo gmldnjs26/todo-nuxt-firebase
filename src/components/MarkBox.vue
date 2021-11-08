@@ -22,10 +22,10 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, watch, onMounted } from '@nuxtjs/composition-api'
+import { ref, defineComponent, watch } from '@nuxtjs/composition-api'
 export default defineComponent({
   components: {
-    MarkIcon: () => import('@/components/common/MarkIcon.vue'),
+    MarkIcon: () => import('@/components/MarkIcon.vue'),
   },
   props: {
     inlineText: {

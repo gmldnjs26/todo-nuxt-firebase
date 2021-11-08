@@ -20,9 +20,9 @@ import { Todo } from '@/types/todo'
 
 export default defineComponent({
   components: {
-    MarkBox: () => import('@/components/common/MarkBox.vue'),
-    IconButton: () => import('@/components/common/IconButton.vue'),
-    FloatMenuBtn: () => import('@/components/todo/FloatMenuBtn.vue'),
+    MarkBox: () => import('@/components/MarkBox.vue'),
+    IconButton: () => import('@/components/IconButton.vue'),
+    FloatMenuBtn: () => import('@/components/FloatMenuBtn.vue'),
   },
   props: {
     todoList: {

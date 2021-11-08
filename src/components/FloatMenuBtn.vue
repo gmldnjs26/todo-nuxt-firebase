@@ -35,7 +35,7 @@ import { defineComponent, ref, computed } from '@nuxtjs/composition-api'
 import { TODO_EDIT_EVENTS } from '~/utils/const'
 export default defineComponent({
   components: {
-    IconButton: () => import('@/components/common/IconButton.vue'),
+    IconButton: () => import('@/components/IconButton.vue'),
   },
   setup() {
     const isShowMenu = ref(false)

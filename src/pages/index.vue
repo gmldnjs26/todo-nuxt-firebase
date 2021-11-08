@@ -20,7 +20,7 @@ import { Todo } from '@/types/todo'
 
 export default defineComponent({
   components: {
-    TodoList: () => import('@/components/todo/TodoList.vue'),
+    TodoList: () => import('@/components/TodoList.vue'),
   },
   setup() {
     const testData = reactive([
