@@ -36,7 +36,6 @@ export default defineComponent({
     const onEditTodoItemIndex = ref(-1)
 
     const onChangeCompletion = (index: number) => {
-      console.log('test2')
       emit('onChangeCompletion', index)
     }
 
