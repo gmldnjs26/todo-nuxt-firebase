@@ -57,6 +57,7 @@ export default defineComponent({
   setup(props, { emit, refs }) {
     onMounted(() => {
       if (props.onEdit) {
+        console.log('22')
         if (refs.editInput instanceof HTMLInputElement) refs.editInput.focus()
       }
     })
