@@ -2,7 +2,7 @@
   <div class="bg-white w-full h-full">
     <div class="w-[400px] mx-auto">
       <TodoList
-        :todo-list="testData"
+        :todo-list="todoList"
         @onChangeCompletion="changeCompletion"
         @onChangeContext="changeContext"
         @onRemove="remove"
@@ -15,52 +15,27 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from '@nuxtjs/composition-api'
+import { defineComponent, reactive, useStore, toRefs } from '@nuxtjs/composition-api'
 import { Todo } from '@/types/todo'
+import { accountStore } from '@/store'
 
 export default defineComponent({
   components: {
     TodoList: () => import('@/components/TodoList.vue'),
   },
   setup() {
-    const testData = reactive([
-      {
-        categoryId: '1',
-        id: '1',
-        doDate: '20210830',
-        doTime: '2012',
-        context: 'Test1',
-        completion: false,
-        createdAt: '20210830',
-        userId: 'gmldnjs',
-      },
-      {
-        categoryId: '1',
-        id: '2',
-        doDate: '20210830',
-        doTime: '2012',
-        context: 'Test2',
-        completion: false,
-        createdAt: '20210830',
-        userId: 'gmldnjs',
-      },
-      {
-        categoryId: '1',
-        id: '3',
-        doDate: '20210830',
-        doTime: '2012',
-        context: 'Test3',
-        completion: false,
-        createdAt: '20210830',
-        userId: 'gmldnjs',
-      },
-    ] as Todo[])
+    const store = useStore()
+    console.log(accountStore.todoList)
+
+    const state = reactive({
+      todoList: accountStore.todoList,
+    })
 
     const changeCompletion = (index: number) => {
-      testData[index].completion = !testData[index].completion
+      state.todoList[index].completion = !state.todoList[index].completion
     }
     const changeContext = ({ editContext, index }: { editContext: string; index: number }) => {
-      testData[index].context = editContext
+      state.todoList[index].context = editContext
     }
     const remove = () => {
       console.log('test')
@@ -72,9 +47,9 @@ export default defineComponent({
       console.log('test')
     }
     const addTodo = () => {
-      testData.push({
+      state.todoList.push({
         categoryId: '1',
-        id: (testData.length + 2).toString(),
+        id: (state.todoList.length + 2).toString(),
         doDate: '20210830',
         doTime: '2012',
         context: 'Test3',
@@ -84,7 +59,7 @@ export default defineComponent({
       })
     }
     return {
-      testData,
+      ...toRefs(state),
       changeCompletion,
       changeContext,
       remove,

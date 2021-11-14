@@ -3,11 +3,48 @@ import { Todo } from '@/types/todo'
 
 interface AccountState {
   email: string
-  password: string
   username: string
   todoList: Todo[]
   createdAt: string
 }
+
+export enum MutationTypes {
+  SET_ACCOUNT_INFO = 'SET_ACCOUNT_INFO',
+  SET_TODOLIST = 'SET_TODOLIST',
+}
+
+const defaultData = [
+  {
+    categoryId: '1',
+    id: '1',
+    doDate: '20210830',
+    doTime: '2012',
+    context: 'Test1',
+    completion: false,
+    createdAt: '20210830',
+    userId: 'gmldnjs',
+  },
+  {
+    categoryId: '1',
+    id: '2',
+    doDate: '20210830',
+    doTime: '2012',
+    context: 'Test2',
+    completion: false,
+    createdAt: '20210830',
+    userId: 'gmldnjs',
+  },
+  {
+    categoryId: '1',
+    id: '3',
+    doDate: '20210830',
+    doTime: '2012',
+    context: 'Test3',
+    completion: false,
+    createdAt: '20210830',
+    userId: 'gmldnjs',
+  },
+]
 
 @Module({
   name: 'account',
@@ -18,14 +55,21 @@ interface AccountState {
 })
 class Account extends VuexModule implements AccountState {
   email = ''
-  password = ''
   username = ''
-  todoList = []
-  createdAt = ''
+  todoList = defaultData
+  createdAt = '';
 
   @Mutation
-  setAccountInfo(accountInfo: AccountState) {
+  [MutationTypes.SET_ACCOUNT_INFO](accountInfo: AccountState) {
     this.email = accountInfo.email
+    this.username = accountInfo.username
+    this.todoList = accountInfo.todoList
+    this.createdAt = accountInfo.createdAt
+  }
+
+  @Mutation
+  [MutationTypes.SET_TODOLIST](todoList: Todo[]) {
+    this.todoList = todoList
   }
 }
 
