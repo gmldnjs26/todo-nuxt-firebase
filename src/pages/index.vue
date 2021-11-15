@@ -15,18 +15,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, useStore, toRefs } from '@nuxtjs/composition-api'
+import { defineComponent, reactive, toRefs, onMounted } from '@nuxtjs/composition-api'
 import { Todo } from '@/types/todo'
-import { accountStore } from '@/store'
+import { accountStore } from '~/store/index'
 
 export default defineComponent({
   components: {
     TodoList: () => import('@/components/TodoList.vue'),
   },
   setup() {
-    const store = useStore()
-    console.log(accountStore.todoList)
-
     const state = reactive({
       todoList: accountStore.todoList,
     })
