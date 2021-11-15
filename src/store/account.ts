@@ -1,11 +1,14 @@
 import { Module, VuexModule, Mutation } from 'vuex-module-decorators'
-import { Todo } from '@/types/todo'
+import { Category, Todo } from '@/types/todo'
 
-interface AccountState {
+export interface AccountState {
   email: string
   username: string
-  todoList: Todo[]
+  categoryList: Array<Category>
+  todoList: Array<{ [key: string]: Array<Todo> }>
   createdAt: string
+
+  // {} as { [key: number]: boolean },
 }
 
 export enum MutationTypes {
@@ -13,36 +16,44 @@ export enum MutationTypes {
   SET_TODOLIST = 'SET_TODOLIST',
 }
 
-const defaultData = [
+const defaultData: Array<{ [key: string]: Array<Todo> }> = [
   {
-    categoryId: '1',
-    id: '1',
-    doDate: '20210830',
-    doTime: '2012',
-    context: 'Test1',
-    completion: false,
-    createdAt: '20210830',
-    userId: 'gmldnjs',
+    '1': [
+      {
+        id: '1',
+        userId: 'gmldnjs',
+        categoryId: '1',
+        doDate: '20210830',
+        doTime: '2012',
+        context: 'Test1',
+        completion: false,
+        createdAt: '20210830',
+      },
+      {
+        categoryId: '1',
+        id: '2',
+        doDate: '20210830',
+        doTime: '2012',
+        context: 'Test2',
+        completion: false,
+        createdAt: '20210830',
+        userId: 'gmldnjs',
+      },
+    ],
   },
   {
-    categoryId: '1',
-    id: '2',
-    doDate: '20210830',
-    doTime: '2012',
-    context: 'Test2',
-    completion: false,
-    createdAt: '20210830',
-    userId: 'gmldnjs',
-  },
-  {
-    categoryId: '1',
-    id: '3',
-    doDate: '20210830',
-    doTime: '2012',
-    context: 'Test3',
-    completion: false,
-    createdAt: '20210830',
-    userId: 'gmldnjs',
+    '2': [
+      {
+        categoryId: '2',
+        id: '3',
+        doDate: '20210830',
+        doTime: '2012',
+        context: 'Test3',
+        completion: false,
+        createdAt: '20210830',
+        userId: 'gmldnjs',
+      },
+    ],
   },
 ]
 
@@ -53,11 +64,12 @@ const defaultData = [
   stateFactory: true,
   namespaced: true, // can do it -> getters['account/accountInfo']
 })
-class Account extends VuexModule implements AccountState {
-  email = ''
-  username = ''
+export default class Account extends VuexModule implements AccountState {
+  email = 'guest'
+  username = 'guest'
   todoList = defaultData
-  createdAt = '';
+  categoryList = [] as Category[]
+  createdAt = '1970-01-01';
 
   @Mutation
   [MutationTypes.SET_ACCOUNT_INFO](accountInfo: AccountState) {
@@ -67,10 +79,8 @@ class Account extends VuexModule implements AccountState {
     this.createdAt = accountInfo.createdAt
   }
 
-  @Mutation
-  [MutationTypes.SET_TODOLIST](todoList: Todo[]) {
-    this.todoList = todoList
-  }
+  // @Mutation
+  // [MutationTypes.SET_TODOLIST](todoList: Todo[]) {
+  //   this.todoList = todoList
+  // }
 }
-
-export { Account }
