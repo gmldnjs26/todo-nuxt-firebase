@@ -5,7 +5,7 @@ export interface AccountState {
   email: string
   username: string
   categoryList: Array<Category>
-  todoList: Array<{ [key: string]: Array<Todo> }>
+  todoList: { [key: string]: Array<Todo> }
   createdAt: string
 
   // {} as { [key: number]: boolean },
@@ -16,46 +16,42 @@ export enum MutationTypes {
   SET_TODOLIST = 'SET_TODOLIST',
 }
 
-const defaultData: Array<{ [key: string]: Array<Todo> }> = [
-  {
-    '1': [
-      {
-        id: '1',
-        userId: 'gmldnjs',
-        categoryId: '1',
-        doDate: '20210830',
-        doTime: '2012',
-        context: 'Test1',
-        completion: false,
-        createdAt: '20210830',
-      },
-      {
-        categoryId: '1',
-        id: '2',
-        doDate: '20210830',
-        doTime: '2012',
-        context: 'Test2',
-        completion: false,
-        createdAt: '20210830',
-        userId: 'gmldnjs',
-      },
-    ],
-  },
-  {
-    '2': [
-      {
-        categoryId: '2',
-        id: '3',
-        doDate: '20210830',
-        doTime: '2012',
-        context: 'Test3',
-        completion: false,
-        createdAt: '20210830',
-        userId: 'gmldnjs',
-      },
-    ],
-  },
-]
+const defaultData: { [key: string]: Array<Todo> } = {
+  '1': [
+    {
+      id: '1',
+      userId: 'gmldnjs',
+      categoryId: '1',
+      doDate: '20210830',
+      doTime: '2012',
+      context: 'Test1',
+      completion: false,
+      createdAt: '20210830',
+    },
+    {
+      categoryId: '1',
+      id: '2',
+      doDate: '20210830',
+      doTime: '2012',
+      context: 'Test2',
+      completion: false,
+      createdAt: '20210830',
+      userId: 'gmldnjs',
+    },
+  ],
+  '2': [
+    {
+      categoryId: '2',
+      id: '3',
+      doDate: '20210830',
+      doTime: '2012',
+      context: 'Test3',
+      completion: false,
+      createdAt: '20210830',
+      userId: 'gmldnjs',
+    },
+  ],
+}
 
 @Module({
   name: 'account',
