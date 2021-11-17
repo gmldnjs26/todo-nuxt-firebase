@@ -30,6 +30,10 @@ export default defineComponent({
       required: false,
       default: () => [],
     },
+    categoryId: {
+      type: String,
+      required: true,
+    },
   },
   setup(props, { emit }) {
     const editTodoList = toRefs(props).todoList

@@ -2,7 +2,10 @@
   <div class="bg-white w-full h-full">
     <div class="w-[400px] mx-auto">
       <TodoList
-        :todo-list="todoList"
+        v-for="(todoListByCat, catId) in todoList"
+        :key="catId"
+        :todo-list="todoListByCat"
+        :category-id="catId"
         @onChangeCompletion="changeCompletion"
         @onChangeContext="changeContext"
         @onRemove="remove"
