@@ -29,7 +29,7 @@ export default defineComponent({
     })
 
     const changeCompletion = (index: number) => {
-      state.todoList[index].completion = !state.todoList[index].completion
+      state.todoList['1'][index].completion = !state.todoList['1'][index].completion
     }
     const changeContext = ({ editContext, index }: { editContext: string; index: number }) => {
       state.todoList[index].context = editContext
