@@ -45,7 +45,7 @@ export default defineComponent({
 
     const onChangeContext = (editContext: string, index: number) => {
       onEditTodoItemIndex.value = -1
-      emit('onChangeContext', { editContext, index })
+      emit('onChangeContext', { editContext, catId: props.categoryId, index })
     }
 
     // event 정리
@@ -53,18 +53,18 @@ export default defineComponent({
       onEditTodoItemIndex.value = index
     }
     const remove = (index: number) => {
-      emit('onRemove', index)
+      emit('onRemove', { catId: props.categoryId, index })
     }
     const setAlram = (index: number) => {
-      emit('onSetAlarm', index)
+      emit('onSetAlarm', { catId: props.categoryId, index })
     }
     const changeDate = (index: number) => {
-      emit('onChangeDate', index)
+      emit('onChangeDate', { catId: props.categoryId, index })
     }
 
     const addTodo = () => {
       // FIXME: function을 내려서 비동기로 만들어준뒤 then으로 onEditTodoItemIndex을 수정하자
-      emit('addTodo')
+      emit('addTodo', props.categoryId)
       onEditTodoItemIndex.value = props.todoList.length - 1
     }
     return {

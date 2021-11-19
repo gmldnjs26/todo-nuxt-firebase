@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, onMounted } from '@nuxtjs/composition-api'
+import { defineComponent, reactive, toRefs } from '@nuxtjs/composition-api'
 import { Todo } from '@/types/todo'
 import { accountStore } from '~/store/index'
 
@@ -31,11 +31,11 @@ export default defineComponent({
       todoList: accountStore.todoList,
     })
 
-    const changeCompletion = (index: number) => {
-      state.todoList['1'][index].completion = !state.todoList['1'][index].completion
+    const changeCompletion = ({ catId, index }: { catId: string; index: number }) => {
+      state.todoList[catId][index].completion = !state.todoList[catId][index].completion
     }
-    const changeContext = ({ editContext, index }: { editContext: string; index: number }) => {
-      state.todoList[index].context = editContext
+    const changeContext = ({ editContext, catId, index }: { editContext: string; catId: string; index: number }) => {
+      state.todoList[catId][index].context = editContext
     }
     const remove = () => {
       console.log('test')
@@ -46,10 +46,10 @@ export default defineComponent({
     const changeDate = () => {
       console.log('test')
     }
-    const addTodo = () => {
-      state.todoList.push({
+    const addTodo = (catId: string) => {
+      state.todoList[catId].push({
         categoryId: '1',
-        id: (state.todoList.length + 2).toString(),
+        id: (state.todoList[catId].length + 2).toString(),
         doDate: '20210830',
         doTime: '2012',
         context: 'Test3',
