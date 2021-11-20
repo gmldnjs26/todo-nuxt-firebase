@@ -37,8 +37,9 @@ export default defineComponent({
     const changeContext = ({ editContext, catId, index }: { editContext: string; catId: string; index: number }) => {
       state.todoList[catId][index].context = editContext
     }
-    const remove = () => {
-      console.log('test')
+    const remove = ({ catId, index }: { catId: string; index: number }) => {
+      const removedItem = state.todoList[catId].splice(index, 1)
+      console.log(removedItem)
     }
     const setAlarm = () => {
       console.log('test')
