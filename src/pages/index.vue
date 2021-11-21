@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from '@nuxtjs/composition-api'
+import { defineComponent, reactive, toRefs, watch } from '@nuxtjs/composition-api'
 import { Todo } from '@/types/todo'
 import { accountStore } from '~/store/index'
 
@@ -28,7 +28,7 @@ export default defineComponent({
   },
   setup() {
     const state = reactive({
-      todoList: accountStore.todoList,
+      todoList: JSON.parse(JSON.stringify(accountStore.todoList)),
     })
 
     const changeCompletion = ({ catId, index }: { catId: string; index: number }) => {
@@ -59,6 +59,9 @@ export default defineComponent({
         userId: 'gmldnjs',
       })
     }
+    watch(toRefs(state).todoList, (cur: { [key: string]: Array<Todo> }, prev: { [key: string]: Array<Todo> }): void => {
+      console.log(prev, cur)
+    })
     return {
       ...toRefs(state),
       changeCompletion,
