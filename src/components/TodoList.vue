@@ -40,7 +40,7 @@ export default defineComponent({
     const onEditTodoItemIndex = ref(-1)
 
     const onChangeCompletion = (index: number) => {
-      emit('onChangeCompletion', index)
+      emit('onChangeCompletion', { catId: props.categoryId, index })
     }
 
     const onChangeContext = (editContext: string, index: number) => {
