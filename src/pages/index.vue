@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, watch } from '@nuxtjs/composition-api'
+import { defineComponent, reactive, toRefs, watch, computed } from '@nuxtjs/composition-api'
 import { Todo } from '@/types/todo'
 import { accountStore } from '~/store/index'
 
@@ -27,18 +27,22 @@ export default defineComponent({
     TodoList: () => import('@/components/TodoList.vue'),
   },
   setup() {
-    const state = reactive({
-      todoList: JSON.parse(JSON.stringify(accountStore.todoList)),
+    // const state = reactive({
+    //   todoList: JSON.parse(JSON.stringify(accountStore.todoList)),
+    // })
+
+    const todoList = computed(() => {
+      return accountStore.todoList
     })
 
     const changeCompletion = ({ catId, index }: { catId: string; index: number }) => {
-      state.todoList[catId][index].completion = !state.todoList[catId][index].completion
+      accountStore.setTodolistCompletion({ catId, index, completion: !todoList.value[catId][index].completion })
     }
     const changeContext = ({ editContext, catId, index }: { editContext: string; catId: string; index: number }) => {
-      state.todoList[catId][index].context = editContext
+      accountStore.setTodolistContext({ catId, index, context: editContext })
     }
     const remove = ({ catId, index }: { catId: string; index: number }) => {
-      const removedItem = state.todoList[catId].splice(index, 1)
+      const removedItem = todoList.value[catId].splice(index, 1)
       console.log(removedItem)
     }
     const setAlarm = () => {
@@ -48,22 +52,13 @@ export default defineComponent({
       console.log('test')
     }
     const addTodo = (catId: string) => {
-      state.todoList[catId].push({
-        categoryId: '1',
-        id: (state.todoList[catId].length + 2).toString(),
-        doDate: '20210830',
-        doTime: '2012',
-        context: 'Test3',
-        completion: false,
-        createdAt: '20210830',
-        userId: 'gmldnjs',
-      })
+      accountStore.addTodolist(catId)
     }
-    watch(toRefs(state).todoList, (cur: { [key: string]: Array<Todo> }, prev: { [key: string]: Array<Todo> }): void => {
-      console.log(prev, cur)
-    })
+    // watch(toRefs.todoList, (cur: { [key: string]: Array<Todo> }, prev: { [key: string]: Array<Todo> }): void => {
+    //   console.log(prev, cur)
+    // })
     return {
-      ...toRefs(state),
+      todoList,
       changeCompletion,
       changeContext,
       remove,

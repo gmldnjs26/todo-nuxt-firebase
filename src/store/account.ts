@@ -1,4 +1,4 @@
-import { Module, VuexModule, Mutation } from 'vuex-module-decorators'
+import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
 import { Category, Todo } from '@/types/todo'
 
 export interface AccountState {
@@ -13,7 +13,12 @@ export interface AccountState {
 
 export enum MutationTypes {
   SET_ACCOUNT_INFO = 'SET_ACCOUNT_INFO',
-  SET_TODOLIST = 'SET_TODOLIST',
+  SET_TODOLIST_COMPLETION = 'SET_TODOLIST_COMPLETION',
+  SET_TODOLIST_CONTEXT = 'SET_TODOLIST_CONTEXT',
+  SET_TODOLIST_DATE = 'SET_TODOLIST_DATE',
+  SET_TODOLIST_TIME = 'SET_TODOLIST_TIME',
+  REMOVE_TODOLIST = 'REMOVE_TODOLIST',
+  ADD_TODOLIST = 'ADD_TODOLIST',
 }
 
 const defaultData: { [key: string]: Array<Todo> } = {
@@ -52,7 +57,8 @@ const defaultData: { [key: string]: Array<Todo> } = {
     },
   ],
 }
-
+const savedData = JSON.parse(window.localStorage.getItem('heewon') as string)
+console.log(savedData)
 @Module({
   name: 'account',
   // If you need to support module reuse or to use modules with NuxtJS,
@@ -75,8 +81,42 @@ export default class Account extends VuexModule implements AccountState {
     this.createdAt = accountInfo.createdAt
   }
 
-  // @Mutation
-  // [MutationTypes.SET_TODOLIST](todoList: Todo[]) {
-  //   this.todoList = todoList
-  // }
+  @Mutation
+  [MutationTypes.SET_TODOLIST_COMPLETION]({ catId, index, completion }: { catId: string; index: number; completion: boolean }) {
+    this.todoList[catId][index].completion = completion
+  }
+
+  @Mutation
+  [MutationTypes.SET_TODOLIST_CONTEXT]({ catId, index, context }: { catId: string; index: number; context: string }) {
+    this.todoList[catId][index].context = context
+  }
+
+  @Mutation
+  [MutationTypes.ADD_TODOLIST](catId: string) {
+    this.todoList[catId].push({
+      categoryId: '1',
+      id: (this.todoList[catId].length + 2).toString(),
+      doDate: '20210830',
+      doTime: '2012',
+      context: 'Test3',
+      completion: false,
+      createdAt: '20210830',
+      userId: 'gmldnjs',
+    })
+  }
+
+  @Action({ rawError: true })
+  setTodolistCompletion(payload: { catId: string; index: number; completion: boolean }) {
+    this.SET_TODOLIST_COMPLETION(payload)
+  }
+
+  @Action({ rawError: true })
+  setTodolistContext(payload: { catId: string; index: number; context: string }) {
+    this.SET_TODOLIST_CONTEXT(payload)
+  }
+
+  @Action({ rawError: true })
+  addTodolist(payload: string) {
+    this.ADD_TODOLIST(payload)
+  }
 }
