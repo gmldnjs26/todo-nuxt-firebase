@@ -57,8 +57,7 @@ const defaultData: { [key: string]: Array<Todo> } = {
     },
   ],
 }
-const savedData = JSON.parse(window.localStorage.getItem('heewon') as string)
-console.log(savedData)
+// const savedData = JSON.parse(window.localStorage.getItem('heewon') as string)
 @Module({
   name: 'account',
   // If you need to support module reuse or to use modules with NuxtJS,
