@@ -21,6 +21,23 @@ export enum MutationTypes {
   ADD_TODOLIST = 'ADD_TODOLIST',
 }
 
+const defaultCategoryList = [
+  {
+    id: '1',
+    userId: 'heewon',
+    icon: 'walking',
+    color: 'green',
+    createdAt: '20211129',
+  },
+  {
+    id: '2',
+    userId: 'heewon',
+    icon: 'school',
+    color: 'blue',
+    createdAt: '20211129',
+  },
+]
+
 const defaultData: { [key: string]: Array<Todo> } = {
   '1': [
     {
@@ -69,7 +86,7 @@ export default class Account extends VuexModule implements AccountState {
   email = 'guest'
   username = 'guest'
   todoList = defaultData
-  categoryList = [] as Category[]
+  categoryList = defaultCategoryList
   createdAt = '1970-01-01';
 
   @Mutation
@@ -93,6 +110,7 @@ export default class Account extends VuexModule implements AccountState {
   @Mutation
   [MutationTypes.ADD_TODOLIST](catId: string) {
     this.todoList[catId].push({
+      // FIXME: default 내용들은 로그인, 비로그인으로 나누기
       categoryId: '1',
       id: (this.todoList[catId].length + 2).toString(),
       doDate: '20210830',

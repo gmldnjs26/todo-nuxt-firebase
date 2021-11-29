@@ -1,5 +1,8 @@
 <template>
   <div class="w-full h-auto flex-1 flex flex-col space-y-2">
+    <div @click="addTodo">
+      <font-awesome-icon class="text-xl" :icon="categoryIcon" />
+    </div>
     <IconButton icon="plus" color="primary" @click="addTodo" />
     <div v-for="(t, i) in editTodoList" :key="i" class="flex justify-between">
       <MarkBox
@@ -15,8 +18,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, toRefs, ref } from '@nuxtjs/composition-api'
+import { defineComponent, PropType, toRefs, ref, computed } from '@nuxtjs/composition-api'
 import { Todo } from '@/types/todo'
+import { accountStore } from '@/store/index'
 
 export default defineComponent({
   components: {
@@ -38,6 +42,11 @@ export default defineComponent({
   setup(props, { emit }) {
     const editTodoList = toRefs(props).todoList
     const onEditTodoItemIndex = ref(-1)
+
+    const categoryIcon = computed(() => {
+      const result = accountStore.categoryList.find((item) => item.id === props.categoryId)
+      return result?.icon
+    })
 
     const onChangeCompletion = (index: number) => {
       emit('onChangeCompletion', { catId: props.categoryId, index })
@@ -70,6 +79,7 @@ export default defineComponent({
     return {
       editTodoList,
       onEditTodoItemIndex,
+      categoryIcon,
       onChangeCompletion,
       onChangeContext,
       edit,
