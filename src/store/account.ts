@@ -17,7 +17,7 @@ export enum MutationTypes {
   SET_TODOLIST_CONTEXT = 'SET_TODOLIST_CONTEXT',
   SET_TODOLIST_DATE = 'SET_TODOLIST_DATE',
   SET_TODOLIST_TIME = 'SET_TODOLIST_TIME',
-  REMOVE_TODOLIST = 'REMOVE_TODOLIST',
+  REMOVE_TODOITEM = 'REMOVE_TODOITEM',
   ADD_TODOLIST = 'ADD_TODOLIST',
 }
 
@@ -104,6 +104,11 @@ export default class Account extends VuexModule implements AccountState {
     })
   }
 
+  @Mutation
+  [MutationTypes.REMOVE_TODOITEM]({ catId, index }: { catId: string; index: number }) {
+    this.todoList[catId].splice(index, 1)
+  }
+
   @Action({ rawError: true })
   setTodolistCompletion(payload: { catId: string; index: number; completion: boolean }) {
     this.SET_TODOLIST_COMPLETION(payload)
@@ -117,5 +122,10 @@ export default class Account extends VuexModule implements AccountState {
   @Action({ rawError: true })
   addTodolist(payload: string) {
     this.ADD_TODOLIST(payload)
+  }
+
+  @Action({ rawError: true })
+  removeTodoItem(payload: { catId: string; index: number }) {
+    this.REMOVE_TODOITEM(payload)
   }
 }

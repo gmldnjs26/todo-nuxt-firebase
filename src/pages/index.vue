@@ -42,8 +42,7 @@ export default defineComponent({
       accountStore.setTodolistContext({ catId, index, context: editContext })
     }
     const remove = ({ catId, index }: { catId: string; index: number }) => {
-      const removedItem = todoList.value[catId].splice(index, 1)
-      console.log(removedItem)
+      accountStore.removeTodoItem({ catId, index })
     }
     const setAlarm = () => {
       console.log('test')
