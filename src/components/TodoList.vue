@@ -1,9 +1,9 @@
 <template>
   <div class="w-full h-auto flex-1 flex flex-col space-y-2">
-    <div @click="addTodo">
-      <font-awesome-icon class="text-xl" :icon="categoryIcon" />
+    <div class="w-20 bg-gray-200 my-2 py-1 px-2 rounded-md flex justify-between" @click="addTodo">
+      <font-awesome-icon :class="`text-sm text-left text-${categoryInfo.color}-500`" :icon="categoryInfo.icon" />
+      <font-awesome-icon class="text-sm text-right" icon="plus" color="primary" />
     </div>
-    <IconButton icon="plus" color="primary" @click="addTodo" />
     <div v-for="(t, i) in editTodoList" :key="i" class="flex justify-between">
       <MarkBox
         :label="t.context"
@@ -25,7 +25,6 @@ import { accountStore } from '@/store/index'
 export default defineComponent({
   components: {
     MarkBox: () => import('@/components/MarkBox.vue'),
-    IconButton: () => import('@/components/IconButton.vue'),
     FloatMenuBtn: () => import('@/components/FloatMenuBtn.vue'),
   },
   props: {
@@ -43,9 +42,8 @@ export default defineComponent({
     const editTodoList = toRefs(props).todoList
     const onEditTodoItemIndex = ref(-1)
 
-    const categoryIcon = computed(() => {
-      const result = accountStore.categoryList.find((item) => item.id === props.categoryId)
-      return result?.icon
+    const categoryInfo = computed(() => {
+      return accountStore.categoryList.find((item) => item.id === props.categoryId)
     })
 
     const onChangeCompletion = (index: number) => {
@@ -79,7 +77,7 @@ export default defineComponent({
     return {
       editTodoList,
       onEditTodoItemIndex,
-      categoryIcon,
+      categoryInfo,
       onChangeCompletion,
       onChangeContext,
       edit,

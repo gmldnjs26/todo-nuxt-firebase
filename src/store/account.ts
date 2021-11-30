@@ -33,7 +33,7 @@ const defaultCategoryList = [
     id: '2',
     userId: 'heewon',
     icon: 'school',
-    color: 'blue',
+    color: 'gray',
     createdAt: '20211129',
   },
 ]
