@@ -25,6 +25,7 @@ const defaultCategoryList = [
   {
     id: '1',
     userId: 'heewon',
+    name: '운동',
     icon: 'walking',
     color: 'green',
     createdAt: '20211129',
@@ -32,6 +33,7 @@ const defaultCategoryList = [
   {
     id: '2',
     userId: 'heewon',
+    name: '공부',
     icon: 'school',
     color: 'gray',
     createdAt: '20211129',
