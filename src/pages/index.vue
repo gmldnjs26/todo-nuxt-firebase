@@ -1,6 +1,9 @@
 <template>
   <div class="bg-white w-full h-full">
     <div class="w-[400px] mx-auto">
+      <Calendar :todo-list="todoList" />
+    </div>
+    <div class="w-[400px] mx-auto">
       <TodoList
         v-for="(todoListByCat, catId) in todoList"
         :key="catId"
@@ -25,6 +28,7 @@ import { accountStore } from '~/store/index'
 export default defineComponent({
   components: {
     TodoList: () => import('@/components/TodoList.vue'),
+    Calendar: () => import('@/components/Calendar.vue'),
   },
   setup() {
     // const state = reactive({
