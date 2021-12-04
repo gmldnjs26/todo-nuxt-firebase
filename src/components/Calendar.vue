@@ -15,11 +15,11 @@
     </section>
     <section>
       <div>
-        월 화 수 목 금 토 일
+        일 월 화 수 목 금 토
       </div>
-      <div>
+      <div class="grid grid-cols-7 mt-2">
         <div v-for="(d, i) in dates" :key="i">
-          {{ d.date }}
+          {{ d.date | formatDateToDay }}
         </div>
       </div>
     </section>
@@ -29,9 +29,15 @@
 <script lang="ts">
 import { defineComponent, PropType, computed, ref } from '@nuxtjs/composition-api'
 import { startOfMonth, startOfWeek, endOfMonth, endOfWeek, eachDayOfInterval, getDay } from 'date-fns/fp'
+import format from 'date-fns/format'
 import { Todo } from 'types/todo'
 
 export default defineComponent({
+  filters: {
+    formatDateToDay(val: Date) {
+      return format(val, 'd')
+    },
+  },
   props: {
     todoList: {
       type: Object as PropType<{ [key: string]: Array<Todo> }>,
