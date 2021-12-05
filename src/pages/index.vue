@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white w-full h-full">
     <div class="w-[400px] mx-auto">
-      <Calendar :todo-list="todoList" />
+      <Calendar :todo-list="todoList" :day-todo-status-infos="dayTodoStatusInfos" />
     </div>
     <div class="w-[400px] mx-auto">
       <TodoList
@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from '@nuxtjs/composition-api'
-import { Todo } from '@/types/todo'
+import { dayTodoStatusInfo, Todo } from '@/types/todo'
 import { accountStore } from '~/store/index'
 
 export default defineComponent({
@@ -37,6 +37,24 @@ export default defineComponent({
 
     const todoList = computed(() => {
       return accountStore.todoList
+    })
+
+    const dayTodoStatusInfos = computed(() => {
+      const dayTodoStatusInfos = {} as { [key: string]: dayTodoStatusInfo }
+      Object.keys(accountStore.todoList).forEach((catId) => {
+        accountStore.todoList[catId].forEach((todo) => {
+          if (todo.completion) {
+            dayTodoStatusInfos[todo.doDate].isCompletedTodoCount = dayTodoStatusInfos[todo.doDate].isCompletedTodoCount
+              ? 1
+              : dayTodoStatusInfos[todo.doDate].isCompletedTodoCount++
+          } else {
+            dayTodoStatusInfos[todo.doDate].isNotCompletedTodoCount = dayTodoStatusInfos[todo.doDate].isNotCompletedTodoCount
+              ? 1
+              : dayTodoStatusInfos[todo.doDate].isNotCompletedTodoCount++
+          }
+        })
+      })
+      return dayTodoStatusInfos
     })
 
     const changeCompletion = ({ catId, index }: { catId: string; index: number }) => {
@@ -62,6 +80,7 @@ export default defineComponent({
     // })
     return {
       todoList,
+      dayTodoStatusInfos,
       changeCompletion,
       changeContext,
       remove,
