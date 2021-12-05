@@ -27,3 +27,8 @@ export type TodoEditEventInfo = {
 export type EditTodo = Todo & {
   onEdit: boolean
 }
+
+export type dayTodoStatusInfo = {
+  isCompletedTodoCount: number
+  isNotCompletedTodoCount: number
+}
