@@ -50,7 +50,27 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    // '@nuxtjs/firebase',
+    // '@nuxtjs/firebase', 타입적용이 어려워서 nuxtjs/firebase는 안쓰는쪽으로함
+    // https://i18n.nuxtjs.org
+    [
+      '@nuxtjs/i18n',
+      {
+        // 使用する言語の設定
+        locales: [
+          { code: 'ko', name: 'Korean', iso: 'ko_KR', file: 'ko/index.js' },
+          { code: 'ja', name: 'Japanese', iso: 'ja_JP', file: 'ja/index.js' },
+        ],
+        defaultLocale: 'ko',
+        langDir: 'locales/',
+        strategy: 'prefix_except_default',
+        vueI18n: {
+          fallbackLocale: 'ko',
+        },
+        lazy: true,
+        vueI18nLoader: true,
+        vuex: false,
+      },
+    ],
   ],
   // firebase: {
   //   config: {
