@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white w-full h-full">
     <div class="w-[400px] mx-auto">
-      <Calendar :todo-list="todoList" :day-todo-status-infos="dayTodoStatusInfos" />
+      <Calendar :day-todo-status-infos="dayTodoStatusInfos" />
     </div>
     <div class="w-[400px] mx-auto">
       <TodoList
@@ -43,14 +43,17 @@ export default defineComponent({
       const dayTodoStatusInfos = {} as { [key: string]: dayTodoStatusInfo }
       Object.keys(accountStore.todoList).forEach((catId) => {
         accountStore.todoList[catId].forEach((todo) => {
+          // FIXME: 좀 더 정확한 빈 객체의 객체 조사방법? 없나?
+          if (dayTodoStatusInfos[todo.doDate] === undefined) {
+            dayTodoStatusInfos[todo.doDate] = {
+              isCompletedTodoCount: 0,
+              isNotCompletedTodoCount: 0,
+            }
+          }
           if (todo.completion) {
-            dayTodoStatusInfos[todo.doDate].isCompletedTodoCount = dayTodoStatusInfos[todo.doDate].isCompletedTodoCount
-              ? 1
-              : dayTodoStatusInfos[todo.doDate].isCompletedTodoCount++
+            dayTodoStatusInfos[todo.doDate].isCompletedTodoCount++
           } else {
-            dayTodoStatusInfos[todo.doDate].isNotCompletedTodoCount = dayTodoStatusInfos[todo.doDate].isNotCompletedTodoCount
-              ? 1
-              : dayTodoStatusInfos[todo.doDate].isNotCompletedTodoCount++
+            dayTodoStatusInfos[todo.doDate].isNotCompletedTodoCount++
           }
         })
       })
