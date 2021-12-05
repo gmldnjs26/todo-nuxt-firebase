@@ -14,8 +14,10 @@
       </div>
     </section>
     <section>
-      <div>
-        일 월 화 수 목 금 토
+      <div class="flex">
+        <div v-for="(day, i) in $t('dayLabels')" :key="i">
+          {{ day }}
+        </div>
       </div>
       <div class="grid grid-cols-7 mt-2">
         <div v-for="(d, i) in dates" :key="i">
