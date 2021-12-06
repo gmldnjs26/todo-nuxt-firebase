@@ -28,7 +28,7 @@ const defaultCategoryList = [
     name: '운동',
     icon: 'walking',
     color: 'green',
-    createdAt: '20211129',
+    createdAt: '20211206',
   },
   {
     id: '2',
@@ -36,7 +36,7 @@ const defaultCategoryList = [
     name: '공부',
     icon: 'school',
     color: 'gray',
-    createdAt: '20211129',
+    createdAt: '20211206',
   },
 ]
 
@@ -46,7 +46,7 @@ const defaultData: { [key: string]: Array<Todo> } = {
       id: '1',
       userId: 'gmldnjs',
       categoryId: '1',
-      doDate: '20210830',
+      doDate: '20211206',
       doTime: '2012',
       context: 'Test1',
       completion: false,
@@ -55,7 +55,7 @@ const defaultData: { [key: string]: Array<Todo> } = {
     {
       categoryId: '1',
       id: '2',
-      doDate: '20210830',
+      doDate: '20211206',
       doTime: '2012',
       context: 'Test2',
       completion: false,
@@ -67,7 +67,7 @@ const defaultData: { [key: string]: Array<Todo> } = {
     {
       categoryId: '2',
       id: '3',
-      doDate: '20210830',
+      doDate: '20211207',
       doTime: '2012',
       context: 'Test3',
       completion: false,
