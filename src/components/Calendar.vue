@@ -61,14 +61,12 @@ export default defineComponent({
         date,
         isHoliday: getDay(date) === 0,
         isSaturday: getDay(date) === 6,
-        isCompletedTodoCount:
-          props.dayTodoStatusInfos[format(date, 'yyyyMMdd')] !== undefined
-            ? props.dayTodoStatusInfos[format(date, 'yyyyMMdd')].isCompletedTodoCount
-            : 0,
-        isNotCompletedTodoCount:
-          props.dayTodoStatusInfos[format(date, 'yyyyMMdd')] !== undefined
-            ? props.dayTodoStatusInfos[format(date, 'yyyyMMdd')].isNotCompletedTodoCount
-            : 0,
+        isCompletedTodoCount: props.dayTodoStatusInfos[format(date, 'yyyyMMdd')]
+          ? props.dayTodoStatusInfos[format(date, 'yyyyMMdd')].isCompletedTodoCount
+          : 0,
+        isNotCompletedTodoCount: props.dayTodoStatusInfos[format(date, 'yyyyMMdd')]
+          ? props.dayTodoStatusInfos[format(date, 'yyyyMMdd')].isNotCompletedTodoCount
+          : 0,
       }))
     })
 
