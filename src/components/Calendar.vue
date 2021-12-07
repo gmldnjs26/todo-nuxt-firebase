@@ -2,7 +2,7 @@
   <div class="w-full h-full mx-4">
     <section class="flex">
       <div>
-        <span>2021년 12월</span>
+        <span>{{ currDateCursor | formatDateToYYYYMM }}</span>
         <span>Completed: 5</span>
       </div>
       <div>
@@ -41,6 +41,9 @@ export default defineComponent({
     formatDateToDay(val: Date) {
       return format(val, 'd')
     },
+    formatDateToYYYYMM(val: Date) {
+      return format(val, 'yyyy-MM')
+    },
   },
   props: {
     dayTodoStatusInfos: {
@@ -72,6 +75,7 @@ export default defineComponent({
 
     return {
       dates,
+      currDateCursor,
     }
   },
 })
