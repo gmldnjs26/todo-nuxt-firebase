@@ -2,6 +2,7 @@
   <div>
     <font-awesome-icon class="absolute inset-0 text-xl" :class="isChecked ? 'text-primary_dark' : 'text-primary'" icon="star" />
     <span v-show="isChecked" class="absolute left-2 top-1 w-3.5 h-3.5" :class="checkStyles" />
+    <span v-show="!isChecked && innerText !== '0'" class="absolute left-2 top-1 text-xs">{{ innerText }}</span>
   </div>
 </template>
 
@@ -14,6 +15,11 @@ export default defineComponent({
       type: Boolean,
       required: false,
       default: false,
+    },
+    innerText: {
+      type: String,
+      required: false,
+      default: '',
     },
   },
   setup() {
