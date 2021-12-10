@@ -64,7 +64,7 @@ export default defineComponent({
     const currDateCursor = ref(new Date(new Date().setHours(0, 0, 0, 0)))
     const isShowMonth = ref(false)
     const dates = computed(() => {
-      const currDate = currDateCursor.value
+      const currDate = currDateCursor.value as Date
       const startDate = isShowMonth.value ? startOfMonth(currDate) : startOfWeek(currDate)
       const endDate = isShowMonth.value ? endOfMonth(currDate) : endOfWeek(currDate)
       return eachDayOfInterval({ end: endDate, start: startDate }).map((date) => ({
