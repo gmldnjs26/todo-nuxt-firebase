@@ -21,7 +21,9 @@
       </div>
       <div class="grid grid-cols-7 mt-2">
         <div v-for="(d, i) in dates" :key="i">
-          {{ d.date | formatDateToDay }}
+          <span :class="d.isHoliday ? 'text-red-500' : d.isSaturday ? 'text-blue-500' : 'text-black'">{{
+            d.date | formatDateToDay
+          }}</span>
           <MarkIcon
             class="relative"
             :is-checked="d.isCompletedTodoCount > 0 && d.isNotCompletedTodoCount === 0"
