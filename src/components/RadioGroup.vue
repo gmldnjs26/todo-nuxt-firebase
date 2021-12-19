@@ -32,7 +32,7 @@ export default defineComponent({
     columnCount: {
       type: Number,
       required: false,
-      default: 4,
+      default: 2,
     },
     selectedValue: {
       type: Number,

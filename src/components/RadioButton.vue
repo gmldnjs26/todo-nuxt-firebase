@@ -6,6 +6,7 @@
       class="mr-1 w-4 h-4 form-radio"
       :value="value"
       :disabled="isDisabled"
+      :checked="isChecked"
       @click="click(value)"
     />
     <span :class="`${isChecked ? 'text-primary' : 'text-gray-500'}`">{{ text }}</span>
