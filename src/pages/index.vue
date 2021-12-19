@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white w-full h-full">
+  <div class="bg-gray-100 w-full h-full">
     <div class="w-[400px] mx-auto">
       <Calendar :day-todo-status-infos="dayTodoStatusInfos" />
     </div>
@@ -17,23 +17,45 @@
         @addTodo="addTodo"
       />
     </div>
+    <div class="w-[200px] mx-auto">
+      <RadioGroup
+        name="time"
+        :radio-contents="testRadioContents"
+        :selected-value="selectedValue"
+        @click="(value) => (selectedValue = value)"
+      />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from '@nuxtjs/composition-api'
-import { dayTodoStatusInfo, Todo } from '@/types/todo'
+import { defineComponent, computed, ref } from '@nuxtjs/composition-api'
+import { dayTodoStatusInfo } from '@/types/todo'
 import { accountStore } from '~/store/index'
 
 export default defineComponent({
   components: {
     TodoList: () => import('@/components/TodoList.vue'),
     Calendar: () => import('@/components/Calendar.vue'),
+    RadioGroup: () => import('@/components/RadioGroup.vue'),
   },
   setup() {
     // const state = reactive({
     //   todoList: JSON.parse(JSON.stringify(accountStore.todoList)),
     // })
+
+    const testRadioContents = [
+      {
+        value: 1,
+        text: '月',
+      },
+      {
+        value: 2,
+        text: '日',
+      },
+    ]
+
+    const selectedValue = ref(1)
 
     const todoList = computed(() => {
       return accountStore.todoList
@@ -90,6 +112,8 @@ export default defineComponent({
       setAlarm,
       changeDate,
       addTodo,
+      testRadioContents,
+      selectedValue,
     }
   },
 })
