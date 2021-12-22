@@ -50,8 +50,9 @@ export default defineComponent({
       const dayTodoStatusInfos = {} as { [key: string]: dayTodoStatusInfo }
       Object.keys(accountStore.todoList).forEach((catId) => {
         accountStore.todoList[catId].forEach((todo) => {
+          // FIXME: 좀 더 정확한 빈 객체의 객체 조사방법? 없나? todo.doDate in dayTodoStatusInfos 라는 방법도 있지만 상당한 속도 차이가 난다.
           // https://stackoverflow.com/questions/1098040/checking-if-a-key-exists-in-a-javascript-object
-          if (!(todo.doDate in dayTodoStatusInfos)) {
+          if (dayTodoStatusInfos[todo.doDate] === undefined) {
             dayTodoStatusInfos[todo.doDate] = {
               isCompletedTodoCount: 0,
               isNotCompletedTodoCount: 0,
