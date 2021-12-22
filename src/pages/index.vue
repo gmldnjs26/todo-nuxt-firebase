@@ -40,21 +40,6 @@ export default defineComponent({
     RadioGroup: () => import('@/components/RadioGroup.vue'),
   },
   setup() {
-    // const state = reactive({
-    //   todoList: JSON.parse(JSON.stringify(accountStore.todoList)),
-    // })
-
-    const testRadioContents = [
-      {
-        value: 1,
-        text: '月',
-      },
-      {
-        value: 2,
-        text: '日',
-      },
-    ]
-
     const selectedValue = ref(1)
 
     const todoList = computed(() => {
@@ -65,8 +50,8 @@ export default defineComponent({
       const dayTodoStatusInfos = {} as { [key: string]: dayTodoStatusInfo }
       Object.keys(accountStore.todoList).forEach((catId) => {
         accountStore.todoList[catId].forEach((todo) => {
-          // FIXME: 좀 더 정확한 빈 객체의 객체 조사방법? 없나?
-          if (dayTodoStatusInfos[todo.doDate] === undefined) {
+          // https://stackoverflow.com/questions/1098040/checking-if-a-key-exists-in-a-javascript-object
+          if (!(todo.doDate in dayTodoStatusInfos)) {
             dayTodoStatusInfos[todo.doDate] = {
               isCompletedTodoCount: 0,
               isNotCompletedTodoCount: 0,
@@ -112,7 +97,6 @@ export default defineComponent({
       setAlarm,
       changeDate,
       addTodo,
-      testRadioContents,
       selectedValue,
     }
   },
