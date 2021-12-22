@@ -22,3 +22,14 @@ export const TODO_EDIT_EVENTS: TodoEditEventInfo[] = [
     title: '날짜변경',
   },
 ]
+
+export const calendarRadioContents = [
+  {
+    value: 1,
+    text: '月',
+  },
+  {
+    value: 2,
+    text: '週',
+  },
+]
