@@ -10,12 +10,12 @@
         <button>·＞·</button>
       </div>
       <div>
-        <button>월</button>
+        <RadioGroup :radio-contents="CALENDAR_RADIO_CONTENTS" :selected-value="1" />
       </div>
     </section>
     <section class="my-6">
       <div class="flex">
-        <div v-for="(day, i) in $t('dayLabels')" :key="i" class="w-full h-3 flex items-center justify-center text-xs">
+        <div v-for="(day, i) in $t('dayLabels')" :key="i" class="w-full h-3 text-xs pl-1">
           {{ day }}
         </div>
       </div>
@@ -25,7 +25,6 @@
             d.date | formatDateToDay
           }}</span>
           <MarkIcon
-            class="relative"
             :is-checked="d.isCompletedTodoCount > 0 && d.isNotCompletedTodoCount === 0"
             :inner-text="d.isNotCompletedTodoCount ? d.isNotCompletedTodoCount.toString() : '0'"
           />
@@ -40,10 +39,12 @@ import { defineComponent, PropType, computed, ref } from '@nuxtjs/composition-ap
 import { startOfMonth, startOfWeek, endOfMonth, endOfWeek, eachDayOfInterval, getDay } from 'date-fns/fp'
 import format from 'date-fns/format'
 import { dayTodoStatusInfo } from '@/types/todo'
+import { CALENDAR_RADIO_CONTENTS } from '@/utils/const'
 
 export default defineComponent({
   components: {
     MarkIcon: () => import('@/components/MarkIcon.vue'),
+    RadioGroup: () => import('@/components/RadioGroup.vue'),
   },
   filters: {
     formatDateToDay(val: Date) {
@@ -83,6 +84,7 @@ export default defineComponent({
     return {
       dates,
       currDateCursor,
+      CALENDAR_RADIO_CONTENTS,
     }
   },
 })

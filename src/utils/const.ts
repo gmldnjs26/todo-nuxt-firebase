@@ -23,7 +23,7 @@ export const TODO_EDIT_EVENTS: TodoEditEventInfo[] = [
   },
 ]
 
-export const calendarRadioContents = [
+export const CALENDAR_RADIO_CONTENTS = [
   {
     value: 1,
     text: '月',
