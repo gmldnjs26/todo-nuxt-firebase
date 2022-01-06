@@ -5,12 +5,20 @@ import 'firebase/storage'
 import 'firebase/messaging'
 import 'firebase/analytics'
 import { Plugin } from '@nuxt/types'
-import FirebaseConfigInfo from '@/config/firebaseConfig'
+// import FirebaseConfigInfo from '@/config/firebaseConfig'
 
-const firebaseConfig = FirebaseConfigInfo
+// const firebaseConfig = FirebaseConfigInfo
 
 if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig)
+  firebase.initializeApp({
+    apiKey: process.env.apiKey,
+    authDomain: process.env.authDomain,
+    projectId: process.env.projectId,
+    storageBucket: process.env.storageBucket,
+    messagingSenderId: process.env.messagingSenderId,
+    appId: process.env.appId,
+    measurementId: process.env.measurementId,
+  })
 }
 
 declare module 'vue/types/vue' {
