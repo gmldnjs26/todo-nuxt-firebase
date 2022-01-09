@@ -2,13 +2,13 @@
   <div class="w-full h-full">
     <div class="mx-auto w-96 h-60">
       <div class="flex flex-col justify-center items-center">
-        <font-awesome-icon icon="user" size="2x" class="text-primary my-2 hover:text-lighter"></font-awesome-icon>
+        <font-awesome-icon icon="user" size="2x" class="text-primary_two my-2 hover:text-lighter"></font-awesome-icon>
         <h1 class="text-xl mb-2 font-bold">Login</h1>
       </div>
       <section class="flex flex-col w-full space-y-3">
         <input type="text" placeholder="Email" />
         <input type="password" placeholder="Password" />
-        <button class="w-full h-12 text-white bg-primary rounded-full hover:bg-dark">
+        <button class="w-full h-12 text-white bg-primary_two rounded-full hover:bg-dark">
           <span>Sign In</span>
         </button>
         <div class="flex flex-col w-full text-center">

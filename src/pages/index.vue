@@ -29,7 +29,6 @@ export default defineComponent({
   components: {
     TodoList: () => import('@/components/TodoList.vue'),
     Calendar: () => import('@/components/Calendar.vue'),
-    RadioGroup: () => import('@/components/RadioGroup.vue'),
   },
   setup() {
     const selectedValue = ref(1)

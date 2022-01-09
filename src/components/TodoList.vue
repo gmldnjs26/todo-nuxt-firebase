@@ -8,7 +8,7 @@
       <div class="text-xs">
         {{ categoryInfo.name }}
       </div>
-      <font-awesome-icon class="text-sm text-right" icon="plus" color="primary" />
+      <font-awesome-icon class="text-sm text-right" icon="plus" color="primary_two" />
     </div>
     <div v-for="(t, i) in editTodoList" :key="i" class="flex justify-between">
       <MarkBox

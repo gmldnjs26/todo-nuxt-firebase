@@ -11,7 +11,7 @@
       <div v-show="isShowMenu" class="flex space-x-2 rounded-lg bg-gray-100 py-0.5 px-1.5">
         <IconButton
           class="w-6 h-6 rounded-full p-1 hover:bg-gray-300"
-          color="primary_light"
+          color="primary_one"
           icon="chevron-right"
           size="text-base"
           @click="toggleMenu"
@@ -21,7 +21,7 @@
           :key="item.event"
           class="w-6 h-6 rounded-full p-1 hover:bg-gray-300"
           :icon="item.icon"
-          color="primary_light"
+          color="primary_one"
           size="text-base"
           @click="$emit(item.event), toggleMenu()"
         />

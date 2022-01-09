@@ -9,7 +9,7 @@
       :checked="isChecked"
       @click="click(value)"
     />
-    <span :class="`${isChecked ? 'text-primary' : 'text-gray-500'}`">{{ text }}</span>
+    <span :class="`${isChecked ? 'text-primary_four' : 'text-gray-500'}`">{{ text }}</span>
   </label>
 </template>
 <script lang="ts">
