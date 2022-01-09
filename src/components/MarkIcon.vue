@@ -1,8 +1,8 @@
 <template>
-  <div class="flex">
+  <div class="flex relative">
     <font-awesome-icon class="text-xl" :class="isChecked ? 'text-primary_five' : 'text-primary_two'" icon="bread-slice" />
     <span v-show="isChecked" class="absolute left-2 top-1 w-3.5 h-3.5" :class="checkStyles" />
-    <span v-show="!isChecked && innerText !== '0'" class="absolute left-2 top-1 text-xs">{{ innerText }}</span>
+    <span v-show="!isChecked && innerText !== '0'" class="absolute left-2 top-1 text-xs text-black">{{ innerText }}</span>
   </div>
 </template>
 
