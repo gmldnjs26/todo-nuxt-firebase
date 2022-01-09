@@ -17,14 +17,6 @@
         @addTodo="addTodo"
       />
     </div>
-    <div class="w-[200px] mx-auto">
-      <RadioGroup
-        name="time"
-        :radio-contents="testRadioContents"
-        :selected-value="selectedValue"
-        @click="(value) => (selectedValue = value)"
-      />
-    </div>
   </div>
 </template>
 
