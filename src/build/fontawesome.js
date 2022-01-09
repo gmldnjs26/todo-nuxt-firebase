@@ -16,6 +16,7 @@ const solid = [
   'faTrashAlt',
   'faWalking',
   'faSchool',
+  'faBreadSlice',
 ]
 
 const regular = ['faStar', 'faEdit', 'faBell', 'faCalendarAlt']

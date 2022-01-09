@@ -11,12 +11,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#448aff',
-        primary_light: '#83b9ff',
-        primary_dark: '#005ecb',
-        secondary: '#ffd180',
-        secondary_light: '#ffffb1',
-        secondary_dark: '#caa052',
+        // https://www.color-hex.com/color-palette/35476
+        primary_one: 'eec07b',
+        primary_two: '#f0d1a0',
+        primary_three: '#d8c4aa',
+        primary_four: '#422308',
+        primary_five: '#6d3200',
       },
     },
   },
