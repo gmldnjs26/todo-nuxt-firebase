@@ -96,4 +96,14 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  env: {
+    FIREBASE_APIKEY: process.env.apiKey,
+    FIREBASE_AUTHDOMAIN: process.env.authDomain,
+    FIREBASE_PROJECTID: process.env.projectId,
+    FIREBASE_STORAGEBUCKET: process.env.storageBucket,
+    FIREBASE_MESSAGINGSENDERID: process.env.messagingSenderId,
+    FIREBASE_APPID: process.env.appId,
+    FIREBASE_MEASURMENTID: process.env.measurementId,
+  },
 }
