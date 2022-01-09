@@ -6,21 +6,19 @@
         <span>Completed: 5</span>
       </div>
       <div>
-        <button>·＜·</button>
-        <button>·＞·</button>
+        <button @click="toPreviousMW">·＜·</button>
+        <button @click="toNextMW">·＞·</button>
       </div>
       <div>
-        <RadioGroup :radio-contents="CALENDAR_RADIO_CONTENTS" :selected-value="1" />
+        <RadioGroup :radio-contents="CALENDAR_RADIO_CONTENTS" :selected-value="1" @click="(value) => changePeriod(value)" />
       </div>
     </section>
     <section class="my-6">
-      <div class="flex">
-        <div v-for="(day, i) in $t('dayLabels')" :key="i" class="w-full h-3 text-xs pl-1">
+      <div class="grid grid-cols-7 mt-2 text-center">
+        <div v-for="(day, i) in $t('dayLabels')" :key="day" class="w-full h-4 text-xs">
           {{ day }}
         </div>
-      </div>
-      <div class="grid grid-cols-7 mt-2">
-        <div v-for="(d, i) in dates" :key="i">
+        <div v-for="(d, i) in dates" :key="i" class="flex flex-col justify-center items-center">
           <span :class="d.isHoliday ? 'text-red-500' : d.isSaturday ? 'text-blue-500' : 'text-black'">{{
             d.date | formatDateToDay
           }}</span>
@@ -35,8 +33,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed, ref } from '@nuxtjs/composition-api'
-import { startOfMonth, startOfWeek, endOfMonth, endOfWeek, eachDayOfInterval, getDay } from 'date-fns/fp'
+import { defineComponent, PropType, computed, ref, Ref } from '@nuxtjs/composition-api'
+import { startOfMonth, startOfWeek, endOfMonth, endOfWeek, eachDayOfInterval, getDay, addMonths, addWeeks } from 'date-fns'
 import format from 'date-fns/format'
 import { dayTodoStatusInfo } from '@/types/todo'
 import { CALENDAR_RADIO_CONTENTS } from '@/utils/const'
@@ -62,10 +60,10 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const currDateCursor = ref(new Date(new Date().setHours(0, 0, 0, 0)))
-    const isShowMonth = ref(false)
+    const currDateCursor: Ref<Date> = ref(new Date(new Date().setHours(0, 0, 0, 0)))
+    const isShowMonth: Ref<Boolean> = ref(true)
     const dates = computed(() => {
-      const currDate = currDateCursor.value as Date
+      const currDate = currDateCursor.value
       const startDate = isShowMonth.value ? startOfMonth(currDate) : startOfWeek(currDate)
       const endDate = isShowMonth.value ? endOfMonth(currDate) : endOfWeek(currDate)
       return eachDayOfInterval({ end: endDate, start: startDate }).map((date) => ({
@@ -81,10 +79,25 @@ export default defineComponent({
       }))
     })
 
+    const toNextMW = () => {
+      currDateCursor.value = isShowMonth.value ? addMonths(currDateCursor.value, 1) : addWeeks(currDateCursor.value, 1)
+    }
+
+    const toPreviousMW = () => {
+      currDateCursor.value = isShowMonth.value ? addMonths(currDateCursor.value, -1) : addWeeks(currDateCursor.value, -1)
+    }
+
+    const changePeriod = (value: number) => {
+      isShowMonth.value = value === 1
+    }
+
     return {
       dates,
       currDateCursor,
       CALENDAR_RADIO_CONTENTS,
+      toNextMW,
+      toPreviousMW,
+      changePeriod,
     }
   },
 })
