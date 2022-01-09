@@ -1,7 +1,7 @@
 <template>
   <label ref="root" class="flex relative cursor-pointer" :class="isDisabled ? 'opacity-50' : 'hover:opacity-60'">
-    <input type="checkbox" class="w-[15px] h-[15px] opacity-0" :checked="isChecked" :disabled="isDisabled" @change="change" />
-    <MarkIcon :is-checked="isChecked" />
+    <input type="checkbox" class="opacity-0" :checked="isChecked" :disabled="isDisabled" @change="change" />
+    <MarkIcon class="absolute left-0" :is-checked="isChecked" />
     <span v-show="label && !onEdit" class="ml-3 leading-5" :class="isChecked ? 'line-through' : ''">
       {{ label }}
     </span>
