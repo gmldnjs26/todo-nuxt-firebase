@@ -15,7 +15,7 @@
     </section>
     <section class="my-6">
       <div class="grid grid-cols-7 mt-2 text-center">
-        <div v-for="(day, i) in $t('dayLabels')" :key="day" class="w-full h-4 text-xs">
+        <div v-for="day in $t('dayLabels')" :key="day" class="w-full h-4 text-xs">
           {{ day }}
         </div>
         <div v-for="(d, i) in dates" :key="i" class="flex flex-col justify-center items-center">
