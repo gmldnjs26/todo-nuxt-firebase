@@ -8,7 +8,7 @@ export default ({ store, isHMR }) => {
     window.onNuxtReady(() => {
       createPersistedState({
         key: 'heewon',
-        paths: ['account'],
+        paths: ['account'], // store/account.ts
       })(store)
     })
   }
