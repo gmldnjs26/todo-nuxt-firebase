@@ -42,7 +42,19 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const styles = computed(() => {
-      return `grid grid-cols-${props.columnCount} gap-1`
+      let classes
+      switch (props.columnCount) {
+        case 4:
+          classes = 'grid grid-cols-4 gap-1'
+          break
+        case 6:
+          classes = 'grid grid-cols-6 gap-1'
+          break
+        default:
+          classes = 'grid grid-cols-2 gap-1'
+          break
+      }
+      return classes
     })
 
     const click = (value: string) => {
