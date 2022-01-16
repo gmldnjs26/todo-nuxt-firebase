@@ -1,20 +1,22 @@
 <template>
   <div class="w-full h-full mx-4">
-    <section class="flex">
+    <section class="flex justify-between">
       <div>
-        <span>{{ currDateCursor | formatDateToYYYYMM }}</span>
+        <span class="font-bold text-lg">{{ currDateCursor | formatDateToYYYYMM }}</span>
         <span>Completed: 5</span>
       </div>
-      <div>
-        <button @click="toPreviousMW">·＜·</button>
-        <button @click="toNextMW">·＞·</button>
-      </div>
-      <div>
+      <div class="flex space-x-3">
+        <button @click="toPreviousMW">
+          <font-awesome-icon class="text-base cursor-pointer" icon="chevron-left"></font-awesome-icon>
+        </button>
+        <button @click="toNextMW">
+          <font-awesome-icon class="text-base cursor-pointer" icon="chevron-right"></font-awesome-icon>
+        </button>
         <RadioGroup :radio-contents="CALENDAR_RADIO_CONTENTS" :selected-value="1" @click="(value) => changePeriod(value)" />
       </div>
     </section>
     <section class="my-6">
-      <div class="grid grid-cols-7 mt-2 text-center">
+      <div class="grid grid-cols-7 gap-2 mt-2 text-center">
         <div v-for="day in $t('dayLabels')" :key="day" class="w-full h-4 text-xs">
           {{ day }}
         </div>
@@ -92,6 +94,7 @@ export default defineComponent({
     }
 
     return {
+      isShowMonth,
       dates,
       currDateCursor,
       CALENDAR_RADIO_CONTENTS,

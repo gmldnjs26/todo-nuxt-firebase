@@ -1,5 +1,5 @@
 <template>
-  <div :class="styles" class="space-x-2">
+  <div :class="styles">
     <RadioButton
       v-for="(item, index) in radioContents"
       :key="index"

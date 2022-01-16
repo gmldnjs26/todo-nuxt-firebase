@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-gray-100 w-full h-full">
-    <div class="w-[400px] mx-auto">
+  <div class="bg-gray-50 w-full h-screen">
+    <div class="w-[400px] mx-auto pt-8">
       <Calendar :day-todo-status-infos="dayTodoStatusInfos" />
     </div>
     <div class="w-[400px] mx-auto">
