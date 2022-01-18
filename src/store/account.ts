@@ -43,9 +43,9 @@ const defaultCategoryList = [
 const defaultData: { [key: string]: Array<Todo> } = {
   '1': [
     {
+      categoryId: '1',
       id: '1',
       userId: 'gmldnjs',
-      categoryId: '1',
       doDate: '20211206',
       doTime: '2012',
       context: 'Test1',
