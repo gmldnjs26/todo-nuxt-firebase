@@ -3,7 +3,7 @@
     <section class="flex justify-between">
       <div>
         <span class="font-bold text-lg">{{ currDateCursor | formatDateToYYYYMM }}</span>
-        <span>Completed: 5</span>
+        <span>Completed: {{ isCompletedCountOfSelectedDay }}</span>
       </div>
       <div class="flex space-x-3">
         <button @click="toPreviousMW">
@@ -20,7 +20,13 @@
         <div v-for="day in $t('dayLabels')" :key="day" class="w-full h-4 text-xs">
           {{ day }}
         </div>
-        <div v-for="(d, i) in dates" :key="i" class="flex flex-col justify-center items-center">
+        <div
+          v-for="(d, i) in dates"
+          :key="i"
+          class="flex flex-col justify-center items-center cursor-pointer"
+          :class="d.isSelectedDay ? 'border-2 border-solid border-black rounded-md' : 'p-1'"
+          @click="onSelectDate(d.date)"
+        >
           <span :class="d.isHoliday ? 'text-red-500' : d.isSaturday ? 'text-blue-500' : 'text-black'">{{
             d.date | formatDateToDay
           }}</span>
@@ -36,7 +42,17 @@
 
 <script lang="ts">
 import { defineComponent, PropType, computed, ref, Ref } from '@nuxtjs/composition-api'
-import { startOfMonth, startOfWeek, endOfMonth, endOfWeek, eachDayOfInterval, getDay, addMonths, addWeeks } from 'date-fns'
+import {
+  startOfMonth,
+  startOfWeek,
+  endOfMonth,
+  endOfWeek,
+  eachDayOfInterval,
+  getDay,
+  addMonths,
+  addWeeks,
+  isSameDay,
+} from 'date-fns'
 import format from 'date-fns/format'
 import { dayTodoStatusInfo } from '@/types/todo'
 import { CALENDAR_RADIO_CONTENTS } from '@/utils/const'
@@ -61,9 +77,11 @@ export default defineComponent({
       default: () => {},
     },
   },
-  setup(props) {
+  emits: ['onSelectDate'],
+  setup(props, { emit }) {
     const currDateCursor: Ref<Date> = ref(new Date(new Date().setHours(0, 0, 0, 0)))
     const isShowMonth: Ref<Boolean> = ref(true)
+
     const dates = computed(() => {
       const currDate = currDateCursor.value
       const startDate = isShowMonth.value ? startOfMonth(currDate) : startOfWeek(currDate)
@@ -78,6 +96,7 @@ export default defineComponent({
         isNotCompletedTodoCount: props.dayTodoStatusInfos[format(date, 'yyyyMMdd')]
           ? props.dayTodoStatusInfos[format(date, 'yyyyMMdd')].isNotCompletedTodoCount
           : 0,
+        isSelectedDay: isSameDay(date, currDate),
       }))
     })
 
@@ -93,6 +112,21 @@ export default defineComponent({
       isShowMonth.value = value === 1
     }
 
+    const onSelectDate = (value: Date) => {
+      currDateCursor.value = value
+      emit('onSelectDate', value)
+    }
+
+    const isCompletedCountOfSelectedDay = computed(
+      (): Number => {
+        if (props.dayTodoStatusInfos[format(currDateCursor.value, 'yyyyMMdd')] !== undefined) {
+          return props.dayTodoStatusInfos[format(currDateCursor.value, 'yyyyMMdd')].isCompletedTodoCount
+        } else {
+          return 0
+        }
+      },
+    )
+
     return {
       isShowMonth,
       dates,
@@ -101,6 +135,8 @@ export default defineComponent({
       toNextMW,
       toPreviousMW,
       changePeriod,
+      onSelectDate,
+      isCompletedCountOfSelectedDay,
     }
   },
 })

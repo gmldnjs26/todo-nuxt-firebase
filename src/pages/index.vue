@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-50 w-full h-screen">
     <div class="w-[400px] mx-auto pt-8">
-      <Calendar :day-todo-status-infos="dayTodoStatusInfos" />
+      <Calendar :day-todo-status-infos="dayTodoStatusInfos" @onSelectDate="onSelectDate" />
     </div>
     <div class="w-[400px] mx-auto">
       <TodoList
@@ -80,6 +80,10 @@ export default defineComponent({
     // watch(toRefs.todoList, (cur: { [key: string]: Array<Todo> }, prev: { [key: string]: Array<Todo> }): void => {
     //   console.log(prev, cur)
     // })
+
+    const onSelectDate = (value: Date) => {
+      console.log(value)
+    }
     return {
       todoList,
       dayTodoStatusInfos,
@@ -90,6 +94,7 @@ export default defineComponent({
       changeDate,
       addTodo,
       selectedValue,
+      onSelectDate,
     }
   },
 })
