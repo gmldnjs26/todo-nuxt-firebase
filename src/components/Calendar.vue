@@ -52,6 +52,7 @@ import {
   addMonths,
   addWeeks,
   isSameDay,
+  addDays,
 } from 'date-fns'
 import format from 'date-fns/format'
 import { dayTodoStatusInfo } from '@/types/todo'
@@ -84,8 +85,12 @@ export default defineComponent({
 
     const dates = computed(() => {
       const currDate = currDateCursor.value
-      const startDate = isShowMonth.value ? startOfMonth(currDate) : startOfWeek(currDate)
-      const endDate = isShowMonth.value ? endOfMonth(currDate) : endOfWeek(currDate)
+      let startDate = isShowMonth.value ? startOfMonth(currDate) : startOfWeek(currDate)
+      let endDate = isShowMonth.value ? endOfMonth(currDate) : endOfWeek(currDate)
+      const daysNeededForLastMonth = getDay(startDate)
+      const daysNeededForNextMonth = 6 - getDay(endDate)
+      startDate = addDays(startDate, -daysNeededForLastMonth)
+      endDate = addDays(endDate, daysNeededForNextMonth)
       return eachDayOfInterval({ end: endDate, start: startDate }).map((date) => ({
         date,
         isHoliday: getDay(date) === 0,
