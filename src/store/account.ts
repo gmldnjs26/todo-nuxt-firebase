@@ -117,10 +117,10 @@ export default class Account extends VuexModule implements AccountState {
       categoryId: catId,
       id: (this.todoList[catId].length + 2).toString(),
       doDate: format(new Date(), 'yyyyMMdd'),
-      doTime: '2012',
-      context: 'Test3',
+      doTime: '0000',
+      context: '할일적어줘',
       completion: false,
-      createdAt: '20210830',
+      createdAt: format(new Date(), 'yyyyMMdd'),
       userId: 'gmldnjs',
     })
   }

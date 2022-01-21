@@ -7,7 +7,7 @@
       <TodoList
         v-for="(todoListByCat, catId) in todoList"
         :key="catId"
-        :todo-list="todoListByCat"
+        :todo-list="todoListByCat.filter((item) => item.doDate === format(selectedDate, 'yyyyMMdd'))"
         :category-id="catId"
         @onChangeCompletion="changeCompletion"
         @onChangeContext="changeContext"
@@ -22,6 +22,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref } from '@nuxtjs/composition-api'
+import format from 'date-fns/format'
 import { dayTodoStatusInfo } from '@/types/todo'
 import { accountStore } from '~/store/index'
 
@@ -32,6 +33,7 @@ export default defineComponent({
   },
   setup() {
     const selectedValue = ref(1)
+    const selectedDate = ref(new Date())
 
     const todoList = computed(() => {
       return accountStore.todoList
@@ -82,7 +84,7 @@ export default defineComponent({
     // })
 
     const onSelectDate = (value: Date) => {
-      console.log(value)
+      selectedDate.value = value
     }
     return {
       todoList,
@@ -94,7 +96,9 @@ export default defineComponent({
       changeDate,
       addTodo,
       selectedValue,
+      selectedDate,
       onSelectDate,
+      format,
     }
   },
 })
