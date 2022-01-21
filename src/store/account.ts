@@ -1,4 +1,5 @@
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
+import format from 'date-fns/format'
 import { Category, Todo } from '@/types/todo'
 
 export interface AccountState {
@@ -113,9 +114,9 @@ export default class Account extends VuexModule implements AccountState {
   [MutationTypes.ADD_TODOLIST](catId: string) {
     this.todoList[catId].push({
       // FIXME: default 내용들은 로그인, 비로그인으로 나누기
-      categoryId: '1',
+      categoryId: catId,
       id: (this.todoList[catId].length + 2).toString(),
-      doDate: '20210830',
+      doDate: format(new Date(), 'yyyyMMdd'),
       doTime: '2012',
       context: 'Test3',
       completion: false,
