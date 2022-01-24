@@ -31,25 +31,25 @@ import { accountStore } from '@/store/index'
 export default defineComponent({
   components: {
     MarkBox: () => import('@/components/MarkBox.vue'),
-    FloatMenuBtn: () => import('@/components/FloatMenuBtn.vue'),
+    FloatMenuBtn: () => import('@/components/FloatMenuBtn.vue')
   },
   props: {
     todoList: {
       type: Array as PropType<Todo[]>,
       required: false,
-      default: () => [],
+      default: () => []
     },
     categoryId: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
-  setup(props, { emit }) {
+  setup (props, { emit }) {
     const editTodoList = toRefs(props).todoList
     const onEditTodoItemIndex = ref(-1)
 
     const categoryInfo = computed(() => {
-      return accountStore.categoryList.find((item) => item.id === props.categoryId)
+      return accountStore.categoryList.find(item => item.id === props.categoryId)
     })
 
     const onChangeCompletion = (index: number) => {
@@ -90,8 +90,8 @@ export default defineComponent({
       remove,
       setAlram,
       changeDate,
-      addTodo,
+      addTodo
     }
-  },
+  }
 })
 </script>

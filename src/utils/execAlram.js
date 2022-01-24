@@ -3,7 +3,7 @@
  */
 import { accountStore } from '~/store/index'
 
-function execAlram() {
+function execAlram () {
   const exampleList = accountStore.todoList
   console.log(exampleList)
 }

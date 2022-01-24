@@ -12,15 +12,15 @@ export default {
   head: {
     title: 'todo-app',
     htmlAttrs: {
-      lang: 'en',
+      lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' },
+      { name: 'format-detection', content: 'telephone=no' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -30,7 +30,7 @@ export default {
   plugins: [
     { src: '~/plugins/firebase.ts', mode: 'client' },
     // サーバーサイドでは使用できないのでssrはfalseにすること
-    { src: '~/plugins/persistedstate.js', ssr: false },
+    { src: '~/plugins/persistedstate.js', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -44,7 +44,7 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
-    ['@nuxtjs/fontawesome', { component: 'fontAwesome', suffix: true }],
+    ['@nuxtjs/fontawesome', { component: 'fontAwesome', suffix: true }]
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -59,19 +59,19 @@ export default {
         // 使用する言語の設定
         locales: [
           { code: 'ko', name: 'Korean', iso: 'ko_KR', file: 'ko/index.js' },
-          { code: 'ja', name: 'Japanese', iso: 'ja_JP', file: 'ja/index.js' },
+          { code: 'ja', name: 'Japanese', iso: 'ja_JP', file: 'ja/index.js' }
         ],
         defaultLocale: 'ko',
         langDir: 'locales/',
         strategy: 'prefix_except_default',
         vueI18n: {
-          fallbackLocale: 'ko',
+          fallbackLocale: 'ko'
         },
         lazy: true,
         vueI18nLoader: true,
-        vuex: false,
-      },
-    ],
+        vuex: false
+      }
+    ]
   ],
   // firebase: {
   //   config: {
@@ -87,8 +87,8 @@ export default {
     icons: {
       solid: FontAwesome.solid,
       regular: FontAwesome.regular,
-      brands: FontAwesome.brands,
-    },
+      brands: FontAwesome.brands
+    }
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -104,6 +104,6 @@ export default {
     FIREBASE_STORAGEBUCKET: process.env.storageBucket,
     FIREBASE_MESSAGINGSENDERID: process.env.messagingSenderId,
     FIREBASE_APPID: process.env.appId,
-    FIREBASE_MEASURMENTID: process.env.measurementId,
-  },
+    FIREBASE_MEASURMENTID: process.env.measurementId
+  }
 }

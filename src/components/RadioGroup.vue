@@ -17,30 +17,30 @@ import { defineComponent, computed } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   components: {
-    RadioButton: () => import('@/components/RadioButton.vue'),
+    RadioButton: () => import('@/components/RadioButton.vue')
   },
   props: {
     name: {
       type: String,
       required: false,
-      default: 'no-name',
+      default: 'no-name'
     },
     radioContents: {
       type: Array,
       required: true,
-      default: () => [],
+      default: () => []
     },
     columnCount: {
       type: Number,
       required: false,
-      default: 2,
+      default: 2
     },
     selectedValue: {
       type: Number,
-      required: true,
-    },
+      required: true
+    }
   },
-  setup(props, { emit }) {
+  setup (props, { emit }) {
     const styles = computed(() => {
       let classes
       switch (props.columnCount) {
@@ -63,8 +63,8 @@ export default defineComponent({
 
     return {
       styles,
-      click,
+      click
     }
-  },
+  }
 })
 </script>

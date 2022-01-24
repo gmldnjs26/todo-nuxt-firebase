@@ -29,9 +29,9 @@ import { accountStore } from '~/store/index'
 export default defineComponent({
   components: {
     TodoList: () => import('@/components/TodoList.vue'),
-    Calendar: () => import('@/components/Calendar.vue'),
+    Calendar: () => import('@/components/Calendar.vue')
   },
-  setup() {
+  setup () {
     const selectedValue = ref(1)
     const selectedDate = ref(new Date())
 
@@ -48,7 +48,7 @@ export default defineComponent({
           if (dayTodoStatusInfos[todo.doDate] === undefined) {
             dayTodoStatusInfos[todo.doDate] = {
               isCompletedTodoCount: 0,
-              isNotCompletedTodoCount: 0,
+              isNotCompletedTodoCount: 0
             }
           }
           if (todo.completion) {
@@ -98,9 +98,9 @@ export default defineComponent({
       selectedValue,
       selectedDate,
       onSelectDate,
-      format,
+      format
     }
-  },
+  }
 })
 </script>
 

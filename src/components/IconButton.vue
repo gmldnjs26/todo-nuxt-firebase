@@ -12,20 +12,20 @@ export default defineComponent({
     color: {
       type: String,
       required: false,
-      default: 'black',
+      default: 'black'
     },
     icon: {
       type: [String, Array],
-      required: true,
+      required: true
     },
     size: {
       type: String,
       required: false,
-      default: 'text-xl',
-    },
+      default: 'text-xl'
+    }
   },
   emits: ['click'],
-  setup(props, { emit }) {
+  setup (props, { emit }) {
     const styles = computed(() => {
       const classes = []
       classes.push(props.size)
@@ -39,9 +39,9 @@ export default defineComponent({
 
     return {
       styles,
-      click,
+      click
     }
-  },
+  }
 })
 </script>
 

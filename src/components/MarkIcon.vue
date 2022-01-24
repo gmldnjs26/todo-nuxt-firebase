@@ -14,15 +14,15 @@ export default defineComponent({
     isChecked: {
       type: Boolean,
       required: false,
-      default: false,
+      default: false
     },
     innerText: {
       type: String,
       required: false,
-      default: '',
-    },
+      default: ''
+    }
   },
-  setup() {
+  setup () {
     const checkStyles = computed(() => {
       const classes = []
       classes.push('after:block')
@@ -36,9 +36,9 @@ export default defineComponent({
     })
 
     return {
-      checkStyles,
+      checkStyles
     }
-  },
+  }
 })
 </script>
 

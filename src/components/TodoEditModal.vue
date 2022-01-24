@@ -32,12 +32,12 @@ import { TODO_EDIT_EVENTS } from '@/utils/const'
 
 export default defineComponent({
   components: {
-    IconButton: () => import('@/components/IconButton.vue'),
+    IconButton: () => import('@/components/IconButton.vue')
   },
-  setup() {
+  setup () {
     return {
-      TODO_EDIT_EVENTS,
+      TODO_EDIT_EVENTS
     }
-  },
+  }
 })
 </script>

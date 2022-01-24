@@ -35,9 +35,9 @@ import { defineComponent, ref, computed } from '@nuxtjs/composition-api'
 import { TODO_EDIT_EVENTS } from '~/utils/const'
 export default defineComponent({
   components: {
-    IconButton: () => import('@/components/IconButton.vue'),
+    IconButton: () => import('@/components/IconButton.vue')
   },
-  setup() {
+  setup () {
     const isShowMenu = ref(false)
 
     const styles = computed(() => {
@@ -54,8 +54,8 @@ export default defineComponent({
       isShowMenu,
       styles,
       TODO_EDIT_EVENTS,
-      toggleMenu,
+      toggleMenu
     }
-  },
+  }
 })
 </script>

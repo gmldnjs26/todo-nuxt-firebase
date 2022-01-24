@@ -5,7 +5,7 @@ module.exports = {
     './src/layouts/**/*.vue',
     './src/pages/**/*.vue',
     './src/plugins/**/*.{js,ts}',
-    './nuxt.config.{js,ts}',
+    './nuxt.config.{js,ts}'
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
@@ -16,12 +16,12 @@ module.exports = {
         primary_two: '#f0d1a0',
         primary_three: '#d8c4aa',
         primary_four: '#422308',
-        primary_five: '#6d3200',
-      },
-    },
+        primary_five: '#6d3200'
+      }
+    }
   },
   variants: {
-    extend: {},
+    extend: {}
   },
-  plugins: [require('@tailwindcss/custom-forms')],
+  plugins: [require('@tailwindcss/custom-forms')]
 }

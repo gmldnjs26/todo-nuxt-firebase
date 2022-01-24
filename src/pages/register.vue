@@ -2,18 +2,22 @@
   <div class="w-full h-full">
     <div class="mx-auto w-96 h-60">
       <div class="flex flex-col justify-center items-center">
-        <font-awesome-icon icon="user" size="2x" class="text-primary_two my-2 hover:text-lighter"></font-awesome-icon>
-        <h1 class="text-xl mb-2 font-bold">Sign up to Here</h1>
+        <font-awesome-icon icon="user" size="2x" class="text-primary_two my-2 hover:text-lighter" />
+        <h1 class="text-xl mb-2 font-bold">
+          Sign up to Here
+        </h1>
       </div>
       <section class="flex flex-col w-full space-y-3">
-        <input v-model="email" type="text" placeholder="Email" />
-        <input v-model="username" type="text" placeholder="Username" />
-        <input v-model="password" type="password" placeholder="Password" />
+        <input v-model="email" type="text" placeholder="Email">
+        <input v-model="username" type="text" placeholder="Username">
+        <input v-model="password" type="password" placeholder="Password">
         <button class="w-full h-12 text-white bg-primary_two rounded-full hover:bg-dark" @click="onRegister">
           <span>Sign Up</span>
         </button>
         <div class="w-full text-center">
-          <router-link to="/Login"> Already have an account? Sign in -> </router-link>
+          <router-link to="/Login">
+            Already have an account? Sign in ->
+          </router-link>
         </div>
       </section>
     </div>
@@ -24,7 +28,7 @@
 import { defineComponent, ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  setup(_, context) {
+  setup (_, context) {
     const email = ref('')
     const password = ref('')
     const username = ref('')
@@ -44,9 +48,9 @@ export default defineComponent({
       email,
       password,
       username,
-      onRegister,
+      onRegister
     }
-  },
+  }
 })
 </script>
 
