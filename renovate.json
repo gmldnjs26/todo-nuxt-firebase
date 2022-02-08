@@ -1,0 +1,18 @@
+{
+  "extends": [":timezone(Asia/Tokyo)", ":label(renovate)", "config:base"],
+  "npm": {
+    "separateMinorPatch": true,
+    "packageRules": [
+      {
+        "depTypeList": ["devDependencies"],
+        "updateTypes": ["patch"],
+        "automerge": true
+      },
+      {
+        "groupName": "ESLint and Prettier",
+        "packageNames": ["eslint", "prettier"],
+        "packagePatterns": ["^eslint-", "^prettier-"]
+      }
+    ]
+  }
+}
