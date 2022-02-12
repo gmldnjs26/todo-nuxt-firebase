@@ -8,8 +8,8 @@
         </h1>
       </div>
       <section class="flex flex-col w-full space-y-3">
-        <input type="text" placeholder="Email">
-        <input type="password" placeholder="Password">
+        <input type="text" placeholder="Email" />
+        <input type="password" placeholder="Password" />
         <button class="w-full h-12 text-white bg-primary_two rounded-full hover:bg-dark">
           <span>Sign In</span>
         </button>
@@ -30,9 +30,7 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  mounted () {
-    const auth = this.$auth
-  }
+  mounted() {},
 })
 </script>
 
