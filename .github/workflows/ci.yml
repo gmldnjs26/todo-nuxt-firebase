@@ -45,13 +45,13 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies 👨🏻‍💻
-        run: yarn
+        run: cd src; yarn
 
       - name: Run linter 👀
-        run: yarn lint
+        run: cd src; yarn lint
 
       - name: Run dev
-        run: yarn dev
+        run: cd src; yarn dev
 
       - name: Run build
-        run: yarn build
+        run: cd src; yarn build
