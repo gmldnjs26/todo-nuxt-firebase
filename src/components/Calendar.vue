@@ -52,7 +52,7 @@ import {
   addMonths,
   addWeeks,
   isSameDay,
-  addDays
+  addDays,
 } from 'date-fns'
 import format from 'date-fns/format'
 import { dayTodoStatusInfo } from '@/types/todo'
@@ -61,25 +61,25 @@ import { CALENDAR_RADIO_CONTENTS } from '@/utils/const'
 export default defineComponent({
   components: {
     MarkIcon: () => import('@/components/MarkIcon.vue'),
-    RadioGroup: () => import('@/components/RadioGroup.vue')
+    RadioGroup: () => import('@/components/RadioGroup.vue'),
   },
   filters: {
-    formatDateToDay (val: Date) {
+    formatDateToDay(val: Date) {
       return format(val, 'd')
     },
-    formatDateToYYYYMM (val: Date) {
+    formatDateToYYYYMM(val: Date) {
       return format(val, 'yyyy-MM')
-    }
+    },
   },
   props: {
     dayTodoStatusInfos: {
       type: Object as PropType<{ [key: string]: dayTodoStatusInfo }>,
       require: true,
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
   emits: ['onSelectDate'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const currDateCursor: Ref<Date> = ref(new Date(new Date().setHours(0, 0, 0, 0)))
     const isShowMonth: Ref<Boolean> = ref(true)
 
@@ -91,7 +91,7 @@ export default defineComponent({
       const daysNeededForNextMonth = 6 - getDay(endDate)
       startDate = addDays(startDate, -daysNeededForLastMonth)
       endDate = addDays(endDate, daysNeededForNextMonth)
-      return eachDayOfInterval({ end: endDate, start: startDate }).map(date => ({
+      return eachDayOfInterval({ end: endDate, start: startDate }).map((date) => ({
         date,
         isHoliday: getDay(date) === 0,
         isSaturday: getDay(date) === 6,
@@ -101,7 +101,7 @@ export default defineComponent({
         isNotCompletedTodoCount: props.dayTodoStatusInfos[format(date, 'yyyyMMdd')]
           ? props.dayTodoStatusInfos[format(date, 'yyyyMMdd')].isNotCompletedTodoCount
           : 0,
-        isSelectedDay: isSameDay(date, currDate)
+        isSelectedDay: isSameDay(date, currDate),
       }))
     })
 
@@ -129,7 +129,7 @@ export default defineComponent({
         } else {
           return 0
         }
-      }
+      },
     )
 
     return {
@@ -141,8 +141,8 @@ export default defineComponent({
       toPreviousMW,
       changePeriod,
       onSelectDate,
-      isCompletedCountOfSelectedDay
+      isCompletedCountOfSelectedDay,
     }
-  }
+  },
 })
 </script>
