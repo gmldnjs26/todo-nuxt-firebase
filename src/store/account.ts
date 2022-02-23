@@ -6,7 +6,7 @@ export interface AccountState {
   email: string
   username: string
   categoryList: Array<Category>
-  todoList: { [key: string]: Array<Todo> }
+  todoList: Array<Todo>
   createdAt: string
 
   // {} as { [key: number]: boolean },
@@ -41,42 +41,38 @@ const defaultCategoryList = [
   },
 ]
 
-const defaultData: { [key: string]: Array<Todo> } = {
-  '1': [
-    {
-      categoryId: '1',
-      id: '1',
-      userId: 'gmldnjs',
-      doDate: '20211206',
-      doTime: '2012',
-      context: 'Test1',
-      completion: false,
-      createdAt: '20210830',
-    },
-    {
-      categoryId: '1',
-      id: '2',
-      doDate: '20211206',
-      doTime: '2012',
-      context: 'Test2',
-      completion: false,
-      createdAt: '20210830',
-      userId: 'gmldnjs',
-    },
-  ],
-  '2': [
-    {
-      categoryId: '2',
-      id: '3',
-      doDate: '20211207',
-      doTime: '2012',
-      context: 'Test3',
-      completion: false,
-      createdAt: '20210830',
-      userId: 'gmldnjs',
-    },
-  ],
-}
+const defaultData: Array<Todo> = [
+  {
+    categoryId: '1',
+    id: '1',
+    userId: 'gmldnjs',
+    doDate: '20211206',
+    doTime: '2012',
+    context: 'Test1',
+    completion: false,
+    createdAt: '20210830',
+  },
+  {
+    categoryId: '1',
+    id: '2',
+    doDate: '20211206',
+    doTime: '2012',
+    context: 'Test2',
+    completion: false,
+    createdAt: '20210830',
+    userId: 'gmldnjs',
+  },
+  {
+    categoryId: '2',
+    id: '3',
+    doDate: '20211207',
+    doTime: '2012',
+    context: 'Test3',
+    completion: false,
+    createdAt: '20210830',
+    userId: 'gmldnjs',
+  },
+]
 // const savedData = JSON.parse(window.localStorage.getItem('heewon') as string)
 @Module({
   name: 'account',
@@ -101,21 +97,23 @@ export default class Account extends VuexModule implements AccountState {
   }
 
   @Mutation
-  [MutationTypes.SET_TODOLIST_COMPLETION]({ catId, index, completion }: { catId: string; index: number; completion: boolean }) {
-    this.todoList[catId][index].completion = completion
+  [MutationTypes.SET_TODOLIST_COMPLETION]({ todoId, completion }: { todoId: String; completion: boolean }) {
+    const target = this.todoList.find((item) => item.id === todoId)
+    if (target) target.completion = completion
   }
 
   @Mutation
-  [MutationTypes.SET_TODOLIST_CONTEXT]({ catId, index, context }: { catId: string; index: number; context: string }) {
-    this.todoList[catId][index].context = context
+  [MutationTypes.SET_TODOLIST_CONTEXT]({ todoId, context }: { todoId: String; context: string }) {
+    const target = this.todoList.find((item) => item.id === todoId)
+    if (target) target.context = context
   }
 
   @Mutation
   [MutationTypes.ADD_TODOLIST](catId: string) {
-    this.todoList[catId].push({
+    this.todoList.push({
       // FIXME: default 내용들은 로그인, 비로그인으로 나누기
       categoryId: catId,
-      id: (this.todoList[catId].length + 2).toString(),
+      id: (this.todoList.length + 1).toString(),
       doDate: format(new Date(), 'yyyyMMdd'),
       doTime: '0000',
       context: '할일적어줘',
@@ -126,17 +124,17 @@ export default class Account extends VuexModule implements AccountState {
   }
 
   @Mutation
-  [MutationTypes.REMOVE_TODOITEM]({ catId, index }: { catId: string; index: number }) {
-    this.todoList[catId].splice(index, 1)
+  [MutationTypes.REMOVE_TODOITEM](todoId: String) {
+    this.todoList = this.todoList.filter((item) => item.id === todoId)
   }
 
   @Action({ rawError: true })
-  setTodolistCompletion(payload: { catId: string; index: number; completion: boolean }) {
+  setTodolistCompletion(payload: { todoId: String; completion: boolean }) {
     this.SET_TODOLIST_COMPLETION(payload)
   }
 
   @Action({ rawError: true })
-  setTodolistContext(payload: { catId: string; index: number; context: string }) {
+  setTodolistContext(payload: { todoId: String; context: string }) {
     this.SET_TODOLIST_CONTEXT(payload)
   }
 
@@ -146,7 +144,7 @@ export default class Account extends VuexModule implements AccountState {
   }
 
   @Action({ rawError: true })
-  removeTodoItem(payload: { catId: string; index: number }) {
-    this.REMOVE_TODOITEM(payload)
+  removeTodoItem(todoId: String) {
+    this.REMOVE_TODOITEM(todoId)
   }
 }
