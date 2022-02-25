@@ -15,10 +15,10 @@
         :label="t.context"
         :is-checked="t.completion"
         :on-edit="i === onEditTodoItemIndex"
-        @change="onChangeCompletion(i)"
-        @overEdit="(editContext) => onChangeContext(editContext, i)"
+        @change="onChangeCompletion(t.id)"
+        @overEdit="(editContext) => onChangeContext(editContext, t.id)"
       />
-      <FloatMenuBtn @edit="edit(i)" @remove="remove(i)" @alram="setAlram(i)" @changeDate="changeDate(i)" />
+      <FloatMenuBtn @edit="edit(t.id)" @remove="remove(t.id)" @alram="setAlram(t.id)" @changeDate="changeDate(t.id)" />
     </div>
   </div>
 </template>
@@ -31,48 +31,48 @@ import { accountStore } from '@/store/index'
 export default defineComponent({
   components: {
     MarkBox: () => import('@/components/MarkBox.vue'),
-    FloatMenuBtn: () => import('@/components/FloatMenuBtn.vue')
+    FloatMenuBtn: () => import('@/components/FloatMenuBtn.vue'),
   },
   props: {
     todoList: {
       type: Array as PropType<Todo[]>,
       required: false,
-      default: () => []
+      default: () => [],
     },
     categoryId: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const editTodoList = toRefs(props).todoList
     const onEditTodoItemIndex = ref(-1)
 
     const categoryInfo = computed(() => {
-      return accountStore.categoryList.find(item => item.id === props.categoryId)
+      return accountStore.categoryList.find((item) => item.id === props.categoryId)
     })
 
-    const onChangeCompletion = (index: number) => {
-      emit('onChangeCompletion', { catId: props.categoryId, index })
+    const onChangeCompletion = (todoId: String) => {
+      emit('onChangeCompletion', todoId)
     }
 
-    const onChangeContext = (editContext: string, index: number) => {
+    const onChangeContext = (editContext: string, todoId: String) => {
       onEditTodoItemIndex.value = -1
-      emit('onChangeContext', { editContext, catId: props.categoryId, index })
+      emit('onChangeContext', { editContext, todoId })
     }
 
     // event 정리
     const edit = (index: number) => {
       onEditTodoItemIndex.value = index
     }
-    const remove = (index: number) => {
-      emit('onRemove', { catId: props.categoryId, index })
+    const remove = (todoId: String) => {
+      emit('onRemove', todoId)
     }
-    const setAlram = (index: number) => {
-      emit('onSetAlarm', { catId: props.categoryId, index })
+    const setAlram = (todoId: String) => {
+      emit('onSetAlarm', todoId)
     }
-    const changeDate = (index: number) => {
-      emit('onChangeDate', { catId: props.categoryId, index })
+    const changeDate = (todoId: String) => {
+      emit('onChangeDate', todoId)
     }
 
     const addTodo = () => {
@@ -90,8 +90,8 @@ export default defineComponent({
       remove,
       setAlram,
       changeDate,
-      addTodo
+      addTodo,
     }
-  }
+  },
 })
 </script>
