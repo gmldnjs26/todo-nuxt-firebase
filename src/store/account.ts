@@ -97,13 +97,13 @@ export default class Account extends VuexModule implements AccountState {
   }
 
   @Mutation
-  [MutationTypes.SET_TODOLIST_COMPLETION]({ todoId, completion }: { todoId: String; completion: boolean }) {
+  [MutationTypes.SET_TODOLIST_COMPLETION]({ todoId, completion }: { todoId: string; completion: boolean }) {
     const target = this.todoList.find((item) => item.id === todoId)
     if (target) target.completion = completion
   }
 
   @Mutation
-  [MutationTypes.SET_TODOLIST_CONTEXT]({ todoId, context }: { todoId: String; context: string }) {
+  [MutationTypes.SET_TODOLIST_CONTEXT]({ todoId, context }: { todoId: string; context: string }) {
     const target = this.todoList.find((item) => item.id === todoId)
     if (target) target.context = context
   }
@@ -124,17 +124,17 @@ export default class Account extends VuexModule implements AccountState {
   }
 
   @Mutation
-  [MutationTypes.REMOVE_TODOITEM](todoId: String) {
+  [MutationTypes.REMOVE_TODOITEM](todoId: string) {
     this.todoList = this.todoList.filter((item) => item.id === todoId)
   }
 
   @Action({ rawError: true })
-  setTodolistCompletion(payload: { todoId: String; completion: boolean }) {
+  setTodolistCompletion(payload: { todoId: string; completion: boolean }) {
     this.SET_TODOLIST_COMPLETION(payload)
   }
 
   @Action({ rawError: true })
-  setTodolistContext(payload: { todoId: String; context: string }) {
+  setTodolistContext(payload: { todoId: string; context: string }) {
     this.SET_TODOLIST_CONTEXT(payload)
   }
 
@@ -144,7 +144,7 @@ export default class Account extends VuexModule implements AccountState {
   }
 
   @Action({ rawError: true })
-  removeTodoItem(todoId: String) {
+  removeTodoItem(todoId: string) {
     this.REMOVE_TODOITEM(todoId)
   }
 }
