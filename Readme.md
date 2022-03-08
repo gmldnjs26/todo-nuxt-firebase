@@ -21,14 +21,3 @@ yarn
 ```
 yarn dev
 ```
-
-## Authors
-
- [@Heewongwak](https://heewon26.tistory.com/)
- 
- | Alfred  | Alfred4 |
-|---|---|
-|   |   |
-|   |   |
-
-
