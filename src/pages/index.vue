@@ -26,7 +26,7 @@
 import { defineComponent, computed, ref } from '@nuxtjs/composition-api'
 import format from 'date-fns/format'
 import { dayTodoStatusInfo } from '@/types/todo'
-import { accountStore } from '~/store/index'
+import { accountStore } from '@/store/index'
 
 export default defineComponent({
   components: {
@@ -48,7 +48,6 @@ export default defineComponent({
     const dayTodoStatusInfos = computed(() => {
       const dayTodoStatusInfos = {} as { [key: string]: dayTodoStatusInfo }
       if (accountStore.todoList) {
-        debugger
         accountStore.todoList.forEach((todo) => {
           // FIXME: 좀 더 정확한 빈 객체의 객체 조사방법? 없나? todo.doDate in dayTodoStatusInfos 라는 방법도 있지만 상당한 속도 차이가 난다.
           // https://stackoverflow.com/questions/1098040/checking-if-a-key-exists-in-a-javascript-object
