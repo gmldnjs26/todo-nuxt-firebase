@@ -80,8 +80,8 @@ export default defineComponent({
   },
   emits: ['onSelectDate'],
   setup(props, { emit }) {
-    const currDateCursor: Ref<Date> = ref(new Date(new Date().setHours(0, 0, 0, 0)))
-    const isShowMonth: Ref<Boolean> = ref(true)
+    const currDateCursor = ref(new Date(new Date().setHours(0, 0, 0, 0))) as Ref<Date>
+    const isShowMonth = ref(true) as Ref<Boolean>
 
     const dates = computed(() => {
       const currDate = currDateCursor.value
