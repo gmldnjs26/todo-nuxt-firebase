@@ -16,9 +16,9 @@
         :is-checked="t.completion"
         :on-edit="i === onEditTodoItemIndex"
         @change="onChangeCompletion(t.id, !t.completion)"
-        @overEdit="(editContext) => onChangeContext(editContext, t.id)"
+        @overEdit="(editContext) => onChangeContext(t.id, editContext)"
       />
-      <FloatMenuBtn @edit="edit(t.id)" @remove="remove(t.id)" @alram="setAlram(t.id)" @changeDate="changeDate(t.id)" />
+      <FloatMenuBtn @edit="edit(i)" @remove="remove(t.id)" @alram="setAlram(t.id)" @changeDate="changeDate(t.id)" />
     </div>
   </div>
 </template>
@@ -52,17 +52,18 @@ export default defineComponent({
       return accountStore.categoryList.find((item) => item.id === props.categoryId)
     })
 
-    const onChangeCompletion = (todoId: String, completion: boolean) => {
+    const onChangeCompletion = (todoId: string, completion: boolean) => {
       emit('onChangeCompletion', { todoId, completion })
     }
 
-    const onChangeContext = (todoId: String, editContext: string) => {
+    const onChangeContext = (todoId: string, editContext: string) => {
       onEditTodoItemIndex.value = -1
       emit('onChangeContext', { todoId, editContext })
     }
 
     // event 정리
     const edit = (index: number) => {
+      console.log(index)
       onEditTodoItemIndex.value = index
     }
     const remove = (todoId: String) => {
