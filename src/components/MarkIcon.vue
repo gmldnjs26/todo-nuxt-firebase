@@ -2,7 +2,7 @@
   <div class="flex relative">
     <font-awesome-icon class="text-xl" :class="isChecked ? 'text-primary_five' : 'text-primary_two'" icon="bread-slice" />
     <span v-show="isChecked" class="absolute left-2 top-1 w-3.5 h-3.5" :class="checkStyles" />
-    <span v-show="!isChecked && innerText !== '0'" class="absolute left-2 top-1 text-xs text-black">{{ innerText }}</span>
+    <span v-show="!isChecked && innerText !== '0'" class="absolute inset-0 mt-1 text-xs text-black">{{ innerText }}</span>
   </div>
 </template>
 
@@ -14,15 +14,15 @@ export default defineComponent({
     isChecked: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
     innerText: {
       type: String,
       required: false,
-      default: ''
-    }
+      default: '',
+    },
   },
-  setup () {
+  setup() {
     const checkStyles = computed(() => {
       const classes = []
       classes.push('after:block')
@@ -36,9 +36,9 @@ export default defineComponent({
     })
 
     return {
-      checkStyles
+      checkStyles,
     }
-  }
+  },
 })
 </script>
 

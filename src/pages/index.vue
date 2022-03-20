@@ -81,7 +81,7 @@ export default defineComponent({
       console.log('test')
     }
     const addTodo = (catId: string) => {
-      accountStore.addTodolist(catId)
+      accountStore.addTodolist({ catId, date: format(selectedDate.value, 'yyyyMMdd') })
     }
     // watch(toRefs.todoList, (cur: { [key: string]: Array<Todo> }, prev: { [key: string]: Array<Todo> }): void => {
     //   console.log(prev, cur)

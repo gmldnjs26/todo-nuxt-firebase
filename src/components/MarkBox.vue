@@ -1,6 +1,6 @@
 <template>
   <label ref="root" class="flex relative cursor-pointer" :class="isDisabled ? 'opacity-50' : 'hover:opacity-60'">
-    <input type="checkbox" class="hidden" :checked="isChecked" :disabled="isDisabled" @change="change">
+    <input type="checkbox" class="hidden" :checked="isChecked" :disabled="isDisabled" @change="change" />
     <MarkIcon :is-checked="isChecked" />
     <span v-show="label && !onEdit" class="ml-3 leading-5" :class="isChecked ? 'line-through' : ''">
       {{ label }}
@@ -11,7 +11,8 @@
       v-model="editContext"
       class="ml-3 leading-5 border-2 border-primary_four rounded-md"
       @blur="$emit('overEdit', editContext)"
-    >
+      @keyup.enter="$emit('overEdit', editContext)"
+    />
   </label>
 </template>
 
@@ -19,39 +20,41 @@
 import { ref, defineComponent, watch, onMounted } from '@nuxtjs/composition-api'
 export default defineComponent({
   components: {
-    MarkIcon: () => import('@/components/MarkIcon.vue')
+    MarkIcon: () => import('@/components/MarkIcon.vue'),
   },
   props: {
     inlineText: {
       type: String,
       required: false,
-      default: ''
+      default: '',
     },
     label: {
       type: String,
       required: false,
-      default: ''
+      default: '',
     },
     isChecked: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
     isDisabled: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
     onEdit: {
       type: Boolean,
       required: false,
-      default: false
-    }
+      default: false,
+    },
   },
-  setup (props, { emit, refs }) {
+  setup(props, { emit, refs }) {
     onMounted(() => {
       if (props.onEdit) {
-        if (refs.editInput instanceof HTMLInputElement) { refs.editInput.focus() }
+        if (refs.editInput instanceof HTMLInputElement) {
+          refs.editInput.focus()
+        }
       }
     })
     const editContext = ref('')
@@ -66,14 +69,16 @@ export default defineComponent({
       () => props.onEdit,
       (): void => {
         setTimeout(() => {
-          if (refs.editInput instanceof HTMLInputElement) { refs.editInput.focus() }
+          if (refs.editInput instanceof HTMLInputElement) {
+            refs.editInput.focus()
+          }
         })
-      }
+      },
     )
     return {
       change,
-      editContext
+      editContext,
     }
-  }
+  },
 })
 </script>
