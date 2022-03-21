@@ -45,11 +45,11 @@ jobs:
       - name: Install dependencies 👨🏻‍💻
         run: cd src; yarn
 
-      # - name: Run linter 👀
-      #   run: cd src; yarn lint
+      - name: Run linter 👀
+        run: cd src; yarn lint
 
-      - name: Run dev
-        run: cd src; yarn dev
+      # - name: Run dev
+      #   run: cd src; yarn dev
 
       - name: Run build
         run: cd src; yarn build
