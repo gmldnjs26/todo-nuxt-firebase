@@ -10,14 +10,5 @@
 
 - Firebase + Nuxt + Tailwindcss
 
-### Installing
+![image](https://user-images.githubusercontent.com/46416157/159205107-11284c3a-1bd9-40b4-8bfc-f4f2c6089218.png)
 
-```sh
-yarn
-```
-
-### Executing program
-
-```
-yarn dev
-```
