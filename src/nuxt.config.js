@@ -1,5 +1,5 @@
 import * as FontAwesome from './build/fontawesome'
-// require('dotenv').config()
+require('dotenv').config()
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -28,7 +28,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    // { src: '~/plugins/firebase.ts', ssr: false },
+    { src: '~/plugins/firebase.ts', ssr: false },
     // サーバーサイドでは使用できないのでssrはfalseにすること
     { src: '~/plugins/persistedstate.js', ssr: false },
   ],
@@ -97,13 +97,13 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
-  // env: {
-  //   FIREBASE_APIKEY: process.env.apiKey,
-  //   FIREBASE_AUTHDOMAIN: process.env.authDomain,
-  //   FIREBASE_PROJECTID: process.env.projectId,
-  //   FIREBASE_STORAGEBUCKET: process.env.storageBucket,
-  //   FIREBASE_MESSAGINGSENDERID: process.env.messagingSenderId,
-  //   FIREBASE_APPID: process.env.appId,
-  //   FIREBASE_MEASURMENTID: process.env.measurementId,
-  // },
+  env: {
+    FIREBASE_APIKEY: process.env.apiKey,
+    FIREBASE_AUTHDOMAIN: process.env.authDomain,
+    FIREBASE_PROJECTID: process.env.projectId,
+    FIREBASE_STORAGEBUCKET: process.env.storageBucket,
+    FIREBASE_MESSAGINGSENDERID: process.env.messagingSenderId,
+    FIREBASE_APPID: process.env.appId,
+    FIREBASE_MEASURMENTID: process.env.measurementId,
+  },
 }
