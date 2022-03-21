@@ -38,9 +38,9 @@ jobs:
         working-directory: ./src
 
       - name: Run dev
-        run: npm run dev
+        run: npm run dev & npx wait-on http://localhost:3000
         working-directory: ./src
 
       - name: Run build
-        run: npm run build & npx wait-on http://localhost:3000
+        run: npm run build
         working-directory: ./src
