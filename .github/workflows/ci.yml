@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [14]
+        node: [14.16.1]
 
     steps:
       - name: Checkout 🛎
@@ -29,27 +29,18 @@ jobs:
           node-version: ${{ matrix.node }}
           check-latest: true
 
-      - name: Get yarn cache directory path 🛠
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Cache node_modules 📦
-        uses: actions/cache@v2.1.4
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
       - name: Install dependencies 👨🏻‍💻
-        run: cd src; yarn
+        run: npm install
+        working-directory: ./src
 
       - name: Run linter 👀
-        run: cd src; yarn lint
+        run: npm run lint
+        working-directory: ./src
 
-      # - name: Run dev
-      #   run: cd src; yarn dev
+      - name: Run dev
+        run: npm run dev
+        working-directory: ./src
 
       - name: Run build
-        run: cd src; yarn build
+        run: npm run build
+        working-directory: ./src
