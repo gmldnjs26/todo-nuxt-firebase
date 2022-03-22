@@ -124,7 +124,8 @@ export default class Account extends VuexModule implements AccountState {
 
   @Mutation
   [MutationTypes.REMOVE_TODOITEM](todoId: string) {
-    this.todoList = this.todoList.filter((item) => item.id === todoId)
+    const targetIndex = this.todoList.findIndex((item) => item.id === todoId)
+    this.todoList.splice(targetIndex, 1)
   }
 
   @Action({ rawError: true })
