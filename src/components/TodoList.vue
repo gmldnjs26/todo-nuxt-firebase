@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, toRefs, ref, computed } from '@nuxtjs/composition-api'
+import { defineComponent, PropType, toRefs, ref, computed, nextTick } from '@nuxtjs/composition-api'
 import { Todo } from '@/types/todo'
 import { accountStore } from '@/store/index'
 
@@ -63,7 +63,6 @@ export default defineComponent({
 
     // event 정리
     const edit = (index: number) => {
-      console.log(index)
       onEditTodoItemIndex.value = index
     }
     const remove = (todoId: String) => {
@@ -79,7 +78,9 @@ export default defineComponent({
     const addTodo = () => {
       // FIXME: function을 내려서 비동기로 만들어준뒤 then으로 onEditTodoItemIndex을 수정하자
       emit('addTodo', props.categoryId)
-      onEditTodoItemIndex.value = props.todoList.length - 1
+      nextTick(() => {
+        onEditTodoItemIndex.value = props.todoList.length - 1
+      })
     }
     return {
       editTodoList,
