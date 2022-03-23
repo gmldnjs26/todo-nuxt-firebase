@@ -1,5 +1,6 @@
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
 import { Category, Todo } from '@/types/todo'
+import { firebase } from '@/plugins/firebase'
 
 export interface AccountState {
   email: string
