@@ -19,8 +19,6 @@ firebase.initializeApp({
   measurementId: process.env.FIREBASE_MEASURMENTID,
 })
 
-export { firebase }
-
 declare module 'vue/types/vue' {
   interface Vue {
     $firebase: firebase.app.App
