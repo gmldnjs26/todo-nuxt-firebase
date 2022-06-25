@@ -4,7 +4,7 @@
       <div class="flex flex-col justify-center items-center">
         <font-awesome-icon icon="user" size="2x" class="text-primary_two my-2 hover:text-lighter" />
         <h1 class="text-xl mb-2 font-bold">
-          Login
+          Loginn
         </h1>
       </div>
       <section class="flex flex-col w-full space-y-3">
