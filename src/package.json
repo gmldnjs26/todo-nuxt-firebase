@@ -20,8 +20,7 @@
     ],
     "*.{html,css,scss,js,ts,json,vue}": "prettier --write",
     "*.{js,jsx,ts,tsx,vue}": [
-      "yarn lint",
-      "yarn lint:fix"
+      "eslint --fix"
     ]
   },
   "dependencies": {
