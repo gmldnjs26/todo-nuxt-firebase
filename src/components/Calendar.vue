@@ -16,26 +16,28 @@
       </div>
     </section>
     <section class="my-6">
-      <div class="grid grid-cols-7 gap-2 mt-2 text-center">
-        <div v-for="day in $t('dayLabels')" :key="day" class="w-full h-4 text-xs">
-          {{ day }}
+      <transition :name="transitionName">
+        <div v-show="!isLoading" class="grid grid-cols-7 gap-2 mt-2 text-center">
+          <div v-for="day in $t('dayLabels')" :key="day" class="w-full h-4 text-xs">
+            {{ day }}
+          </div>
+          <div
+            v-for="(d, i) in dates"
+            :key="i"
+            class="flex flex-col justify-center items-center cursor-pointer"
+            :class="d.isSelectedDay ? 'border-2 border-solid border-black rounded-md' : 'p-1'"
+            @click="onSelectDate(d.date)"
+          >
+            <span :class="d.isHoliday ? 'text-red-500' : d.isSaturday ? 'text-blue-500' : 'text-black'">{{
+              d.date | formatDateToDay
+            }}</span>
+            <MarkIcon
+              :is-checked="d.isCompletedTodoCount > 0 && d.isNotCompletedTodoCount === 0"
+              :inner-text="d.isNotCompletedTodoCount ? d.isNotCompletedTodoCount.toString() : '0'"
+            />
+          </div>
         </div>
-        <div
-          v-for="(d, i) in dates"
-          :key="i"
-          class="flex flex-col justify-center items-center cursor-pointer"
-          :class="d.isSelectedDay ? 'border-2 border-solid border-black rounded-md' : 'p-1'"
-          @click="onSelectDate(d.date)"
-        >
-          <span :class="d.isHoliday ? 'text-red-500' : d.isSaturday ? 'text-blue-500' : 'text-black'">{{
-            d.date | formatDateToDay
-          }}</span>
-          <MarkIcon
-            :is-checked="d.isCompletedTodoCount > 0 && d.isNotCompletedTodoCount === 0"
-            :inner-text="d.isNotCompletedTodoCount ? d.isNotCompletedTodoCount.toString() : '0'"
-          />
-        </div>
-      </div>
+      </transition>
     </section>
   </div>
 </template>
@@ -81,7 +83,9 @@ export default defineComponent({
   emits: ['onSelectDate'],
   setup(props, { emit }) {
     const currDateCursor = ref(new Date(new Date().setHours(0, 0, 0, 0))) as Ref<Date>
-    const isShowMonth = ref(true) as Ref<Boolean>
+    const isShowMonth: Ref<Boolean> = ref(true)
+    const isLoading: Ref<Boolean> = ref(false)
+    const transitionName: Ref<String> = ref('')
 
     const dates = computed(() => {
       const currDate = currDateCursor.value
@@ -107,10 +111,20 @@ export default defineComponent({
 
     const toNextMW = () => {
       currDateCursor.value = isShowMonth.value ? addMonths(currDateCursor.value, 1) : addWeeks(currDateCursor.value, 1)
+      transitionHandler('right')
     }
 
     const toPreviousMW = () => {
       currDateCursor.value = isShowMonth.value ? addMonths(currDateCursor.value, -1) : addWeeks(currDateCursor.value, -1)
+      transitionHandler('left')
+    }
+
+    const transitionHandler = (name: string) => {
+      transitionName.value = name
+      isLoading.value = true
+      setTimeout(() => {
+        isLoading.value = false
+      })
     }
 
     const changePeriod = (value: number) => {
@@ -141,8 +155,31 @@ export default defineComponent({
       toPreviousMW,
       changePeriod,
       onSelectDate,
+      isLoading,
+      transitionName,
       isCompletedCountOfSelectedDay,
     }
   },
 })
 </script>
+
+<style scoped>
+.right-enter-active,
+.right-leave-active {
+  transform: translate(0px, 0px);
+  transition: transform 500ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+}
+.right-enter,
+.right-leave-to {
+  transform: translateX(20vw) translateX(0px);
+}
+.left-enter-active,
+.left-leave-active {
+  transform: translate(0px, 0px);
+  transition: transform 500ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+}
+.left-enter,
+.left-leave-to {
+  transform: translateX(-20vw) translateX(0px);
+}
+</style>
