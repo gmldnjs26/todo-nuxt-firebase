@@ -1,9 +1,9 @@
 <template>
-  <div class="w-full h-full mx-4">
+  <div class="w-full h-full px-1">
     <section class="flex justify-between">
       <div>
         <span class="font-bold text-lg">{{ currDateCursor | formatDateToYYYYMM }}</span>
-        <span>Completed: {{ isCompletedCountOfSelectedDay }}</span>
+        <span class="text-sm">Completed: {{ isCompletedCountOfSelectedDay }}</span>
       </div>
       <div class="flex space-x-3">
         <button @click="toPreviousMW">
@@ -110,12 +110,12 @@ export default defineComponent({
     })
 
     const toNextMW = () => {
-      currDateCursor.value = isShowMonth.value ? addMonths(currDateCursor.value, 1) : addWeeks(currDateCursor.value, 1)
+      onSelectDate(isShowMonth.value ? addMonths(currDateCursor.value, 1) : addWeeks(currDateCursor.value, 1))
       transitionHandler('right')
     }
 
     const toPreviousMW = () => {
-      currDateCursor.value = isShowMonth.value ? addMonths(currDateCursor.value, -1) : addWeeks(currDateCursor.value, -1)
+      onSelectDate(isShowMonth.value ? addMonths(currDateCursor.value, -1) : addWeeks(currDateCursor.value, -1))
       transitionHandler('left')
     }
 

@@ -8,7 +8,7 @@
       :disabled="isDisabled"
       :checked="isChecked"
       @click="click(value)"
-    >
+    />
     <span :class="`${isChecked ? 'text-primary_four' : 'text-gray-500'}`">{{ text }}</span>
   </label>
 </template>
@@ -20,42 +20,44 @@ export default defineComponent({
     name: {
       type: String,
       required: false,
-      default: ''
+      default: '',
     },
     value: {
       type: Number,
       required: false,
-      default: 0
+      default: 0,
     },
     text: {
       type: String,
       required: false,
-      default: 'asd'
+      default: 'asd',
     },
     color: {
       type: String,
       required: false,
-      default: ''
+      default: '',
     },
     isChecked: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
     isDisabled: {
       type: Boolean,
       required: false,
-      default: false
-    }
+      default: false,
+    },
   },
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const click = (value: string | number): string | number | void => {
-      if (props.isDisabled) { return }
+      if (props.isDisabled) {
+        return
+      }
       emit('click', value)
     }
     return {
-      click
+      click,
     }
-  }
+  },
 })
 </script>

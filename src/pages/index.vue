@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-gray-50 w-full h-screen">
-    <div class="w-[400px] mx-auto pt-8">
+  <div class="bg-gray-100 w-full h-screen">
+    <div class="w-[370px] mx-auto pt-8">
       <Calendar :day-todo-status-infos="dayTodoStatusInfos" @onSelectDate="onSelectDate" />
     </div>
-    <div class="w-[400px] mx-auto">
+    <div class="w-[370px] mx-auto">
       <TodoList
         v-for="category in categoryList"
         :key="category.id"
