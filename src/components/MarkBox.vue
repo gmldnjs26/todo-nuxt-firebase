@@ -2,14 +2,14 @@
   <label ref="root" class="flex relative cursor-pointer" :class="isDisabled ? 'opacity-50' : 'hover:opacity-60'">
     <input type="checkbox" class="hidden" :checked="isChecked" :disabled="isDisabled" @change="change" />
     <MarkIcon :is-checked="isChecked" />
-    <span v-show="label && !onEdit" class="ml-3 leading-5" :class="isChecked ? 'line-through' : ''">
+    <span v-show="label && !onEdit" class="ml-1 leading-5 py-0.5 px-1" :class="isChecked ? 'line-through' : ''">
       {{ label }}
     </span>
     <input
       v-show="label && onEdit"
       ref="editInput"
       v-model="editContext"
-      class="ml-3 leading-5 border-2 border-primary_four rounded-md"
+      class="ml-1 leading-5 border-none rounded-md py-0.5 px-1"
       @blur="$emit('overEdit', editContext)"
       @keyup.enter="$emit('overEdit', editContext)"
     />
