@@ -5,8 +5,8 @@
         <span class="font-bold text-lg">{{ currDateCursor | formatDateToYYYYMM }}</span>
         <span class="text-sm">Completed: {{ isCompletedCountOfSelectedDay }}</span>
       </div>
-      <div class="flex space-x-3">
-        <button @click="toPreviousMW">
+      <div class="flex space-x-4">
+        <button @click="toPrevMW">
           <font-awesome-icon class="text-base cursor-pointer" icon="chevron-left" />
         </button>
         <button @click="toNextMW">
@@ -25,7 +25,10 @@
             v-for="(d, i) in dates"
             :key="i"
             class="flex flex-col justify-center items-center cursor-pointer"
-            :class="d.isSelectedDay ? 'border-2 border-solid border-black rounded-md' : 'p-1'"
+            :class="[
+              d.isSelectedDay ? 'border-2 border-solid border-black rounded-md' : 'p-1',
+              !d.isCurrMonth ? 'opacity-30' : '',
+            ]"
             @click="onSelectDate(d.date)"
           >
             <span :class="d.isHoliday ? 'text-red-500' : d.isSaturday ? 'text-blue-500' : 'text-black'">{{
@@ -54,11 +57,14 @@ import {
   addMonths,
   addWeeks,
   isSameDay,
+  isSameMonth,
   addDays,
 } from 'date-fns'
 import format from 'date-fns/format'
 import { dayTodoStatusInfo } from '@/types/todo'
 import { CALENDAR_RADIO_CONTENTS } from '@/utils/const'
+
+import { DateCellInfo } from '~/types/calendar'
 
 export default defineComponent({
   components: {
@@ -87,7 +93,7 @@ export default defineComponent({
     const isLoading: Ref<Boolean> = ref(false)
     const transitionName: Ref<String> = ref('')
 
-    const dates = computed(() => {
+    const dates = computed<DateCellInfo[]>(() => {
       const currDate = currDateCursor.value
       let startDate = isShowMonth.value ? startOfMonth(currDate) : startOfWeek(currDate)
       let endDate = isShowMonth.value ? endOfMonth(currDate) : endOfWeek(currDate)
@@ -106,6 +112,7 @@ export default defineComponent({
           ? props.dayTodoStatusInfos[format(date, 'yyyyMMdd')].isNotCompletedTodoCount
           : 0,
         isSelectedDay: isSameDay(date, currDate),
+        isCurrMonth: isSameMonth(date, currDate),
       }))
     })
 
@@ -114,7 +121,7 @@ export default defineComponent({
       transitionHandler('right')
     }
 
-    const toPreviousMW = () => {
+    const toPrevMW = () => {
       onSelectDate(isShowMonth.value ? addMonths(currDateCursor.value, -1) : addWeeks(currDateCursor.value, -1))
       transitionHandler('left')
     }
@@ -152,7 +159,7 @@ export default defineComponent({
       currDateCursor,
       CALENDAR_RADIO_CONTENTS,
       toNextMW,
-      toPreviousMW,
+      toPrevMW,
       changePeriod,
       onSelectDate,
       isLoading,
