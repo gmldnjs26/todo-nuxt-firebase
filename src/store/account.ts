@@ -29,6 +29,7 @@ const defaultCategoryList = [
     icon: 'walking',
     color: 'green',
     createdAt: '20211206',
+    rowNum: 1,
   },
   {
     id: '2',
@@ -37,6 +38,7 @@ const defaultCategoryList = [
     icon: 'school',
     color: 'gray',
     createdAt: '20211206',
+    rowNum: 2,
   },
 ]
 
@@ -50,6 +52,7 @@ const defaultData: Array<Todo> = [
     context: 'Test1',
     completion: false,
     createdAt: '20210830',
+    rowNum: 1,
   },
   {
     categoryId: '1',
@@ -60,6 +63,7 @@ const defaultData: Array<Todo> = [
     completion: false,
     createdAt: '20210830',
     userId: 'gmldnjs',
+    rowNum: 2,
   },
   {
     categoryId: '2',
@@ -70,6 +74,7 @@ const defaultData: Array<Todo> = [
     completion: false,
     createdAt: '20210830',
     userId: 'gmldnjs',
+    rowNum: 3,
   },
 ]
 // const savedData = JSON.parse(window.localStorage.getItem('heewon') as string)
@@ -119,6 +124,7 @@ export default class Account extends VuexModule implements AccountState {
       completion: false,
       createdAt: date,
       userId: 'gmldnjs',
+      rowNum: this.todoList.length + 1,
     })
   }
 

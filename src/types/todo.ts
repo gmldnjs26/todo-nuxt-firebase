@@ -5,6 +5,7 @@ export type Category = {
   icon: string
   color: string
   createdAt: string
+  rowNum: number
 }
 
 export type Todo = {
@@ -16,6 +17,7 @@ export type Todo = {
   context: string
   completion: boolean
   createdAt: string
+  rowNum: number
 }
 
 export type TodoEditEventInfo = {
