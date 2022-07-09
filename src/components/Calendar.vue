@@ -12,7 +12,11 @@
         <button @click="toNextMW">
           <font-awesome-icon class="text-base cursor-pointer" icon="chevron-right" />
         </button>
-        <RadioGroup :radio-contents="CALENDAR_RADIO_CONTENTS" :selected-value="1" @click="(value) => changePeriod(value)" />
+        <RadioGroup
+          :radio-contents="CALENDAR_RADIO_CONTENTS"
+          :selected-value="selectedPeriodVal"
+          @click="(value) => changePeriod(value)"
+        />
       </div>
     </section>
     <section class="my-6">
@@ -90,8 +94,6 @@ export default defineComponent({
   setup(props, { emit }) {
     const currDateCursor = ref(new Date(new Date().setHours(0, 0, 0, 0))) as Ref<Date>
     const isShowMonth: Ref<Boolean> = ref(true)
-    const isLoading: Ref<Boolean> = ref(false)
-    const transitionName: Ref<String> = ref('')
 
     const dates = computed<DateCellInfo[]>(() => {
       const currDate = currDateCursor.value
@@ -126,6 +128,8 @@ export default defineComponent({
       transitionHandler('left')
     }
 
+    const isLoading: Ref<Boolean> = ref(false)
+    const transitionName: Ref<String> = ref('')
     const transitionHandler = (name: string) => {
       transitionName.value = name
       isLoading.value = true
@@ -134,7 +138,9 @@ export default defineComponent({
       })
     }
 
+    const selectedPeriodVal: Ref<Number> = ref(1)
     const changePeriod = (value: number) => {
+      selectedPeriodVal.value = value
       isShowMonth.value = value === 1
     }
 
@@ -164,6 +170,7 @@ export default defineComponent({
       onSelectDate,
       isLoading,
       transitionName,
+      selectedPeriodVal,
       isCompletedCountOfSelectedDay,
     }
   },
