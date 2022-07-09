@@ -4,6 +4,7 @@
       <Calendar :day-todo-status-infos="dayTodoStatusInfos" @onSelectDate="onSelectDate" />
     </div>
     <div class="w-[370px] mx-auto">
+      <CategoryManage />
       <TodoList
         v-for="category in categoryList"
         :key="category.id"
@@ -30,6 +31,7 @@ export default defineComponent({
   components: {
     TodoList: () => import('@/components/TodoList.vue'),
     Calendar: () => import('@/components/Calendar.vue'),
+    CategoryManage: () => import('@/components/CategoryManage.vue'),
   },
   setup() {
     const selectedValue = ref(1)

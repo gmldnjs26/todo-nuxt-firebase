@@ -1,14 +1,18 @@
 <template>
   <div class="w-full h-auto flex-1 flex flex-col space-y-2 mb-2">
     <div
-      class="w-[80px] bg-gray-200 mt-2 py-2 px-1 rounded-md flex justify-between hover:bg-gray-400 cursor-pointer"
+      class="min-w-[80px] bg-white w-min shadow-md mt-2 py-2 px-1 rounded-md flex hover:opacity-60 cursor-pointer"
       @click="addTodo"
     >
-      <font-awesome-icon :class="`text-sm text-left text-${categoryInfo.color}-500`" :icon="categoryInfo.icon" />
-      <div class="text-xs">
-        {{ categoryInfo.name }}
+      <div class="w-3/12">
+        <font-awesome-icon class="text-sm w-3/12 text-left" :icon="categoryInfo.icon" />
       </div>
-      <font-awesome-icon class="text-sm text-right" icon="plus" color="primary_two" />
+      <div class="w-6/12 text-center">
+        <span :class="`${categoryInfo.color} text-xs font-semibold`">{{ categoryInfo.name }}</span>
+      </div>
+      <div class="w-3/12">
+        <font-awesome-icon class="text-xs text-right" icon="plus" color="primary_two" />
+      </div>
     </div>
     <div v-for="(t, i) in editTodoList" :key="i" class="flex justify-between p-1">
       <MarkBox
