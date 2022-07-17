@@ -22,6 +22,67 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push(
+        {
+          name: 'hotel-country',
+          path: '/hotel/country',
+          component: resolve(__dirname, 'pages/search.vue'),
+        },
+        {
+          name: 'hotel-country-id',
+          path: '/hotel/country/:id',
+          component: resolve(__dirname, 'pages/search.vue'),
+        },
+        {
+          name: 'hotel-country-district-id',
+          path: '/hotel/country/:id/district/:id',
+          component: resolve(__dirname, 'pages/hub.vue'),
+        },
+        {
+          name: 'hotel-country-district-prefecture',
+          path: '/hotel/country/:id/district/:id/prefecture/:id',
+          component: resolve(__dirname, 'pages/search.vue'),
+        },
+        {
+          name: 'hotel-country-district-prefecture-zone',
+          path: '/hotel/country/:id/district/:id/prefecture/:id/zone/:id',
+          component: resolve(__dirname, 'pages/search.vue'),
+        },
+        {
+          name: 'hotel-country-district-prefecture-section-block',
+          path: '/hotel/country/:id/district/:id/prefecture/:id/zone/:id/section/:id/block/:id',
+          component: resolve(__dirname, 'pages/search.vue'),
+        },
+        {
+          name: 'hotel-station',
+          path: '/hotel/station',
+          component: resolve(__dirname, 'pages/search.vue'),
+        },
+        {
+          name: 'hotel-station-id',
+          path: '/hotel/station/:id',
+          component: resolve(__dirname, 'pages/search.vue'),
+        },
+        {
+          name: 'hotel-spot',
+          path: '/hotel/spot',
+          component: resolve(__dirname, 'pages/search.vue'),
+        },
+        {
+          name: 'hotel-spot',
+          path: '/hotel/spot/:id',
+          component: resolve(__dirname, 'pages/search.vue'),
+        },
+        {
+          name: 'hotel-search',
+          path: '/hotel/search',
+          component: resolve(__dirname, 'pages/search.vue'),
+        },
+      )
+    },
+  },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['~/assets/scss/index.scss'],
