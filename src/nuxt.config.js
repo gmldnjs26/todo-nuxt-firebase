@@ -29,6 +29,12 @@ export default {
           name: 'hotel-country',
           path: '/hotel/country',
           component: resolve(__dirname, 'pages/search.vue'),
+          beforeEnter(to, _, next) {
+            // query를 갖고있을때 다른 path로 가기
+            if (Object.keys(to.query).length === 0) {
+              next({ path: 'hub', params: to.params })
+            } else next()
+          },
         },
         {
           name: 'hotel-country-id',
