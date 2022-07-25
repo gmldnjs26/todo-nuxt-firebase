@@ -3,7 +3,6 @@ export const search = () => {
     let locationIds
     let locationType
     let word
-    let result = {}
 
     /** @locationIds start */
     locationIds = path.split('/').filter((e) => +e)
@@ -14,25 +13,25 @@ export const search = () => {
       } else {
         locationIds = [...locationIds, query.id]
       }
-    } else {
-      // TODO: id[]=2&id[]=3存在する？
-    }
-    delete query.id
-
-    if (typeof query['district[]'] === 'string') {
-      if (query.id.includes(',')) {
-        locationIds = [...locationIds, ...query['district[]'].split(',')]
-      } else {
-        locationIds = [...locationIds, query['district[]']]
-      }
-    } else if (query['district[]'] && query['district[]'].length > 0) {
-      const queryIds = query['district[]'].reduce((a, b) => {
+    } else if (typeof query.id === 'object') {
+      const queryIds = query.id.reduce((a, b) => {
         if (b !== null) a.push(b)
         return a
       }, [] as string[])
       locationIds = [...locationIds, ...queryIds]
     }
-    delete query['district[]']
+    delete query.id
+
+    if (typeof query.district === 'string') {
+      locationIds = [...locationIds, query.district]
+    } else if (typeof query.district === 'object') {
+      const queryIds = query.district.reduce((a, b) => {
+        if (b !== null) a.push(b)
+        return a
+      }, [] as string[])
+      locationIds = [...locationIds, ...queryIds]
+    }
+    delete query.district
     /** @locationIds　end */
 
     /** @locationType　start */
@@ -51,20 +50,22 @@ export const search = () => {
       } else {
         word = query.word
       }
-    } else {
-      // TODO: word[]='sample1'&word[]='sample2'存在する？
+    } else if (typeof query.word === 'object') {
+      const queryWords = query.word.reduce((a, b) => {
+        if (b !== null) a.push(b)
+        return a
+      }, [] as string[])
+      word = queryWords
     }
     delete query.word
     /** @word end */
 
-    result = {
+    return {
       ...(locationIds.length > 0 && { locationIds }),
       ...(locationType && { locationType }),
       ...(word && { word }),
       ...query,
     }
-    console.log(result)
-    return result
   }
 
   return {
