@@ -1,19 +1,6 @@
 <template>
   <div class="w-full h-auto flex-1 flex flex-col space-y-2 mb-2">
-    <div
-      class="min-w-[80px] bg-white w-min shadow-md mt-2 py-2 px-1 rounded-md flex hover:opacity-60 cursor-pointer"
-      @click="addTodo"
-    >
-      <div class="w-3/12">
-        <font-awesome-icon class="text-sm w-3/12 text-left" :icon="categoryInfo.icon" />
-      </div>
-      <div class="w-6/12 text-center">
-        <span :class="`${categoryInfo.color} text-xs font-semibold`">{{ categoryInfo.name }}</span>
-      </div>
-      <div class="w-3/12">
-        <font-awesome-icon class="text-xs text-right" icon="plus" color="primary_two" />
-      </div>
-    </div>
+    <TodoListAddButton :add-todo-func="addTodo" :category-icon="categoryInfo.icon" :category-name="categoryInfo.name" />
     <div v-for="(t, i) in editTodoList" :key="i" class="flex justify-between p-1">
       <MarkBox
         :label="t.context"
@@ -36,6 +23,7 @@ export default defineComponent({
   components: {
     MarkBox: () => import('@/components/MarkBox.vue'),
     FloatMenuBtn: () => import('@/components/FloatMenuBtn.vue'),
+    TodoListAddButton: () => import('@/components/TodoListAddButton.vue'),
   },
   props: {
     todoList: {

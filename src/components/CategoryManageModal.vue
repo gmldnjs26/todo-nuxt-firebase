@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="fixed top-0 left-0 z-10 w-screen h-screen bg-black opacity-40"></div>
-    <div class="fixed inset-0 z-10 m-auto bg-white shadow-md animate-appear rounded-md w-[370px] max-h-[500px]">
+    <div class="fixed top-0 left-0 z-10 w-screen h-screen bg-black opacity-40" @click="$emit('close')"></div>
+    <div class="fixed inset-0 z-10 m-auto bg-white shadow-md rounded-md w-[370px] max-h-[500px]">
       <div class="flex overflow-auto flex-col w-full h-full">
         <!-- header -->
         <div class="flex justify-between items-center px-5 h-16 text-sm font-semibold bg-bgColor-basic">
