@@ -46,13 +46,19 @@ declare module '@nuxt/types' {
 //   }
 // }
 
-const myPlugin: Plugin = (_, inject) => {
-  inject('firebase', firebase)
-  inject('auth', firebase.auth())
-  inject('db', firebase.firestore())
-  inject('storage', firebase.storage())
-}
+const $firebase = firebase
+const $auth = firebase.auth()
+const $db = firebase.firestore()
+const $storage = firebase.storage()
 
+const myPlugin: Plugin = (_, inject) => {
+  inject('firebase', $firebase)
+  inject('auth', $auth)
+  inject('db', $db)
+  inject('storage', $storage)
+}
+// vuex에서도 접근하기 위해 근데 애초에 굳이 inject안하고 import로써 쓰는것도 나쁘지 않을꺼 같드아..
+export { $firebase, $auth, $db, $storage }
 export default myPlugin
 
 // declare module '@nuxt/types' {
