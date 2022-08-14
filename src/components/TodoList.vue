@@ -17,7 +17,7 @@
 <script lang="ts">
 import { defineComponent, PropType, toRefs, ref, computed, nextTick } from '@nuxtjs/composition-api'
 import { Todo } from '@/types/todo'
-import { accountStore } from '@/store/index'
+import { guestStore } from '@/store/index'
 
 export default defineComponent({
   components: {
@@ -41,7 +41,7 @@ export default defineComponent({
     const onEditTodoItemIndex = ref(-1)
 
     const categoryInfo = computed(() => {
-      return accountStore.categoryList.find((item) => item.id === props.categoryId)
+      return guestStore.categoryList.find((item) => item.id === props.categoryId)
     })
 
     const onChangeCompletion = (todoId: string, completion: boolean) => {

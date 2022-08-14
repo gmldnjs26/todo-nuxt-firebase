@@ -8,6 +8,6 @@ module.exports = {
   plugins: [],
   // add your custom rules here
   rules: {
-    'no-irregular-whitespace': 'off',
+    '@typescript-eslint/no-unused-vars': 0,
   },
 }

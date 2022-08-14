@@ -25,7 +25,7 @@
 import { defineComponent, computed, ref, Ref } from '@nuxtjs/composition-api'
 import format from 'date-fns/format'
 import { dayTodoStatusInfo } from '@/types/todo'
-import { accountStore } from '@/store/index'
+import { guestStore } from '@/store/index'
 
 export default defineComponent({
   components: {
@@ -38,17 +38,17 @@ export default defineComponent({
     const selectedDate = ref(new Date()) as Ref<Date>
 
     const categoryList = computed(() => {
-      return accountStore.categoryList
+      return guestStore.categoryList
     })
 
     const todoListOfselectedDate = computed(() => {
-      return accountStore.todoList.filter((item) => item.doDate === format(selectedDate.value, 'yyyyMMdd'))
+      return guestStore.todoList.filter((item) => item.doDate === format(selectedDate.value, 'yyyyMMdd'))
     })
 
     const dayTodoStatusInfos = computed(() => {
       const dayTodoStatusInfos = {} as { [key: string]: dayTodoStatusInfo }
-      if (accountStore.todoList) {
-        accountStore.todoList.forEach((todo) => {
+      if (guestStore.todoList) {
+        guestStore.todoList.forEach((todo) => {
           // FIXME: 좀 더 정확한 빈 객체의 객체 조사방법? 없나? todo.doDate in dayTodoStatusInfos 라는 방법도 있지만 상당한 속도 차이가 난다.
           // https://stackoverflow.com/questions/1098040/checking-if-a-key-exists-in-a-javascript-object
           if (dayTodoStatusInfos[todo.doDate] === undefined) {
@@ -68,13 +68,13 @@ export default defineComponent({
     })
 
     const changeCompletion = ({ todoId, completion }: { todoId: string; completion: boolean }) => {
-      accountStore.setTodolistCompletion({ todoId, completion })
+      guestStore.setTodolistCompletion({ todoId, completion })
     }
     const changeContext = ({ todoId, editContext }: { todoId: string; editContext: string }) => {
-      accountStore.setTodolistContext({ todoId, context: editContext })
+      guestStore.setTodolistContext({ todoId, context: editContext })
     }
     const remove = (todoId: string) => {
-      accountStore.removeTodoItem(todoId)
+      guestStore.removeTodoItem(todoId)
     }
     const setAlarm = () => {
       console.log('test')
@@ -83,7 +83,7 @@ export default defineComponent({
       console.log('test')
     }
     const addTodo = (catId: string) => {
-      accountStore.addTodolist({ catId, date: format(selectedDate.value, 'yyyyMMdd') })
+      guestStore.addTodolist({ catId, date: format(selectedDate.value, 'yyyyMMdd') })
     }
     // watch(toRefs.todoList, (cur: { [key: string]: Array<Todo> }, prev: { [key: string]: Array<Todo> }): void => {
     //   console.log(prev, cur)

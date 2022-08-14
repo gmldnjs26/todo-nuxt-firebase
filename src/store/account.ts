@@ -1,4 +1,5 @@
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
+import { $auth, $db } from '../plugins/firebase'
 import { AccountState, MutationTypes } from './type'
 @Module({
   name: 'account',
@@ -14,12 +15,17 @@ export default class Account extends VuexModule implements AccountState {
   [MutationTypes.SET_ACCOUNT_INFO](accountInfo: AccountState) {
     this.email = accountInfo.email
     this.username = accountInfo.username
+    this.isAuthenticated = true
+  }
+
+  @Mutation
+  [MutationTypes.SET_AUTH](payload: boolean) {
+    this.isAuthenticated = payload
   }
 
   @Action({ rawError: true })
   onLogin(payload: { email: string; password: string }) {
     // TODO: login
-    console.log(payload)
   }
 
   @Action({ rawError: true })

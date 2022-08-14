@@ -8,9 +8,9 @@
         </h1>
       </div>
       <section class="flex flex-col w-full space-y-3">
-        <input v-model="email" type="text" placeholder="Email">
-        <input v-model="username" type="text" placeholder="Username">
-        <input v-model="password" type="password" placeholder="Password">
+        <input v-model="email" type="text" placeholder="Email" />
+        <input v-model="username" type="text" placeholder="Username" />
+        <input v-model="password" type="password" placeholder="Password" />
         <button class="w-full h-12 text-white bg-primary_two rounded-full hover:bg-dark" @click="onRegister">
           <span>Sign Up</span>
         </button>
@@ -25,22 +25,30 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
+import { $auth, $db } from '@/plugins/firebase'
 
 export default defineComponent({
-  setup (_, context) {
+  setup() {
     const email = ref('')
     const password = ref('')
     const username = ref('')
 
+    const router = useRouter()
+
     const onRegister = async (): Promise<any> => {
       try {
-        const credential = await context.root.$auth.createUserWithEmailAndPassword(email.value, password.value)
-        console.log(credential)
+        const { user } = await $auth.createUserWithEmailAndPassword(email.value, password.value)
+        const res = await $db
+          .collection('users')
+          .doc(user?.uid)
+          .set({
+            name: username.value,
+            email: email.value,
+          })
+        router.push('/login')
       } catch (err) {
-        if (err instanceof Error) {
-          alert(err.message)
-        }
+        console.log(err)
       }
     }
 
@@ -48,9 +56,9 @@ export default defineComponent({
       email,
       password,
       username,
-      onRegister
+      onRegister,
     }
-  }
+  },
 })
 </script>
 

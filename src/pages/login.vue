@@ -8,9 +8,9 @@
         </h1>
       </div>
       <section class="flex flex-col w-full space-y-3">
-        <input type="text" placeholder="Email" />
-        <input type="password" placeholder="Password" />
-        <button class="w-full h-12 text-white bg-primary_two rounded-full hover:bg-dark">
+        <input v-model="email" type="text" placeholder="Email" />
+        <input v-model="password" type="password" placeholder="Password" />
+        <button class="w-full h-12 text-white bg-primary_two rounded-full hover:bg-dark" @click="login">
           <span>Sign In</span>
         </button>
         <div class="flex flex-col w-full text-center">
@@ -27,9 +27,37 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, ref } from '@nuxtjs/composition-api'
+import { $auth, $db } from '@/plugins/firebase'
 
-export default defineComponent({})
+export default defineComponent({
+  setup() {
+    const email = ref('')
+    const password = ref('')
+
+    const login = async () => {
+      try {
+        const result = await $auth.signInWithEmailAndPassword(email.value, password.value)
+        console.log(result.user?.uid)
+        const user = await $db
+          .collection('users')
+          .doc(result.user?.uid)
+          .get()
+        console.log(user.data())
+        // TODO: store에 데이터 저장
+        // TODO: 인증정보 관리 및 제한을 어떻게 한건지 정하자
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    return {
+      email,
+      password,
+      login,
+    }
+  },
+})
 </script>
 
 <style scoped>
@@ -44,10 +72,7 @@ input {
 }
 input[type='text'],
 input[type='password'] {
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   outline: none;
   border: 1px solid #dddddd;
 }
