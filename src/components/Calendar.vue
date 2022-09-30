@@ -28,11 +28,8 @@
           <div
             v-for="(d, i) in dates"
             :key="i"
-            class="flex flex-col justify-center items-center cursor-pointer"
-            :class="[
-              d.isSelectedDay ? 'border-2 border-solid border-black rounded-md' : 'p-1',
-              !d.isCurrMonth ? 'opacity-30' : '',
-            ]"
+            class="flex flex-col justify-center items-center cursor-pointer transition-all"
+            :class="[d.isSelectedDay ? 'drop-shadow-lg scale-150' : 'p-1', !d.isCurrMonth ? 'opacity-30' : '']"
             @click="onSelectDate(d.date)"
           >
             <span :class="d.isHoliday ? 'text-red-500' : d.isSaturday ? 'text-blue-500' : 'text-black'">{{
