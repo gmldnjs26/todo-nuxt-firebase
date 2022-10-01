@@ -69,7 +69,7 @@ export default defineComponent({
 
     const addTodoHandler = () => {
       // FIXME: function을 내려서 비동기로 만들어준뒤 then으로 onEditTodoItemIndex을 수정하자
-      emit('addTodo', props.categoryId)
+      emit('onAddTodo', props.categoryId)
       nextTick(() => {
         onEditTodoItemIndex.value = props.todoList.length - 1
       })

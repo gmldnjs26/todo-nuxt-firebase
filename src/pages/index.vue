@@ -15,7 +15,7 @@
         @onRemove="remove"
         @onSetAlarm="setAlarm"
         @onChangeDate="changeDate"
-        @addTodo="addTodo"
+        @onAddTodo="addTodo"
       />
     </div>
   </div>
