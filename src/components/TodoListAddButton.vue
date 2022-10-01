@@ -1,7 +1,7 @@
 <template>
   <div
     class="min-w-[80px] bg-white w-min shadow-md mt-2 py-2 px-1 rounded-md flex hover:opacity-60 cursor-pointer"
-    @click="addTodoFunc"
+    @click="$emit('onAddTodo')"
   >
     <div class="w-3/12">
       <font-awesome-icon class="text-sm w-3/12 text-left" :icon="categoryIcon" />
@@ -27,10 +27,6 @@ export default defineComponent({
     categoryName: {
       type: String,
       default: '',
-    },
-    addTodoFunc: {
-      type: Function,
-      default: () => {},
     },
   },
   setup() {},

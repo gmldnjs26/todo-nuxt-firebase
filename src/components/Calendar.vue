@@ -1,9 +1,12 @@
 <template>
   <div class="w-full h-full px-1">
     <section class="flex justify-between">
-      <div>
-        <span class="font-bold text-lg">{{ currDateCursor | formatDateToYYYYMM }}</span>
-        <span class="text-sm">Completed: {{ isCompletedCountOfSelectedDay }}</span>
+      <div class="flex items-center justify-center">
+        <span class="font-bold text-xl mr-2">{{ currDateCursor | formatDateToYYYYMM }}</span>
+        <div class="flex">
+          <MarkIcon v-show="isCompletedCountOfCurrentMonth > 0" class="scale-75" :is-checked="true" />
+          <span v-show="isCompletedCountOfCurrentMonth > 0" class="text-sm pt-[2px]"> {{ isCompletedCountOfCurrentMonth }}</span>
+        </div>
       </div>
       <div class="flex space-x-4">
         <button @click="toPrevMW">
@@ -12,11 +15,16 @@
         <button @click="toNextMW">
           <font-awesome-icon class="text-base cursor-pointer" icon="chevron-right" />
         </button>
-        <RadioGroup
+        <SwitchButton
+          :items="CALENDAR_RADIO_CONTENTS"
+          :selected-value="selectedPeriodVal"
+          @onChange="(value) => changePeriod(value)"
+        />
+        <!-- <RadioGroup
           :radio-contents="CALENDAR_RADIO_CONTENTS"
           :selected-value="selectedPeriodVal"
           @click="(value) => changePeriod(value)"
-        />
+        /> -->
       </div>
     </section>
     <section class="my-6">
@@ -70,7 +78,8 @@ import { DateCellInfo } from '~/types/calendar'
 export default defineComponent({
   components: {
     MarkIcon: () => import('@/components/MarkIcon.vue'),
-    RadioGroup: () => import('@/components/RadioGroup.vue'),
+    // RadioGroup: () => import('@/components/RadioGroup.vue'),
+    SwitchButton: () => import('@/components/SwitchButton.vue'),
   },
   filters: {
     formatDateToDay(val: Date) {
@@ -104,11 +113,11 @@ export default defineComponent({
         date,
         isHoliday: getDay(date) === 0,
         isSaturday: getDay(date) === 6,
-        isCompletedTodoCount: props.dayTodoStatusInfos[format(date, 'yyyyMMdd')]
-          ? props.dayTodoStatusInfos[format(date, 'yyyyMMdd')].isCompletedTodoCount
+        isCompletedTodoCount: props.dayTodoStatusInfos[format(date, 'yyyy-MM-dd')]
+          ? props.dayTodoStatusInfos[format(date, 'yyyy-MM-dd')].isCompletedTodoCount
           : 0,
-        isNotCompletedTodoCount: props.dayTodoStatusInfos[format(date, 'yyyyMMdd')]
-          ? props.dayTodoStatusInfos[format(date, 'yyyyMMdd')].isNotCompletedTodoCount
+        isNotCompletedTodoCount: props.dayTodoStatusInfos[format(date, 'yyyy-MM-dd')]
+          ? props.dayTodoStatusInfos[format(date, 'yyyy-MM-dd')].isNotCompletedTodoCount
           : 0,
         isSelectedDay: isSameDay(date, currDate),
         isCurrMonth: isSameMonth(date, currDate),
@@ -148,11 +157,21 @@ export default defineComponent({
 
     const isCompletedCountOfSelectedDay = computed(
       (): Number => {
-        if (props.dayTodoStatusInfos[format(currDateCursor.value, 'yyyyMMdd')] !== undefined) {
-          return props.dayTodoStatusInfos[format(currDateCursor.value, 'yyyyMMdd')].isCompletedTodoCount
+        if (props.dayTodoStatusInfos[format(currDateCursor.value, 'yyyy-MM-dd')] !== undefined) {
+          return props.dayTodoStatusInfos[format(currDateCursor.value, 'yyyy-MM-dd')].isCompletedTodoCount
         } else {
           return 0
         }
+      },
+    )
+    const isCompletedCountOfCurrentMonth = computed(
+      (): Number => {
+        let sum = 0
+        Object.keys(props.dayTodoStatusInfos).forEach((key) => {
+          console.log(key, currDateCursor.value)
+          if (isSameMonth(new Date(key), currDateCursor.value)) sum += props.dayTodoStatusInfos[key].isCompletedTodoCount
+        })
+        return sum
       },
     )
 
@@ -169,6 +188,7 @@ export default defineComponent({
       transitionName,
       selectedPeriodVal,
       isCompletedCountOfSelectedDay,
+      isCompletedCountOfCurrentMonth,
     }
   },
 })

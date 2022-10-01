@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-auto flex-1 flex flex-col space-y-2 mb-2">
-    <TodoListAddButton :add-todo-func="addTodo" :category-icon="categoryInfo.icon" :category-name="categoryInfo.name" />
+    <TodoListAddButton :category-icon="categoryInfo.icon" :category-name="categoryInfo.name" @onAddTodo="addTodoHandler" />
     <div v-for="(t, i) in editTodoList" :key="i" class="flex justify-between p-1">
       <MarkBox
         :label="t.context"
@@ -67,7 +67,7 @@ export default defineComponent({
       emit('onChangeDate', todoId)
     }
 
-    const addTodo = () => {
+    const addTodoHandler = () => {
       // FIXME: function을 내려서 비동기로 만들어준뒤 then으로 onEditTodoItemIndex을 수정하자
       emit('addTodo', props.categoryId)
       nextTick(() => {
@@ -84,7 +84,7 @@ export default defineComponent({
       remove,
       setAlram,
       changeDate,
-      addTodo,
+      addTodoHandler,
     }
   },
 })
