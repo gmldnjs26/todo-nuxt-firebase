@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-100 w-full h-screen">
+  <div class="bg-gray-50 w-full h-screen">
     <div class="w-[370px] mx-auto pt-8">
       <Calendar :day-todo-status-infos="dayTodoStatusInfos" @onSelectDate="onSelectDate" />
     </div>
@@ -42,7 +42,7 @@ export default defineComponent({
     })
 
     const todoListOfselectedDate = computed(() => {
-      return guestStore.todoList.filter((item) => item.doDate === format(selectedDate.value, 'yyyyMMdd'))
+      return guestStore.todoList.filter((item) => item.doDate === format(selectedDate.value, 'yyyy-MM-dd'))
     })
 
     const dayTodoStatusInfos = computed(() => {
@@ -83,7 +83,7 @@ export default defineComponent({
       console.log('test')
     }
     const addTodo = (catId: string) => {
-      guestStore.addTodolist({ catId, date: format(selectedDate.value, 'yyyyMMdd') })
+      guestStore.addTodolist({ catId, date: format(selectedDate.value, 'yyyy-MM-dd') })
     }
     // watch(toRefs.todoList, (cur: { [key: string]: Array<Todo> }, prev: { [key: string]: Array<Todo> }): void => {
     //   console.log(prev, cur)
