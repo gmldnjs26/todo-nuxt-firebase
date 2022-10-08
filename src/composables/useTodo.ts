@@ -1,7 +1,5 @@
-const todo = () => {
+export const useTodo = () => {
   const alert = () => {}
 
   return { alert }
 }
-
-export default todo
