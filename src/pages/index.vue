@@ -1,5 +1,7 @@
 <template>
   <div class="bg-gray-50 w-full h-screen">
+    <IconButton class="w-5 h-5 rounded-full p-1 hover:bg-gray-200" icon="ellipsis-h" size="text-sm" @click="toggleSideMenu" />
+    <SideMenu :is-show-side-menu="isShowMenu" @onCloseSideMenu="toggleSideMenu" />
     <div class="w-[370px] mx-auto pt-8">
       <Calendar :day-todo-status-infos="dayTodoStatusInfos" @onSelectDate="onSelectDate" />
     </div>
@@ -32,10 +34,17 @@ export default defineComponent({
     TodoList: () => import('@/components/TodoList.vue'),
     Calendar: () => import('@/components/Calendar.vue'),
     CategoryManage: () => import('@/components/CategoryManage.vue'),
+    IconButton: () => import('@/components/IconButton.vue'),
+    SideMenu: () => import('@/components/SideMenu.vue'),
   },
   setup() {
     const selectedValue = ref(1)
     const selectedDate = ref(new Date()) as Ref<Date>
+
+    const isShowMenu = ref(false)
+    const toggleSideMenu = () => {
+      isShowMenu.value = !isShowMenu.value
+    }
 
     const categoryList = computed(() => {
       return guestStore.categoryList
@@ -106,6 +115,8 @@ export default defineComponent({
       selectedDate,
       onSelectDate,
       format,
+      isShowMenu,
+      toggleSideMenu,
     }
   },
 })

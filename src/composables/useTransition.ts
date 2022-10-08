@@ -43,7 +43,7 @@ export const useTransition = () => {
   const rightSideBeforeEnter = (el: HTMLElement) => {
     el.style.backgroundColor = 'rgba(0,0,0,0)'
     el.style.transition = 'background-color 0.5s ease'
-    ;(el.firstChild! as HTMLElement).style.transform = 'translateX(563px)'
+    ;(el.firstChild! as HTMLElement).style.transform = 'translateX(280px)'
     ;(el.firstChild! as HTMLElement).style.transition = 'transform 0.5s cubic-bezier(0, 0, 0.2, 1) 0ms'
   }
   const rightSideEnter = (el: HTMLElement) => {
@@ -60,7 +60,7 @@ export const useTransition = () => {
     setTimeout(() => {
       el.style.backgroundColor = 'rgba(0,0,0,0)'
       el.style.transition = 'background-color 0.5s ease'
-      ;(el.firstChild! as HTMLElement).style.transform = 'translateX(563px)'
+      ;(el.firstChild! as HTMLElement).style.transform = 'translateX(280px)'
       ;(el.firstChild! as HTMLElement).style.transition = 'transform 0.5s cubic-bezier(0, 0, 0.2, 1) 0ms'
     })
   }
