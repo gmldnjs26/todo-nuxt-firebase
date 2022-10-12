@@ -30,7 +30,7 @@
     "@nuxtjs/i18n": "7.2.3",
     "core-js": "3.21.1",
     "date-fns": "2.28.0",
-    "firebase": "^8.9.1",
+    "firebase": "8.10.1",
     "normalizr": "3.6.2",
     "nuxt": "^2.15.7",
     "vuex-module-decorators": "^1.0.1",
